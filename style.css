@@ -463,3 +463,81 @@
     flex-direction: column;
   }
 }
+
+/* V8 Responsive Design */
+body { min-height: 100vh; }
+.container { width: min(1200px, 100%); }
+
+@media (min-width: 901px) {
+  body { background: #eef2f7; }
+  .container { padding: 28px 24px 40px; }
+  .top { padding: 6px 2px 10px; }
+  .top h1 { font-size: 32px; letter-spacing: -0.5px; }
+  .top p { font-size: 14px; }
+  .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .card { min-height: 112px; display: flex; flex-direction: column; justify-content: center; }
+  .amount { font-size: 29px; }
+  .layout { grid-template-columns: 360px minmax(0, 1fr); gap: 20px; align-items: start; }
+  .panel { padding: 22px; }
+  .layout > .panel:nth-child(2) { min-height: 560px; }
+  table th, table td { padding: 13px 10px; }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .container { padding: 20px; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .layout { grid-template-columns: 1fr; }
+  .top { align-items: flex-start; flex-direction: column; }
+  .account-area { justify-content: flex-start; }
+}
+
+@media (max-width: 600px) {
+  body { background: #f5f7fb; overflow-x: hidden; }
+  .container { width: 100%; padding: 12px; }
+  .top { margin-bottom: 14px; gap: 10px; }
+  .top h1 { font-size: 22px; line-height: 1.15; }
+  .top p { font-size: 12px; margin-top: 5px; }
+  .account-area { width: 100%; justify-content: flex-start; gap: 6px; }
+  .status { font-size: 11px; padding: 6px 8px; }
+  .user-email { max-width: 145px; font-size: 11px; }
+  .account-area button { padding: 9px 11px; font-size: 12px; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin-bottom: 12px; }
+  .card { padding: 13px; border-radius: 14px; min-width: 0; }
+  .label { font-size: 11px; }
+  .amount { font-size: 20px; margin-top: 5px; overflow-wrap: anywhere; }
+  .layout { grid-template-columns: 1fr; gap: 12px; }
+  .panel { border-radius: 14px; padding: 15px; box-shadow: 0 2px 10px #0000000a; }
+  .panel h2 { font-size: 17px; margin-bottom: 12px; }
+  label { font-size: 12px; margin-top: 11px; }
+  input, select { min-height: 46px; padding: 11px; border-radius: 11px; font-size: 15px; }
+  form button { min-height: 48px; margin-top: 14px; border-radius: 11px; }
+  .summary { gap: 8px; margin-top: 12px; }
+  .mini { padding: 11px; border-radius: 10px; }
+  .mini b { font-size: 13px; }
+  .filters { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .filters select { min-width: 0; }
+  table { min-width: 590px; }
+  th, td { padding: 10px 7px; font-size: 12px; }
+  th { font-size: 10px; }
+  .delete { padding: 7px 9px; font-size: 11px; }
+  .empty { padding: 25px 12px; font-size: 13px; }
+  .auth-panel { width: 100%; margin: 18px auto; padding: 18px; }
+  .auth-panel h2 { font-size: 20px; }
+  .auth-help { font-size: 13px; }
+  .google-btn { min-height: 48px; border-radius: 11px; }
+  .modal { align-items: flex-end; padding: 0; }
+  .modal-card { width: 100%; border-radius: 20px 20px 0 0; padding: 18px; max-height: 90vh; overflow: auto; }
+  .modal-header h2 { font-size: 19px; }
+  .profile-actions { flex-direction: column; }
+  .profile-actions button { min-height: 46px; }
+}
+
+@media (max-width: 380px) {
+  .container { padding: 9px; }
+  .cards { gap: 7px; }
+  .card { padding: 11px; }
+  .amount { font-size: 18px; }
+  .top h1 { font-size: 20px; }
+  .user-email { max-width: 112px; }
+  .panel { padding: 13px; }
+}

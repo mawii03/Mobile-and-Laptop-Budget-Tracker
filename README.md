@@ -1,19 +1,8 @@
-# LapMob Budget Tracker V7
+# LapMob Budget Tracker V8
 
-Google-login budget tracker with profile settings.
+Responsive desktop and mobile design.
 
-## New in V7
-- Continue with Google authentication
-- Profile Settings button
-- Change your display name
-- Display name is saved to the Firebase Authentication profile
-- Same account works across phone and laptop
-- Log out
+Desktop/laptop uses a wide dashboard with four summary cards and side-by-side panels.
+Phone uses a compact mobile-first layout with larger touch targets, stacked sections, and a mobile-friendly profile dialog.
 
-## Firebase setup
-- Authentication → Sign-in method → Google → Enable
-- Authentication → Settings → Authorized domains → add your GitHub Pages domain
-- Firestore → use the included `firestore.rules`
-
-## Hosting
-Serve through GitHub Pages or another HTTPS host. Do not open the files directly with `file://`.
+The layout switches automatically based on screen width.
