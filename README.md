@@ -1,27 +1,22 @@
-# LapMob Budget Tracker V5
+# LapMob Budget Tracker V6
 
-A Firebase-backed budget tracker with personal user accounts.
+Google-only authentication version.
 
-## Features
-- Email/password registration and login
-- Password reset email
-- Logout
-- Each user's transactions are stored under their own Firebase UID
-- Phone ↔ laptop synchronization through Firestore
-- Responsive layout for mobile and desktop
-
-## Files
-- `index.html` — page structure
-- `style.css` — design
-- `app.js` — authentication, Firestore, and budget logic
-- `firebase-config.js` — Firebase web configuration
-- `firestore.rules` — rules so users can access only their own transactions
+## User flow
+1. Friend opens the website.
+2. Clicks **Continue with Google**.
+3. Selects their Google account.
+4. They enter their own private budget.
+5. The same Google account works on phone and laptop.
+6. **Log out** is available at the top right.
 
 ## Firebase setup
 In Firebase Console:
-1. Authentication → Sign-in method → enable **Email/Password**.
-2. Firestore Database → use the `firestore.rules` rules from this project.
-3. Keep your web app in GitHub Pages (or another HTTPS host). Do not open the HTML with `file://`.
+1. Authentication → Sign-in method → enable **Google**.
+2. Authentication → Settings → Authorized domains → make sure your GitHub Pages domain is listed.
+3. Firestore → publish/use the included `firestore.rules`.
 
 ## Important
-Each friend creates their own account. Their transactions are separated by their Firebase user ID.
+The website must be served over HTTPS, such as GitHub Pages. Do not open `index.html` directly with `file://`.
+
+Google sign-in is implemented with the Firebase Web SDK.

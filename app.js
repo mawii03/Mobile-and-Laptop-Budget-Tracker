@@ -1,11 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   onAuthStateChanged,
-  signOut
+  signOut,
+  setPersistence,
+  browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 import {
   getFirestore,
@@ -27,7 +30,6 @@ let db;
 let user = null;
 let data = [];
 let unsubscribeTransactions = null;
-let authMode = "login";
 
 const $ = id => document.getElementById(id);
 
@@ -55,16 +57,17 @@ function setAuthMessage(text = "", type = "") {
   $("authMessage").className = "auth-message" + (type ? ` ${type}` : "");
 }
 
-function setAuthMode(mode) {
-  authMode = mode;
-  const login = mode === "login";
-
-  $("showLoginBtn").classList.toggle("active", login);
-  $("showRegisterBtn").classList.toggle("active", !login);
-  $("authSubmitBtn").textContent = login ? "Log in" : "Create account";
-  $("authPassword").autocomplete = login ? "current-password" : "new-password";
-  $("resetPasswordBtn").classList.toggle("hidden", !login);
-  setAuthMessage("");
+function friendlyAuthError(error) {
+  const code = error?.code || "";
+  const map = {
+    "auth/popup-closed-by-user": "Google sign-in was cancelled.",
+    "auth/cancelled-popup-request": "The Google sign-in was cancelled.",
+    "auth/popup-blocked": "Your browser blocked the Google sign-in window. Please allow pop-ups for this site.",
+    "auth/unauthorized-domain": "This website domain is not authorized in Firebase Authentication.",
+    "auth/operation-not-allowed": "Google sign-in is not enabled in Firebase yet.",
+    "auth/network-request-failed": "Network error. Please check your internet connection."
+  };
+  return map[code] || error?.message || "Google sign-in failed.";
 }
 
 function render() {
@@ -153,7 +156,7 @@ function showAppForUser(u) {
   $("userEmail").textContent = u.email || "";
   $("userEmail").classList.remove("hidden");
   $("logoutBtn").classList.remove("hidden");
-  setStatus("Loading cloud...", false);
+  setStatus("Loading cloud...");
   listen();
 }
 
@@ -171,68 +174,39 @@ function showLoggedOut() {
     unsubscribeTransactions = null;
   }
 
-  setStatus("Not signed in");
-  setAuthMode(authMode);
+  setStatus("Sign in to continue");
 }
 
-function friendlyAuthError(error) {
-  const code = error?.code || "";
-  const map = {
-    "auth/email-already-in-use": "That email is already registered.",
-    "auth/invalid-email": "Please enter a valid email address.",
-    "auth/weak-password": "Password must be at least 6 characters.",
-    "auth/invalid-credential": "Email or password is incorrect.",
-    "auth/user-not-found": "No account was found for that email.",
-    "auth/wrong-password": "Email or password is incorrect.",
-    "auth/too-many-requests": "Too many attempts. Please wait and try again.",
-    "auth/network-request-failed": "Network error. Check your internet connection.",
-    "auth/operation-not-allowed": "Email/password sign-in is not enabled in Firebase yet."
-  };
-  return map[code] || error?.message || "Something went wrong.";
-}
+async function signInWithGoogle() {
+  if (!auth) return;
 
-async function submitAuth() {
-  const email = $("authEmail").value.trim();
-  const password = $("authPassword").value;
-
-  if (!email || !password) {
-    setAuthMessage("Enter your email and password.", "error");
-    return;
-  }
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: "select_account" });
 
   try {
-    $("authSubmitBtn").disabled = true;
-    setAuthMessage(authMode === "login" ? "Logging in..." : "Creating account...");
+    $("googleSignInBtn").disabled = true;
+    $("googleSignInBtn").textContent = "Connecting to Google...";
+    setAuthMessage("Choose your Google account...");
 
-    if (authMode === "login") {
-      await signInWithEmailAndPassword(auth, email, password);
-      setAuthMessage("Logged in.", "success");
-    } else {
-      await createUserWithEmailAndPassword(auth, email, password);
-      setAuthMessage("Account created.", "success");
+    // Popup is quick on desktop. Redirect fallback is used when popups are blocked.
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      if (
+        error.code === "auth/popup-blocked" ||
+        error.code === "auth/popup-closed-by-user" ||
+        error.code === "auth/cancelled-popup-request"
+      ) {
+        await signInWithRedirect(auth, provider);
+        return;
+      }
+      throw error;
     }
   } catch (error) {
     console.error(error);
     setAuthMessage(friendlyAuthError(error), "error");
-  } finally {
-    $("authSubmitBtn").disabled = false;
-  }
-}
-
-async function resetPassword() {
-  const email = $("authEmail").value.trim();
-
-  if (!email) {
-    setAuthMessage("Enter your email first, then click Forgot password.", "error");
-    return;
-  }
-
-  try {
-    await sendPasswordResetEmail(auth, email);
-    setAuthMessage("Password reset email sent. Check your inbox.", "success");
-  } catch (error) {
-    console.error(error);
-    setAuthMessage(friendlyAuthError(error), "error");
+    $("googleSignInBtn").disabled = false;
+    $("googleSignInBtn").innerHTML = '<span class="google-icon">G</span> Continue with Google';
   }
 }
 
@@ -276,7 +250,7 @@ async function addTransaction(event) {
   event.preventDefault();
 
   if (!user) {
-    setAuthMessage("Please log in first.", "error");
+    setAuthMessage("Please sign in first.", "error");
     return;
   }
 
@@ -325,7 +299,17 @@ async function start() {
     auth = getAuth(app);
     db = getFirestore(app);
 
+    await setPersistence(auth, browserLocalPersistence);
+
     $("date").value = today();
+
+    // Complete a previous mobile/browser redirect sign-in, if one exists.
+    try {
+      await getRedirectResult(auth);
+    } catch (error) {
+      console.error(error);
+      setAuthMessage(friendlyAuthError(error), "error");
+    }
 
     onAuthStateChanged(auth, currentUser => {
       if (currentUser) {
@@ -341,13 +325,7 @@ async function start() {
   }
 }
 
-$("showLoginBtn").addEventListener("click", () => setAuthMode("login"));
-$("showRegisterBtn").addEventListener("click", () => setAuthMode("register"));
-$("authForm").addEventListener("submit", event => {
-  event.preventDefault();
-  submitAuth();
-});
-$("resetPasswordBtn").addEventListener("click", resetPassword);
+$("googleSignInBtn").addEventListener("click", signInWithGoogle);
 $("logoutBtn").addEventListener("click", logout);
 $("form").addEventListener("submit", addTransaction);
 $("monthFilter").addEventListener("change", render);
@@ -360,5 +338,4 @@ $("rows").addEventListener("click", event => {
   }
 });
 
-setAuthMode("login");
 start();

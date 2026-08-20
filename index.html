@@ -24,25 +24,14 @@
     </div>
 
     <section id="authPanel" class="panel auth-panel">
-      <h2>Welcome</h2>
-      <p class="auth-help">Create an account or log in to use your personal budget on your phone and laptop.</p>
+      <h2>Welcome to LapMob Budget Tracker</h2>
+      <p class="auth-help">Sign in with your Google account to create or access your personal budget.</p>
 
-      <div class="auth-tabs">
-        <button id="showLoginBtn" class="tab-btn active" type="button">Log in</button>
-        <button id="showRegisterBtn" class="tab-btn" type="button">Create account</button>
-      </div>
+      <button id="googleSignInBtn" class="google-btn" type="button">
+        <span class="google-icon">G</span>
+        Continue with Google
+      </button>
 
-      <form id="authForm">
-        <label for="authEmail">Email</label>
-        <input id="authEmail" type="email" autocomplete="email" required placeholder="you@example.com">
-
-        <label for="authPassword">Password</label>
-        <input id="authPassword" type="password" autocomplete="current-password" minlength="6" required placeholder="At least 6 characters">
-
-        <button id="authSubmitBtn" type="submit">Log in</button>
-      </form>
-
-      <button id="resetPasswordBtn" class="link-btn" type="button">Forgot password?</button>
       <div id="authMessage" class="auth-message" aria-live="polite"></div>
     </section>
 

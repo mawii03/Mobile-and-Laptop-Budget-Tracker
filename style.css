@@ -338,3 +338,47 @@
     justify-content: flex-start;
   }
 }
+
+.google-btn {
+  width: 100%;
+  margin-top: 20px;
+  background: #fff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 15px;
+}
+
+.google-btn:hover {
+  background: #f9fafb;
+}
+
+.google-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.google-icon {
+  font-weight: 800;
+  font-size: 19px;
+  color: #4285f4;
+  width: 22px;
+}
+
+.auth-message {
+  min-height: 22px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.auth-message.error {
+  color: var(--red);
+}
+
+.hidden {
+  display: none !important;
+}
