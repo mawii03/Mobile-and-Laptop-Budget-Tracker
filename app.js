@@ -2,6 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebas
 import {
   getAuth,
   GoogleAuthProvider,
+  updateProfile,
   signInWithPopup,
   signInWithRedirect,
   getRedirectResult,
@@ -153,8 +154,9 @@ function showAppForUser(u) {
   user = u;
   $("authPanel").classList.add("hidden");
   $("appPanel").classList.remove("hidden");
-  $("userEmail").textContent = u.email || "";
+  $("userEmail").textContent = u.displayName ? `${u.displayName} · ${u.email || ""}` : (u.email || "");
   $("userEmail").classList.remove("hidden");
+  $("profileBtn").classList.remove("hidden");
   $("logoutBtn").classList.remove("hidden");
   setStatus("Loading cloud...");
   listen();
@@ -167,7 +169,9 @@ function showLoggedOut() {
   $("appPanel").classList.add("hidden");
   $("userEmail").classList.add("hidden");
   $("userEmail").textContent = "";
+  $("profileBtn").classList.add("hidden");
   $("logoutBtn").classList.add("hidden");
+  closeProfile();
 
   if (unsubscribeTransactions) {
     unsubscribeTransactions();
@@ -207,6 +211,48 @@ async function signInWithGoogle() {
     setAuthMessage(friendlyAuthError(error), "error");
     $("googleSignInBtn").disabled = false;
     $("googleSignInBtn").innerHTML = '<span class="google-icon">G</span> Continue with Google';
+  }
+}
+
+
+function openProfile() {
+  if (!user) return;
+  $("profileName").value = user.displayName || "";
+  $("profileEmail").value = user.email || "";
+  $("profileMessage").textContent = "";
+  $("profileMessage").className = "auth-message";
+  $("profileModal").classList.remove("hidden");
+}
+
+function closeProfile() {
+  $("profileModal").classList.add("hidden");
+}
+
+async function saveProfile() {
+  if (!user) return;
+
+  const name = $("profileName").value.trim();
+
+  if (!name) {
+    $("profileMessage").textContent = "Please enter a name.";
+    $("profileMessage").className = "auth-message error";
+    return;
+  }
+
+  try {
+    $("saveProfileBtn").disabled = true;
+    $("profileMessage").textContent = "Saving...";
+    $("profileMessage").className = "auth-message";
+
+    await updateProfile(user, { displayName: name });
+    $("profileMessage").textContent = "Profile updated successfully.";
+    $("profileMessage").className = "auth-message success";
+  } catch (error) {
+    console.error(error);
+    $("profileMessage").textContent = error.message || "Could not update your profile.";
+    $("profileMessage").className = "auth-message error";
+  } finally {
+    $("saveProfileBtn").disabled = false;
   }
 }
 
@@ -326,6 +372,13 @@ async function start() {
 }
 
 $("googleSignInBtn").addEventListener("click", signInWithGoogle);
+$("profileBtn").addEventListener("click", openProfile);
+$("closeProfileBtn").addEventListener("click", closeProfile);
+$("cancelProfileBtn").addEventListener("click", closeProfile);
+$("saveProfileBtn").addEventListener("click", saveProfile);
+$("profileModal").addEventListener("click", event => {
+  if (event.target === $("profileModal")) closeProfile();
+});
 $("logoutBtn").addEventListener("click", logout);
 $("form").addEventListener("submit", addTransaction);
 $("monthFilter").addEventListener("change", render);

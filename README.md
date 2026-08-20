@@ -1,22 +1,19 @@
-# LapMob Budget Tracker V6
+# LapMob Budget Tracker V7
 
-Google-only authentication version.
+Google-login budget tracker with profile settings.
 
-## User flow
-1. Friend opens the website.
-2. Clicks **Continue with Google**.
-3. Selects their Google account.
-4. They enter their own private budget.
-5. The same Google account works on phone and laptop.
-6. **Log out** is available at the top right.
+## New in V7
+- Continue with Google authentication
+- Profile Settings button
+- Change your display name
+- Display name is saved to the Firebase Authentication profile
+- Same account works across phone and laptop
+- Log out
 
 ## Firebase setup
-In Firebase Console:
-1. Authentication → Sign-in method → enable **Google**.
-2. Authentication → Settings → Authorized domains → make sure your GitHub Pages domain is listed.
-3. Firestore → publish/use the included `firestore.rules`.
+- Authentication → Sign-in method → Google → Enable
+- Authentication → Settings → Authorized domains → add your GitHub Pages domain
+- Firestore → use the included `firestore.rules`
 
-## Important
-The website must be served over HTTPS, such as GitHub Pages. Do not open `index.html` directly with `file://`.
-
-Google sign-in is implemented with the Firebase Web SDK.
+## Hosting
+Serve through GitHub Pages or another HTTPS host. Do not open the files directly with `file://`.

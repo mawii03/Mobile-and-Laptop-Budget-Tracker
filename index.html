@@ -19,6 +19,7 @@
       <div class="account-area">
         <span id="status" class="status">Starting...</span>
         <span id="userEmail" class="user-email hidden"></span>
+        <button id="profileBtn" class="secondary hidden" type="button">Profile</button>
         <button id="logoutBtn" class="secondary hidden" type="button">Log out</button>
       </div>
     </div>
@@ -34,6 +35,31 @@
 
       <div id="authMessage" class="auth-message" aria-live="polite"></div>
     </section>
+
+    <div id="profileModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <h2 id="profileTitle">Profile Settings</h2>
+            <p class="modal-subtitle">Change the name shown in your LapMob account.</p>
+          </div>
+          <button id="closeProfileBtn" class="modal-close" type="button" aria-label="Close">×</button>
+        </div>
+
+        <label for="profileName">Your name</label>
+        <input id="profileName" type="text" maxlength="60" placeholder="Enter your name">
+
+        <label for="profileEmail">Google account</label>
+        <input id="profileEmail" type="email" disabled>
+
+        <div class="profile-actions">
+          <button id="saveProfileBtn" type="button">Save changes</button>
+          <button id="cancelProfileBtn" class="secondary" type="button">Cancel</button>
+        </div>
+
+        <div id="profileMessage" class="auth-message" aria-live="polite"></div>
+      </div>
+    </div>
 
     <main id="appPanel" class="hidden">
       <div class="cards">
