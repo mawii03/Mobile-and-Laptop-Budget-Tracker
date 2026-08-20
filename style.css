@@ -541,3 +541,122 @@ body { min-height: 100vh; }
   .user-email { max-width: 112px; }
   .panel { padding: 13px; }
 }
+
+/* V9 funds */
+.funds-panel {
+  margin-bottom: 18px;
+}
+
+.funds-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.funds-header h2 {
+  margin-bottom: 4px;
+}
+
+.funds-help {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.funds-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.fund-card {
+  width: 100%;
+  text-align: left;
+  background: #f9fafb;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.fund-card:hover {
+  background: #f3f4f6;
+}
+
+.fund-icon {
+  font-size: 22px;
+  margin-bottom: 3px;
+}
+
+.fund-name {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fund-card strong {
+  font-size: 24px;
+  margin-top: 2px;
+}
+
+.fund-action {
+  color: var(--accent);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.fund-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.fund-total strong {
+  color: var(--text);
+  font-size: 20px;
+}
+
+@media (max-width: 900px) {
+  .funds-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .funds-panel {
+    margin-bottom: 12px;
+  }
+
+  .funds-header {
+    align-items: flex-start;
+  }
+
+  .funds-help {
+    font-size: 12px;
+  }
+
+  .fund-card {
+    padding: 14px;
+  }
+
+  .fund-card strong {
+    font-size: 22px;
+  }
+
+  .fund-total strong {
+    font-size: 18px;
+  }
+}

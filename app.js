@@ -19,7 +19,9 @@ import {
   doc,
   query,
   orderBy,
-  onSnapshot
+  onSnapshot,
+  setDoc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 
@@ -31,6 +33,8 @@ let db;
 let user = null;
 let data = [];
 let unsubscribeTransactions = null;
+let funds = { bank: 0, cash: 0, emergency: 0 };
+let selectedFund = null;
 
 const $ = id => document.getElementById(id);
 
@@ -69,6 +73,110 @@ function friendlyAuthError(error) {
     "auth/network-request-failed": "Network error. Please check your internet connection."
   };
   return map[code] || error?.message || "Google sign-in failed.";
+}
+
+
+function fundLabel(key) {
+  return {
+    bank: "Bank",
+    cash: "Cash",
+    emergency: "Emergency Savings Acc."
+  }[key] || key;
+}
+
+function updateFundUI() {
+  $("bankAmount").textContent = money(funds.bank);
+  $("cashAmount").textContent = money(funds.cash);
+  $("emergencyAmount").textContent = money(funds.emergency);
+
+  const total = Number(funds.bank) + Number(funds.cash) + Number(funds.emergency);
+  $("fundTotal").textContent = money(total);
+}
+
+async function loadFunds() {
+  if (!user) return;
+
+  try {
+    const ref = doc(db, "users", user.uid, "settings", "funds");
+    const snap = await getDoc(ref);
+
+    if (snap.exists()) {
+      const saved = snap.data();
+      funds = {
+        bank: Number(saved.bank || 0),
+        cash: Number(saved.cash || 0),
+        emergency: Number(saved.emergency || 0)
+      };
+    } else {
+      funds = { bank: 0, cash: 0, emergency: 0 };
+    }
+
+    updateFundUI();
+  } catch (error) {
+    console.error(error);
+    setAuthMessage(error.message, "error");
+  }
+}
+
+function openFund(key) {
+  if (!user) return;
+
+  selectedFund = key;
+  $("fundModalTitle").textContent = fundLabel(key);
+  $("fundModalSubtitle").textContent =
+    key === "bank"
+      ? "Set the money currently available in your bank account."
+      : key === "cash"
+        ? "Set the cash amount you currently have."
+        : "Set the amount currently saved for emergencies.";
+
+  $("fundInput").value = Number(funds[key] || 0);
+  $("fundMessage").textContent = "";
+  $("fundMessage").className = "auth-message";
+  $("fundModal").classList.remove("hidden");
+  $("fundInput").focus();
+}
+
+function closeFund() {
+  $("fundModal").classList.add("hidden");
+  selectedFund = null;
+}
+
+async function saveFund() {
+  if (!user || !selectedFund) return;
+
+  const value = Number($("fundInput").value);
+  if (!Number.isFinite(value) || value < 0) {
+    $("fundMessage").textContent = "Enter a valid amount.";
+    $("fundMessage").className = "auth-message error";
+    return;
+  }
+
+  try {
+    $("saveFundBtn").disabled = true;
+    $("fundMessage").textContent = "Saving...";
+    $("fundMessage").className = "auth-message";
+
+    funds[selectedFund] = value;
+
+    const ref = doc(db, "users", user.uid, "settings", "funds");
+    await setDoc(ref, {
+      bank: Number(funds.bank || 0),
+      cash: Number(funds.cash || 0),
+      emergency: Number(funds.emergency || 0),
+      updatedAt: Date.now()
+    }, { merge: true });
+
+    updateFundUI();
+    $("fundMessage").textContent = "Amount saved.";
+    $("fundMessage").className = "auth-message success";
+  } catch (error) {
+    console.error(error);
+    $("fundMessage").textContent = error.message || "Could not save the amount.";
+    $("fundMessage").className = "auth-message error";
+  } finally {
+    $("saveFundBtn").disabled = false;
+  }
 }
 
 function render() {
@@ -159,12 +267,16 @@ function showAppForUser(u) {
   $("profileBtn").classList.remove("hidden");
   $("logoutBtn").classList.remove("hidden");
   setStatus("Loading cloud...");
+  updateFundUI();
   listen();
+  loadFunds();
 }
 
 function showLoggedOut() {
   user = null;
   data = [];
+  funds = { bank: 0, cash: 0, emergency: 0 };
+  updateFundUI();
   $("authPanel").classList.remove("hidden");
   $("appPanel").classList.add("hidden");
   $("userEmail").classList.add("hidden");
@@ -373,6 +485,17 @@ async function start() {
 
 $("googleSignInBtn").addEventListener("click", signInWithGoogle);
 $("profileBtn").addEventListener("click", openProfile);
+document.querySelectorAll("[data-fund]").forEach(button => {
+  button.addEventListener("click", () => openFund(button.dataset.fund));
+});
+$("refreshFundsBtn").addEventListener("click", loadFunds);
+$("closeFundBtn").addEventListener("click", closeFund);
+$("cancelFundBtn").addEventListener("click", closeFund);
+$("saveFundBtn").addEventListener("click", saveFund);
+$("fundModal").addEventListener("click", event => {
+  if (event.target === $("fundModal")) closeFund();
+});
+
 $("closeProfileBtn").addEventListener("click", closeProfile);
 $("cancelProfileBtn").addEventListener("click", closeProfile);
 $("saveProfileBtn").addEventListener("click", saveProfile);
