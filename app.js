@@ -1,961 +1,148 @@
+import {
+  auth, db, signInWithPopup, signOut, onAuthStateChanged, updateProfile,
+  collection, doc, getDoc, addDoc, deleteDoc, setDoc, query, orderBy, onSnapshot,
+  googleProvider
+} from "./firebase-app.js";
+
 const $ = id => document.getElementById(id);
-
-
-/* =========================================
-   BALANCE EYE
-   ========================================= */
-
-const hiddenBalances = JSON.parse(
-  localStorage.getItem("lapmobHiddenBalances") || "{}"
-);
-
-function setSensitiveValue(id, value) {
-
-  const element = $(id);
-
-  if (!element) return;
-
-  element.dataset.value = value;
-
-  element.textContent =
-    hiddenBalances[id]
-      ? "••••••"
-      : value;
-
-  const eye =
-    document.querySelector(
-      `.eye-toggle[data-target="${id}"]`
-    );
-
-  if (eye) {
-
-    eye.textContent =
-      hiddenBalances[id]
-        ? "👁‍🗨"
-        : "👁";
-
-    eye.setAttribute(
-      "aria-label",
-      hiddenBalances[id]
-        ? "Show amount"
-        : "Hide amount"
-    );
-
-    eye.setAttribute(
-      "title",
-      hiddenBalances[id]
-        ? "Show amount"
-        : "Hide amount"
-    );
-  }
-}
-
-
-function toggleBalance(id) {
-
-  hiddenBalances[id] =
-    !hiddenBalances[id];
-
-  localStorage.setItem(
-    "lapmobHiddenBalances",
-    JSON.stringify(hiddenBalances)
-  );
-
-  const element = $(id);
-
-  if (element) {
-
-    setSensitiveValue(
-      id,
-      element.dataset.value ||
-      element.textContent
-    );
-
-  }
-}
-
-
-document.addEventListener(
-  "click",
-  event => {
-
-    const button =
-      event.target.closest(".eye-toggle");
-
-    if (!button) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    toggleBalance(
-      button.dataset.target
-    );
-
-  }
-);
-
-
-/* =========================================
-   DEFAULT DATA
-   ========================================= */
-
-const defaultFunds = {
-
-  cash: 0,
-  bank: 0,
-  savings: 0,
-  emergency: 0,
-  other: 0
-
-};
-
-
-/* =========================================
-   LOAD TRANSACTIONS
-   ========================================= */
-
-let data = loadData();
-
-
-function loadData() {
-
-  try {
-
-    const saved =
-      JSON.parse(
-        localStorage.getItem("lapmobData") ||
-        "[]"
-      );
-
-    return Array.isArray(saved)
-      ? saved
-      : [];
-
-  } catch {
-
-    return [];
-
-  }
-
-}
-
-
-/* =========================================
-   SAVE TRANSACTIONS
-   ========================================= */
-
-function saveData() {
-
-  localStorage.setItem(
-    "lapmobData",
-    JSON.stringify(data)
-  );
-
-}
-
-
-/* =========================================
-   HELPERS
-   ========================================= */
-
-function today() {
-
-  return new Date()
-    .toISOString()
-    .slice(0, 10);
-
-}
-
+const hiddenBalances = JSON.parse(localStorage.getItem("lapmobHiddenBalances") || "{}");
+const ACCOUNTS = ["cash", "bank", "savings", "emergency", "other"];
+let user = null;
+let data = [];
+let unsubscribe = null;
 
 function money(n) {
-
-  return "NT$" +
-    Number(n || 0).toLocaleString(
-      "en-US",
-      {
-        maximumFractionDigits: 0
-      }
-    );
-
+  return "NT$" + Number(n || 0).toLocaleString("en-US", { maximumFractionDigits: 0 });
 }
-
-
+function today() { return new Date().toISOString().slice(0, 10); }
 function esc(s) {
-
-  return String(s ?? "").replace(
-    /[&<>"']/g,
-    c =>
-      ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-      }[c])
-  );
-
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
 }
-
-
-/* =========================================
-   CALCULATE ALL FUNDS
-   =========================================
-
-   IMPORTANT:
-
-   Transactions are the source of truth.
-
-   We calculate balances from lapmobData
-   instead of repeatedly overwriting
-   lapmobFunds whenever another page opens.
-*/
+function setSensitiveValue(id, value) {
+  const el = $(id); if (!el) return;
+  el.dataset.value = value;
+  el.textContent = hiddenBalances[id] ? "••••••" : value;
+  const eye = document.querySelector(`.eye-toggle[data-target="${id}"]`);
+  if (eye) eye.textContent = hiddenBalances[id] ? "👁‍🗨" : "👁";
+}
+document.addEventListener("click", e => {
+  const eye = e.target.closest(".eye-toggle");
+  if (!eye) return;
+  e.preventDefault(); e.stopPropagation();
+  const id = eye.dataset.target;
+  hiddenBalances[id] = !hiddenBalances[id];
+  localStorage.setItem("lapmobHiddenBalances", JSON.stringify(hiddenBalances));
+  setSensitiveValue(id, $(id)?.dataset.value || "NT$0");
+});
 
 function calculateFunds() {
-
-  const funds = {
-    ...defaultFunds
-  };
-
-
-  data.forEach(
-    transaction => {
-
-      const account =
-        transaction.account;
-
-      const amount =
-        Number(transaction.amount);
-
-
-      if (
-        !(account in funds) ||
-        !Number.isFinite(amount) ||
-        amount < 0
-      ) {
-
-        return;
-
-      }
-
-
-      if (
-        transaction.type === "income"
-      ) {
-
-        funds[account] += amount;
-
-      }
-
-
-      else if (
-        transaction.type === "expense" ||
-        transaction.type === "withdrawal"
-      ) {
-
-        funds[account] -= amount;
-
-      }
-
-    }
-  );
-
-
+  const funds = Object.fromEntries(ACCOUNTS.map(a => [a, 0]));
+  for (const x of data) {
+    if (!ACCOUNTS.includes(x.account)) continue;
+    const amount = Number(x.amount);
+    if (!Number.isFinite(amount) || amount < 0) continue;
+    if (x.type === "income") funds[x.account] += amount;
+    if (x.type === "expense" || x.type === "withdrawal") funds[x.account] -= amount;
+  }
   return funds;
-
 }
-
-
-/* =========================================
-   RENDER FUND CARDS
-   ========================================= */
-
+function otherName() {
+  return localStorage.getItem("lapmobOtherName") || "Other";
+}
 function renderFunds() {
-
-  const funds =
-    calculateFunds();
-
-
-  setSensitiveValue(
-    "cashAmount",
-    money(funds.cash)
-  );
-
-
-  setSensitiveValue(
-    "bankAmount",
-    money(funds.bank)
-  );
-
-
-  setSensitiveValue(
-    "savingsAmount",
-    money(funds.savings)
-  );
-
-
-  setSensitiveValue(
-    "emergencyAmount",
-    money(funds.emergency)
-  );
-
-
-  setSensitiveValue(
-    "otherAmount",
-    money(funds.other)
-  );
-
-
-  if ($("otherFundName")) {
-
-    $("otherFundName").textContent =
-      localStorage.getItem(
-        "lapmobOtherName"
-      ) || "Other";
-
-  }
-
-
-  if ($("fundTotal")) {
-
-    $("fundTotal").textContent =
-      money(
-        funds.cash +
-        funds.bank
-      );
-
-  }
-
+  const f = calculateFunds();
+  for (const a of ACCOUNTS) setSensitiveValue(a === "cash" ? "cashAmount" : a + "Amount", money(f[a]));
+  if ($("otherFundName")) $("otherFundName").textContent = otherName();
+  if ($("fundTotal")) $("fundTotal").textContent = money(f.cash + f.bank);
 }
-
-
-/* =========================================
-   RENDER DASHBOARD
-   ========================================= */
-
+function renderGroup(id, rows, cls, sign, empty) {
+  const el = $(id); if (!el) return;
+  if (!rows.length) { el.innerHTML = `<div class="transaction-empty">${empty}</div>`; return; }
+  el.innerHTML = rows.map(x => `
+    <div class="transaction-row">
+      <span>${esc(x.date)}</span><span>${esc(x.category)}</span>
+      <span>${esc(x.note || "—")}</span>
+      <span class="amount ${cls}">${sign}${money(x.amount)}</span>
+      <span><button class="row-delete" type="button" data-delete-id="${esc(x.id)}">Delete</button></span>
+    </div>`).join("");
+}
 function render() {
+  const f = calculateFunds();
+  setSensitiveValue("balance", money(f.cash + f.bank));
+  const income = data.filter(x => x.type === "income");
+  const expense = data.filter(x => x.type === "expense");
+  setSensitiveValue("income", money(income.reduce((s,x)=>s+Number(x.amount||0),0)));
+  setSensitiveValue("expenses", money(expense.reduce((s,x)=>s+Number(x.amount||0),0)));
+  if ($("count")) $("count").textContent = data.length;
 
-  const funds =
-    calculateFunds();
-
-
-  /* CASH TRANSACTIONS */
-
-  const cashTransactions =
-    data.filter(
-      x =>
-        x.account === "cash"
-    );
-
-
-  const cashIncome =
-    cashTransactions
-      .filter(
-        x =>
-          x.type === "income"
-      )
-      .sort(
-        (a, b) =>
-          String(b.date)
-            .localeCompare(
-              String(a.date)
-            )
-      );
-
-
-  const cashExpenses =
-    cashTransactions
-      .filter(
-        x =>
-          x.type === "expense"
-      )
-      .sort(
-        (a, b) =>
-          String(b.date)
-            .localeCompare(
-              String(a.date)
-            )
-      );
-
-
-  const cashWithdrawals =
-    cashTransactions
-      .filter(
-        x =>
-          x.type === "withdrawal"
-      )
-      .sort(
-        (a, b) =>
-          String(b.date)
-            .localeCompare(
-              String(a.date)
-            )
-      );
-
-
-  /* DASHBOARD BALANCE */
-
-  setSensitiveValue(
-    "balance",
-    money(
-      funds.cash +
-      funds.bank
-    )
-  );
-
-
-  /* TOTAL INCOME */
-
-  const inc =
-    data
-      .filter(
-        x =>
-          x.type === "income"
-      )
-      .reduce(
-        (s, x) =>
-          s +
-          Number(x.amount || 0),
-        0
-      );
-
-
-  /* TOTAL EXPENSES */
-
-  const exp =
-    data
-      .filter(
-        x =>
-          x.type === "expense"
-      )
-      .reduce(
-        (s, x) =>
-          s +
-          Number(x.amount || 0),
-        0
-      );
-
-
-  setSensitiveValue(
-    "income",
-    money(inc)
-  );
-
-
-  setSensitiveValue(
-    "expenses",
-    money(exp)
-  );
-
-
-  /* TRANSACTION COUNT */
-
-  if ($("count")) {
-
-    $("count").textContent =
-      data.length;
-
-  }
-
-
-  /* =========================================
-     CASH INCOME
-     ========================================= */
-
-  renderGroup(
-    "cashIncomeRows",
-    cashIncome,
-    "income",
-    "+",
-    "No cash income yet."
-  );
-
-
-  /* =========================================
-     CASH EXPENSES
-     ========================================= */
-
-  renderGroup(
-    "cashExpenseRows",
-    cashExpenses,
-    "expense",
-    "-",
-    "No cash expenses yet."
-  );
-
-
-  /* =========================================
-     CASH WITHDRAWALS
-     ========================================= */
-
-  renderGroup(
-    "cashWithdrawalRows",
-    cashWithdrawals,
-    "withdrawal",
-    "-",
-    "No cash withdrawals yet."
-  );
-
-
-  /* =========================================
-     CASH TOTALS
-     ========================================= */
-
-  if ($("cashIncomeTotal")) {
-
-    $("cashIncomeTotal").textContent =
-      money(
-        sum(cashIncome)
-      );
-
-  }
-
-
-  if ($("cashExpenseTotal")) {
-
-    $("cashExpenseTotal").textContent =
-      money(
-        sum(cashExpenses)
-      );
-
-  }
-
-
-  if ($("cashWithdrawalTotal")) {
-
-    $("cashWithdrawalTotal").textContent =
-      money(
-        sum(cashWithdrawals)
-      );
-
-  }
-
-
-  /* =========================================
-     THIS MONTH
-     ========================================= */
-
-  const ym =
-    today().slice(0, 7);
-
-
-  if ($("monthSpend")) {
-
-    $("monthSpend").textContent =
-      money(
-
-        data
-          .filter(
-            x =>
-              x.account === "cash" &&
-              x.type === "expense" &&
-              String(x.date)
-                .startsWith(ym)
-          )
-          .reduce(
-            (s, x) =>
-              s +
-              Number(x.amount || 0),
-            0
-          )
-
-      );
-
-  }
-
-
-  /* =========================================
-     TOP CATEGORY
-     ========================================= */
-
+  const cash = data.filter(x => x.account === "cash").sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  renderGroup("cashIncomeRows", cash.filter(x=>x.type==="income"), "income", "+", "No cash income yet.");
+  renderGroup("cashExpenseRows", cash.filter(x=>x.type==="expense"), "expense", "-", "No cash expenses yet.");
+  renderGroup("cashWithdrawalRows", cash.filter(x=>x.type==="withdrawal"), "withdrawal", "-", "No cash withdrawals yet.");
+  if ($("cashIncomeTotal")) $("cashIncomeTotal").textContent = money(cash.filter(x=>x.type==="income").reduce((s,x)=>s+Number(x.amount||0),0));
+  if ($("cashExpenseTotal")) $("cashExpenseTotal").textContent = money(cash.filter(x=>x.type==="expense").reduce((s,x)=>s+Number(x.amount||0),0));
+  if ($("cashWithdrawalTotal")) $("cashWithdrawalTotal").textContent = money(cash.filter(x=>x.type==="withdrawal").reduce((s,x)=>s+Number(x.amount||0),0));
+  const ym = today().slice(0,7);
+  if ($("monthSpend")) $("monthSpend").textContent = money(cash.filter(x=>x.type==="expense" && String(x.date).startsWith(ym)).reduce((s,x)=>s+Number(x.amount||0),0));
   const cats = {};
-
-
-  cashExpenses.forEach(
-    x => {
-
-      cats[x.category] =
-        (cats[x.category] || 0) +
-        Number(x.amount || 0);
-
-    }
-  );
-
-
-  const top =
-    Object.entries(cats)
-      .sort(
-        (a, b) =>
-          b[1] - a[1]
-      )[0];
-
-
-  if ($("topCategory")) {
-
-    $("topCategory").textContent =
-      top
-        ? `${top[0]} (${money(top[1])})`
-        : "—";
-
+  cash.filter(x=>x.type==="expense").forEach(x=>cats[x.category]=(cats[x.category]||0)+Number(x.amount||0));
+  const top = Object.entries(cats).sort((a,b)=>b[1]-a[1])[0];
+  if ($("topCategory")) $("topCategory").textContent = top ? `${top[0]} (${money(top[1])})` : "—";
+  if ($("rows")) {
+    let rows = [...data];
+    const month = $("monthFilter")?.value || "all";
+    const type = $("typeFilter")?.value || "all";
+    if (month !== "all") rows = rows.filter(x=>String(x.date).startsWith(month));
+    if (type !== "all") rows = rows.filter(x=>x.type===type);
+    rows.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+    renderGroup("rows", rows, "amount", "", "No transactions yet.");
   }
-
 }
-
-
-/* =========================================
-   SUM
-   ========================================= */
-
-function sum(rows) {
-
-  return rows.reduce(
-    (s, x) =>
-      s +
-      Number(x.amount || 0),
-    0
-  );
-
+async function addTransaction(e) {
+  e.preventDefault();
+  if (!user) return alert("Please sign in first.");
+  const amount = Number($("amount").value), date = $("date").value, account = $("account").value;
+  if (!ACCOUNTS.includes(account) || !Number.isFinite(amount) || amount <= 0 || !date) return alert("Please enter valid transaction details.");
+  await addDoc(collection(db,"users",user.uid,"transactions"), {
+    account, type:$("type").value, amount, category:$("category").value,
+    date, note:$("note").value.trim(), createdAt:Date.now()
+  });
+  e.target.reset(); $("date").value = today();
 }
-
-
-/* =========================================
-   RENDER TRANSACTION GROUP
-   ========================================= */
-
-function renderGroup(
-  containerId,
-  rows,
-  cssClass,
-  sign,
-  emptyText
-) {
-
-  const container =
-    $(containerId);
-
-
-  if (!container) return;
-
-
-  if (!rows.length) {
-
-    container.innerHTML =
-      `<div class="transaction-empty">
-        ${esc(emptyText)}
-      </div>`;
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    rows
-      .map(
-        x => `
-
-          <div class="transaction-row">
-
-            <span>
-              ${esc(x.date)}
-            </span>
-
-            <span>
-              ${esc(x.category)}
-            </span>
-
-            <span>
-              ${esc(x.note || "—")}
-            </span>
-
-            <span class="amount ${cssClass}">
-              ${sign}${money(x.amount)}
-            </span>
-
-            <span>
-
-              <button
-                class="row-delete"
-                data-delete-id="${esc(x.id)}"
-                type="button"
-              >
-                Delete
-              </button>
-
-            </span>
-
-          </div>
-
-        `
-      )
-      .join("");
-
+async function removeTransaction(id) {
+  if (!user || !confirm("Delete this transaction?")) return;
+  await deleteDoc(doc(db,"users",user.uid,"transactions",id));
 }
-
-
-/* =========================================
-   DELETE TRANSACTION
-   =========================================
-
-   THIS IS THE PART THAT WAS MISSING
-   FROM YOUR ORIGINAL app.js.
-*/
-
-document.addEventListener(
-  "click",
-  event => {
-
-    const button =
-      event.target.closest(
-        "[data-delete-id]"
-      );
-
-
-    if (!button) return;
-
-
-    event.preventDefault();
-    event.stopPropagation();
-
-
-    const id =
-      String(
-        button.dataset.deleteId
-      );
-
-
-    const before =
-      data.length;
-
-
-    data =
-      data.filter(
-        x =>
-          String(x.id) !== id
-      );
-
-
-    if (
-      data.length === before
-    ) {
-
+async function start() {
+  if ($("date")) $("date").value = today();
+  $("form")?.addEventListener("submit", addTransaction);
+  $("rows")?.addEventListener("click", e => {
+    const b=e.target.closest("[data-delete-id]"); if(b) removeTransaction(b.dataset.deleteId);
+  });
+  $("refreshFundsBtn")?.addEventListener("click", renderFunds);
+  $("editOtherNameBtn")?.addEventListener("click", () => {
+    const n=prompt("Enter a name for this account:",otherName());
+    if(n?.trim()){localStorage.setItem("lapmobOtherName",n.trim());renderFunds();}
+  });
+  $("googleSignInBtn")?.addEventListener("click", async()=>{
+    try { await signInWithPopup(auth,googleProvider); } catch(e){ console.error(e); alert(e.message); }
+  });
+  $("logoutBtn")?.addEventListener("click",()=>signOut(auth));
+  onAuthStateChanged(auth, u => {
+    user=u;
+    if (unsubscribe) unsubscribe();
+    if (!u) {
+      if ($("status")) $("status").textContent="Signed out";
       return;
-
     }
-
-
-    saveData();
-
-
-    renderFunds();
-
-    render();
-
-  }
-);
-
-
-/* =========================================
-   ADD TRANSACTION
-   ========================================= */
-
-const form =
-  $("form");
-
-
-if (form) {
-
-  form.addEventListener(
-    "submit",
-    event => {
-
-      event.preventDefault();
-
-
-      const account =
-        $("account").value;
-
-
-      const type =
-        $("type").value;
-
-
-      const amount =
-        Number(
-          $("amount").value
-        );
-
-
-      const date =
-        $("date").value;
-
-
-      if (
-        !Number.isFinite(amount) ||
-        amount <= 0
-      ) {
-
-        alert(
-          "Please enter a valid amount."
-        );
-
-        return;
-
-      }
-
-
-      if (!date) {
-
-        alert(
-          "Please select a date."
-        );
-
-        return;
-
-      }
-
-
-      /* CREATE TRANSACTION */
-
-      data.push({
-
-        id:
-          `${Date.now()}-${Math.random()
-            .toString(16)
-            .slice(2)}`,
-
-        account:
-          account,
-
-        type:
-          type,
-
-        amount:
-          amount,
-
-        category:
-          $("category").value,
-
-        date:
-          date,
-
-        note:
-          $("note")
-            .value
-            .trim()
-
-      });
-
-
-      /* SAVE */
-
-      saveData();
-
-
-      /* RESET FORM */
-
-      form.reset();
-
-
-      if ($("date")) {
-
-        $("date").value =
-          today();
-
-      }
-
-
-      /* REFRESH */
-
-      renderFunds();
-
-      render();
-
-    }
-  );
-
+    if ($("status")) $("status").textContent="Connected";
+    const q=query(collection(db,"users",u.uid,"transactions"),orderBy("date","desc"));
+    unsubscribe=onSnapshot(q,snap=>{
+      data=snap.docs.map(d=>({id:d.id,...d.data()}));
+      renderFunds(); render();
+    },err=>{console.error(err);alert("Firestore error: "+err.message);});
+  });
 }
-
-
-/* =========================================
-   INITIAL DATE
-   ========================================= */
-
-if ($("date")) {
-
-  $("date").value =
-    today();
-
-}
-
-
-/* =========================================
-   FILTERS
-   ========================================= */
-
-$("monthFilter")
-  ?.addEventListener(
-    "change",
-    render
-  );
-
-
-$("typeFilter")
-  ?.addEventListener(
-    "change",
-    render
-  );
-
-
-/* =========================================
-   OTHER ACCOUNT NAME
-   ========================================= */
-
-$("editOtherNameBtn")
-  ?.addEventListener(
-    "click",
-    event => {
-
-      event.preventDefault();
-      event.stopPropagation();
-
-
-      const current =
-        localStorage.getItem(
-          "lapmobOtherName"
-        ) ||
-        "Other";
-
-
-      const newName =
-        prompt(
-          "Enter a name for this account:",
-          current
-        );
-
-
-      if (
-        newName &&
-        newName.trim()
-      ) {
-
-        localStorage.setItem(
-          "lapmobOtherName",
-          newName.trim()
-        );
-
-
-        renderFunds();
-
-      }
-
-    }
-  );
-
-
-/* =========================================
-   INITIAL RENDER
-   ========================================= */
-
-renderFunds();
-
-render();
+start();
