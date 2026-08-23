@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,85 +18,51 @@
       </div>
 
       <div class="account-area">
-        <span id="status" class="status">Starting...</span>
-        <span id="userEmail" class="user-email hidden"></span>
-        <button id="profileBtn" class="secondary hidden" type="button">Profile</button>
-        <button id="logoutBtn" class="secondary hidden" type="button">Log out</button>
+        <span class="status ok">Budget Dashboard</span>
+        <button id="profileBtn" class="secondary" type="button">Profile</button>
       </div>
     </div>
 
-    <section id="authPanel" class="panel auth-panel">
-      <h2>Welcome to LapMob Budget Tracker</h2>
-      <p class="auth-help">Sign in with your Google account to create or access your personal budget.</p>
-
-      <button id="googleSignInBtn" class="google-btn" type="button">
-        <span class="google-icon">G</span>
-        Continue with Google
-      </button>
-
-      <div id="authMessage" class="auth-message" aria-live="polite"></div>
-    </section>
-
-    <div id="profileModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+    <div id="profileModal" class="modal hidden" role="dialog" aria-modal="true">
       <div class="modal-card">
         <div class="modal-header">
           <div>
-            <h2 id="profileTitle">Profile Settings</h2>
-            <p class="modal-subtitle">Change the name shown in your LapMob account.</p>
+            <h2>Profile Preview</h2>
+            <p class="modal-subtitle">Local profile settings</p>
           </div>
-          <button id="closeProfileBtn" class="modal-close" type="button" aria-label="Close">×</button>
+          <button id="closeProfileBtn" class="modal-close" type="button">×</button>
         </div>
-
-        <label for="profileName">Your name</label>
-        <input id="profileName" type="text" maxlength="60" placeholder="Enter your name">
-
-        <label for="profileEmail">Google account</label>
-        <input id="profileEmail" type="email" disabled>
-
+        <label for="profileName">Name</label>
+        <input id="profileName" type="text" value="Demo User">
         <div class="profile-actions">
-          <button id="saveProfileBtn" type="button">Save changes</button>
+          <button id="saveProfileBtn" type="button">Save preview</button>
           <button id="cancelProfileBtn" class="secondary" type="button">Cancel</button>
         </div>
-
-        <div id="profileMessage" class="auth-message" aria-live="polite"></div>
+        <div id="profileMessage" class="auth-message"></div>
       </div>
     </div>
-
-    <div id="fundModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="fundModalTitle">
-      <div class="modal-card">
-        <div class="modal-header">
-          <div>
-            <h2 id="fundModalTitle">Edit Fund</h2>
-            <p id="fundModalSubtitle" class="modal-subtitle">Update the current amount.</p>
-          </div>
-          <button id="closeFundBtn" class="modal-close" type="button" aria-label="Close">×</button>
-        </div>
-
-        <label for="fundInput">Amount (NT$)</label>
-        <input id="fundInput" type="number" min="0" step="1" inputmode="numeric" placeholder="0">
-
-        <div class="profile-actions">
-          <button id="saveFundBtn" type="button">Save amount</button>
-          <button id="cancelFundBtn" class="secondary" type="button">Cancel</button>
-        </div>
-
-        <div id="fundMessage" class="auth-message" aria-live="polite"></div>
-      </div>
-    </div>
-
-    <main id="appPanel" class="hidden">
+    <main id="appPanel">
       <div class="cards">
         <div class="card">
-          <div class="label">Balance</div>
-          <div id="balance" class="amount">NT$0</div>
+          <div class="label">Available Balance</div>
+          <div class="amount-with-eye">
+            <span id="balance">NT$0</span>
+            <button class="eye-toggle" type="button" data-target="balance" aria-label="Hide balance">👁</button>
+          </div>
         </div>
         <div class="card">
           <div class="label">Income</div>
-          <div id="income" class="amount income">NT$0</div>
+          <div class="amount-with-eye income">
+            <span id="income">NT$0</span>
+            <button class="eye-toggle" type="button" data-target="income" aria-label="Hide income">👁</button>
+          </div>
         </div>
         <div class="card">
           <div class="label">Expenses</div>
-          <div id="expenses" class="amount expense">NT$0</div>
+          <div class="amount-with-eye expense">
+            <span id="expenses">NT$0</span>
+            <button class="eye-toggle" type="button" data-target="expenses" aria-label="Hide expenses">👁</button>
+          </div>
         </div>
         <div class="card">
           <div class="label">Transactions</div>
@@ -107,32 +74,93 @@
         <div class="funds-header">
           <div>
             <h2>Money & Savings</h2>
-            <p class="funds-help">Manage your Bank, Cash, and Emergency Savings amounts separately from transactions.</p>
+            <p class="funds-help">Manage your Bank, Cash, and Emergency Savings amounts separately from transactions.
+            </p>
           </div>
           <button id="refreshFundsBtn" class="secondary" type="button">Refresh</button>
         </div>
 
         <div class="funds-grid">
-          <button class="fund-card" type="button" data-fund="bank">
-            <span class="fund-icon">🏦</span>
-            <span class="fund-name">Bank</span>
-            <strong id="bankAmount">NT$0</strong>
-            <span class="fund-action">View / edit amount</span>
-          </button>
 
-          <button class="fund-card" type="button" data-fund="cash">
+          <!-- CASH stays on dashboard -->
+          <div class="fund-card">
             <span class="fund-icon">💵</span>
             <span class="fund-name">Cash</span>
-            <strong id="cashAmount">NT$0</strong>
-            <span class="fund-action">View / edit amount</span>
-          </button>
+            <div class="fund-amount-with-eye">
+              <strong id="cashAmount">NT$0</strong>
+              <button class="eye-toggle" type="button" data-target="cashAmount" aria-label="Hide cash">👁</button>
+            </div>
+            <span class="fund-action">Dashboard transactions</span>
+          </div>
 
-          <button class="fund-card" type="button" data-fund="emergency">
+          <a href="bank.html" class="fund-card fund-link">
+            <span class="fund-icon">🏦</span>
+            <span class="fund-name">Bank</span>
+            <div class="fund-amount-with-eye">
+              <strong id="bankAmount">NT$0</strong>
+              <button
+  class="eye-toggle"
+  type="button"
+  data-target="bankAmount"
+  aria-label="Hide bank"
+>
+  👁
+</button>
+            </div>
+            <span class="fund-action">Open Bank</span>
+          </a>
+
+          <a href="savings.html" class="fund-card fund-link">
+            <span class="fund-icon">💰</span>
+            <span class="fund-name">Savings</span>
+            <div class="fund-amount-with-eye">
+              <strong id="savingsAmount">NT$0</strong>
+                <button
+  class="eye-toggle"
+  type="button"
+  data-target="bankAmount"
+  aria-label="Hide bank"
+>
+  👁
+</button>
+            </div>
+            <span class="fund-action">Open Savings</span>
+          </a>
+
+          <a href="emergency.html" class="fund-card fund-link">
             <span class="fund-icon">🛟</span>
-            <span class="fund-name">Emergency Savings Acc.</span>
-            <strong id="emergencyAmount">NT$0</strong>
-            <span class="fund-action">View / edit amount</span>
-          </button>
+            <span class="fund-name">Emergency Fund</span>
+            <div class="fund-amount-with-eye">
+              <strong id="emergencyAmount">NT$0</strong>
+              <button
+  class="eye-toggle"
+  type="button"
+  data-target="emergencyAmount"
+  aria-label="Hide emergency fund"
+>
+  👁
+</button>
+            </div>
+            <span class="fund-action">Open Emergency</span>
+          </a>
+
+          <a href="other.html" class="fund-card fund-link">
+            <span class="fund-icon">📦</span>
+            <span id="otherFundName" class="fund-name">Other</span>
+            <div class="fund-amount-with-eye">
+              <strong id="otherAmount">NT$0</strong>
+              <button
+  class="eye-toggle"
+  type="button"
+  data-target="bankAmount"
+  aria-label="Hide bank"
+>
+  👁
+</button>
+            </div>
+            <span class="fund-action">Open Other</span>
+          </a>
+
         </div>
 
         <div class="fund-total">
@@ -145,14 +173,21 @@
         <div class="panel">
           <h2>Add Transaction</h2>
           <form id="form">
-            <label for="type">Type</label>
-            <select id="type">
-              <option value="expense">Expense</option>
-              <option value="income">Income</option>
+            <label for="account">Account</label>
+            <select id="account">
+              <option value="cash">Cash</option>
+              <option value="bank">Bank</option>
+              <option value="savings">Savings</option>
+              <option value="emergency">Emergency Fund</option>
+              <option value="other">Other</option>
             </select>
 
-            <label for="amount">Amount (NT$)</label>
-            <input id="amount" type="number" min="0" step="1" required placeholder="e.g. 4100">
+            <label for="type">Type</label>
+            <select id="type">
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+              <option value="withdrawal">Withdrawal</option>
+            </select>
 
             <label for="category">Category</label>
             <select id="category">
@@ -174,13 +209,17 @@
               <option>Other</option>
             </select>
 
+            <label for="amount">Amount (NT$)</label>
+            <input id="amount" type="number" min="0" step="1" required autocomplete="off" inputmode="numeric"
+              placeholder="Enter amount">
+
             <label for="date">Date</label>
             <input id="date" type="date" required>
 
             <label for="note">Note</label>
             <input id="note" maxlength="80" placeholder="Optional">
 
-            <button type="submit">＋ Add & Sync to Cloud</button>
+            <button type="submit">＋ Add Transaction</button>
           </form>
 
           <div class="summary">
@@ -190,40 +229,97 @@
         </div>
 
         <div class="panel">
-          <h2>Transactions</h2>
-          <div class="filters">
-            <select id="monthFilter">
-              <option value="all">All months</option>
-            </select>
-            <select id="typeFilter">
-              <option value="all">All types</option>
-              <option value="income">Income</option>
-              <option value="expense">Expenses</option>
-              <option value="Bank">Bank Balance</option>
-            </select>
-          </div>
 
-          <div style="overflow:auto">
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Type</th>
-                  <th>Category</th>
-                  <th>Note</th>
-                  <th>Amount</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="rows"></tbody>
-            </table>
-          </div>
-          <div id="empty" class="empty" style="display:none">No transactions yet.</div>
+          <h2>Cash Transactions</h2>
+
+          <!-- INCOME -->
+          <section class="transaction-group">
+
+            <div class="transaction-group-title income-title">
+              <h3>Income</h3>
+              <span id="cashIncomeTotal">NT$0</span>
+            </div>
+
+            <div class="transaction-list">
+
+              <div class="transaction-list-head">
+                <span>Date</span>
+                <span>Category</span>
+                <span>Note</span>
+                <span>Amount</span>
+                <span></span>
+              </div>
+
+              <div id="cashIncomeRows" class="transaction-list-body">
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- EXPENSES -->
+          <section class="transaction-group">
+
+            <div class="transaction-group-title expense-title">
+              <h3>Expenses</h3>
+              <span id="cashExpenseTotal">NT$0</span>
+            </div>
+
+            <div class="transaction-list">
+
+              <div class="transaction-list-head">
+                <span>Date</span>
+                <span>Category</span>
+                <span>Note</span>
+                <span>Amount</span>
+                <span></span>
+              </div>
+
+              <div id="cashExpenseRows" class="transaction-list-body">
+              </div>
+
+            </div>
+
+          </section>
+
         </div>
       </div>
+      <div class="panel account-transactions-panel">
+
+  <h2>Cash Withdrawals</h2>
+
+  <div class="transaction-group">
+
+    <div class="transaction-group-title withdrawal-title">
+      <h3>Withdrawals</h3>
+      <span id="cashWithdrawalTotal">NT$0</span>
+    </div>
+
+    <div class="transaction-list">
+
+      <div class="transaction-list-head">
+        <span>Date</span>
+        <span>Category</span>
+        <span>Note</span>
+        <span>Amount</span>
+        <span></span>
+      </div>
+
+      <div
+        id="cashWithdrawalRows"
+        class="transaction-list-body"
+      ></div>
+
+    </div>
+
+  </div>
+
+</div>
     </main>
   </div>
 
   <script type="module" src="app.js"></script>
 </body>
+
 </html>

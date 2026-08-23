@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Emergency Fund - LapMob Budget Tracker</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-account-page="emergency">
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="top">
+
+      <div>
+        <h1>🛟 Emergency Fund</h1>
+        <p>Emergency fund transactions</p>
+      </div>
+
+      <div class="account-area">
+
+        <button
+          class="secondary"
+          id="backBtn"
+          type="button"
+        >
+          ← Dashboard
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- CURRENT BALANCE -->
+    <div class="account-summary-card">
+
+      <span class="label">
+        Current Balance
+      </span>
+
+      <div class="amount-with-eye">
+
+        <strong id="pageBalance">
+          NT$0
+        </strong>
+
+        <button
+          class="eye-toggle"
+          type="button"
+          data-target="pageBalance"
+          aria-label="Hide balance"
+          title="Hide balance"
+        >
+          👁
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- MAIN AREA -->
+    <div class="account-page-layout">
+
+
+      <!-- LEFT: ADD TRANSACTION -->
+      <div class="panel account-add-panel">
+
+        <h2>
+          Add Transaction
+        </h2>
+
+        <form id="accountTransactionForm">
+
+
+          <label for="account">
+            Account
+          </label>
+
+          <select
+            id="account"
+            disabled
+          >
+            <option value="emergency">
+              Emergency Fund
+            </option>
+          </select>
+
+
+          <label for="type">
+            Type
+          </label>
+
+          <select id="type">
+
+            <option value="income">
+              Income
+            </option>
+
+            <option value="expense">
+              Expense
+            </option>
+
+            <option value="withdrawal">
+              Withdrawal
+            </option>
+
+          </select>
+
+
+          <label for="category">
+            Category
+          </label>
+
+          <select id="category">
+
+            <option>Allowance</option>
+            <option>Salary</option>
+            <option>Deposit</option>
+            <option>Cash Withdrawal</option>
+            <option>Rent</option>
+            <option>Food</option>
+            <option>Electricity</option>
+            <option>Public Electricity</option>
+            <option>Tuition</option>
+            <option>Transportation</option>
+            <option>Gasoline</option>
+            <option>Phone / Internet</option>
+            <option>Motorcycle</option>
+            <option>Shopping</option>
+            <option>Entertainment</option>
+            <option>School</option>
+            <option>Other</option>
+
+          </select>
+
+
+          <label for="amount">
+            Amount (NT$)
+          </label>
+
+          <input
+            id="amount"
+            type="number"
+            min="0"
+            step="1"
+            required
+            autocomplete="off"
+            inputmode="numeric"
+            placeholder="Enter amount"
+          >
+
+
+          <label for="date">
+            Date
+          </label>
+
+          <input
+            id="date"
+            type="date"
+            required
+          >
+
+
+          <label for="note">
+            Note
+          </label>
+
+          <input
+            id="note"
+            maxlength="80"
+            placeholder="Optional"
+          >
+
+
+          <button type="submit">
+            ＋ Add Transaction
+          </button>
+
+        </form>
+
+      </div>
+
+
+      <!-- RIGHT SIDE -->
+      <div class="account-right-column">
+
+
+        <!-- SUMMARY -->
+        <div class="account-stats">
+
+
+          <!-- INCOME -->
+          <div class="mini">
+
+            <span class="label">
+              Income
+            </span>
+
+            <div class="amount-with-eye">
+
+              <b
+                id="pageIncome"
+                class="income"
+              >
+                NT$0
+              </b>
+
+              <button
+                class="eye-toggle"
+                type="button"
+                data-target="pageIncome"
+                aria-label="Hide income"
+                title="Hide income"
+              >
+                👁
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- EXPENSES -->
+          <div class="mini">
+
+            <span class="label">
+              Expenses
+            </span>
+
+            <div class="amount-with-eye">
+
+              <b
+                id="pageExpense"
+                class="expense"
+              >
+                NT$0
+              </b>
+
+              <button
+                class="eye-toggle"
+                type="button"
+                data-target="pageExpense"
+                aria-label="Hide expenses"
+                title="Hide expenses"
+              >
+                👁
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- WITHDRAWALS -->
+          <div class="mini">
+
+            <span class="label">
+              Withdrawals
+            </span>
+
+            <div class="amount-with-eye">
+
+              <b
+                id="pageWithdrawal"
+                class="withdrawal"
+              >
+                NT$0
+              </b>
+
+              <button
+                class="eye-toggle"
+                type="button"
+                data-target="pageWithdrawal"
+                aria-label="Hide withdrawals"
+                title="Hide withdrawals"
+              >
+                👁
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- EMERGENCY TRANSACTIONS -->
+        <div class="panel account-transactions-panel">
+
+          <h2>
+            Emergency Fund Transactions
+          </h2>
+
+
+          <!-- INCOME -->
+          <section class="transaction-group">
+
+            <div class="transaction-group-title income-title">
+
+              <h3>
+                Income
+              </h3>
+
+              <span id="pageIncomeTotal">
+                NT$0
+              </span>
+
+            </div>
+
+
+            <div class="transaction-list">
+
+              <div class="transaction-list-head">
+
+                <span>Date</span>
+                <span>Category</span>
+                <span>Note</span>
+                <span>Amount</span>
+                <span></span>
+
+              </div>
+
+              <div
+                id="incomeRows"
+                class="transaction-list-body"
+              >
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- EXPENSES -->
+          <section class="transaction-group">
+
+            <div class="transaction-group-title expense-title">
+
+              <h3>
+                Expenses
+              </h3>
+
+              <span id="pageExpenseTotal">
+                NT$0
+              </span>
+
+            </div>
+
+
+            <div class="transaction-list">
+
+              <div class="transaction-list-head">
+
+                <span>Date</span>
+                <span>Category</span>
+                <span>Note</span>
+                <span>Amount</span>
+                <span></span>
+
+              </div>
+
+              <div
+                id="expenseRows"
+                class="transaction-list-body"
+              >
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- WITHDRAWALS -->
+          <section class="transaction-group">
+
+            <div class="transaction-group-title withdrawal-title">
+
+              <h3>
+                Withdrawals
+              </h3>
+
+              <span id="pageWithdrawalTotal">
+                NT$0
+              </span>
+
+            </div>
+
+
+            <div class="transaction-list">
+
+              <div class="transaction-list-head">
+
+                <span>Date</span>
+                <span>Category</span>
+                <span>Note</span>
+                <span>Amount</span>
+                <span></span>
+
+              </div>
+
+              <div
+                id="withdrawalRows"
+                class="transaction-list-body"
+              >
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script type="module" src="account-page.js"></script>
+
+</body>
+
+</html>
