@@ -15,54 +15,56 @@
   <div class="container">
 
     <!-- HEADER -->
-    <div class="top">
+<div class="top emergency-header">
 
-      <div>
-        <h1>🛟 Emergency Fund</h1>
-        <p>Emergency fund transactions</p>
-      </div>
+  <img
+    src="picture/Emergency Design/banner.png"
+    alt="Emergency Fund"
+    class="emergency-banner"
+  >
 
-      <div class="account-area">
+  <div class="account-area">
+    <button
+      class="secondary"
+      id="backBtn"
+      type="button"
+    >
+      ← Back to Dashboard
+    </button>
+  </div>
 
-        <button
-          class="secondary"
-          id="backBtn"
-          type="button"
-        >
-          ← Dashboard
-        </button>
-
-      </div>
-
-    </div>
+</div>
 
 
-    <!-- CURRENT BALANCE -->
     <div class="account-summary-card">
 
-      <span class="label">
-        Current Balance
-      </span>
+    <div class="balance-content">
 
-      <div class="amount-with-eye">
+        <div class="balance-info">
+            <span class="label">Current Balance</span>
 
-        <strong id="pageBalance">
-          NT$0
-        </strong>
+            <div class="amount-with-eye">
+                <span id="pageBalance">NT$0</span>
 
-        <button
-          class="eye-toggle"
-          type="button"
-          data-target="pageBalance"
-          aria-label="Hide balance"
-          title="Hide balance"
+                <button
+                    class="eye-toggle"
+                    type="button"
+                    data-target="pageBalance">
+                    👁
+                </button>
+            </div>
+        </div>
+
+        <!-- Emergency Fund Image -->
+        <img
+            src="picture/Emergency Design/e1.png"
+            alt="Emergency Fund"
+            class="emergency-balance-image"
         >
-          👁
-        </button>
-
-      </div>
 
     </div>
+
+</div>
 
 
     <!-- MAIN AREA -->
@@ -182,6 +184,12 @@
           <button type="submit">
             ＋ Add Transaction
           </button>
+
+          <img
+    src="picture/Emergency Design/e2.png"
+    alt="Emergency Fund Savings"
+    class="emergency-transaction-image"
+>
 
         </form>
 
@@ -424,7 +432,7 @@
   </div>
 
 
-  <script type="module" src="account-page.js"></script>
+  <script src="account-page.js"></script>
 
 </body>
 

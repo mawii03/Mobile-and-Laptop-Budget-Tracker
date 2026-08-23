@@ -7,19 +7,33 @@
   <meta name="theme-color" content="#111827">
   <title>LapMob Budget Tracker</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dashboard-design.css">
 </head>
 
 <body>
   <div class="container">
     <div class="top">
-      <div>
-        <h1>☁️ My Cloud Budget</h1>
-        <p>Phone ↔ Cloud ↔ Laptop synchronization</p>
+      <div class="brand">
+        <img src="picture/Cash Design/banner.png" alt="My Cloud Budget" class="cloud-budget-banner">
       </div>
 
       <div class="account-area">
-        <span class="status ok">Budget Dashboard</span>
-        <button id="profileBtn" class="secondary" type="button">Profile</button>
+
+        <span class="status ok">
+          Budget Dashboard
+        </span>
+
+        <button id="profileBtn" class="secondary" type="button">
+          Profile
+        </button>
+
+      </div>
+
+      <!-- 3D DASHBOARD CHARACTER -->
+      <div class="dashboard-character">
+
+        <img src="picture/Cash Design/1.png" alt="Budget assistant">
+
       </div>
     </div>
 
@@ -73,8 +87,10 @@
       <section class="panel funds-panel">
         <div class="funds-header">
           <div>
-            <h2>Money & Savings</h2>
-            <p class="funds-help">Manage your Bank, Cash, and Emergency Savings amounts separately from transactions.
+            <h2>Accounts & Savings</h2>
+
+            <p class="funds-help">
+              Manage your Bank, Cash, and Emergency Savings amounts separately from transactions.
             </p>
           </div>
           <button id="refreshFundsBtn" class="secondary" type="button">Refresh</button>
@@ -98,14 +114,9 @@
             <span class="fund-name">Bank</span>
             <div class="fund-amount-with-eye">
               <strong id="bankAmount">NT$0</strong>
-              <button
-  class="eye-toggle"
-  type="button"
-  data-target="bankAmount"
-  aria-label="Hide bank"
->
-  👁
-</button>
+              <button class="eye-toggle" type="button" data-target="bankAmount" aria-label="Hide bank">
+                👁
+              </button>
             </div>
             <span class="fund-action">Open Bank</span>
           </a>
@@ -115,31 +126,21 @@
             <span class="fund-name">Savings</span>
             <div class="fund-amount-with-eye">
               <strong id="savingsAmount">NT$0</strong>
-                <button
-  class="eye-toggle"
-  type="button"
-  data-target="bankAmount"
-  aria-label="Hide bank"
->
-  👁
-</button>
+              <button class="eye-toggle" type="button" data-target="savingsAmount" aria-label="Hide savings">
+                👁
+              </button>
             </div>
             <span class="fund-action">Open Savings</span>
           </a>
 
           <a href="emergency.html" class="fund-card fund-link">
-            <span class="fund-icon">🛟</span>
+            <span class="fund-icon">🚨</span>
             <span class="fund-name">Emergency Fund</span>
             <div class="fund-amount-with-eye">
               <strong id="emergencyAmount">NT$0</strong>
-              <button
-  class="eye-toggle"
-  type="button"
-  data-target="emergencyAmount"
-  aria-label="Hide emergency fund"
->
-  👁
-</button>
+              <button class="eye-toggle" type="button" data-target="emergencyAmount" aria-label="Hide emergency fund">
+                👁
+              </button>
             </div>
             <span class="fund-action">Open Emergency</span>
           </a>
@@ -149,14 +150,9 @@
             <span id="otherFundName" class="fund-name">Other</span>
             <div class="fund-amount-with-eye">
               <strong id="otherAmount">NT$0</strong>
-              <button
-  class="eye-toggle"
-  type="button"
-  data-target="bankAmount"
-  aria-label="Hide bank"
->
-  👁
-</button>
+              <button class="eye-toggle" type="button" data-target="otherAmount" aria-label="Hide other">
+                👁
+              </button>
             </div>
             <span class="fund-action">Open Other</span>
           </a>
@@ -228,9 +224,9 @@
           </div>
         </div>
 
-        <div class="panel">
+        <div class="panel cash-transactions-panel">
 
-          <h2>Cash Transactions</h2>
+
 
           <!-- INCOME -->
           <section class="transaction-group">
@@ -283,43 +279,26 @@
 
           </section>
 
+          <!-- BUDGET QUOTE -->
+          <div class="cash-quote-footer">
+
+            <div class="budget-quote">
+              “Budget wisely. Spend mindfully. Live freely.”
+            </div>
+
+            <div class="cash-dashboard-character">
+              <img src="picture/Cash Design/2.png" alt="Cash budget assistant">
+            </div>
+
+          </div>
+
         </div>
       </div>
-      <div class="panel account-transactions-panel">
 
-  <h2>Cash Withdrawals</h2>
-
-  <div class="transaction-group">
-
-    <div class="transaction-group-title withdrawal-title">
-      <h3>Withdrawals</h3>
-      <span id="cashWithdrawalTotal">NT$0</span>
-    </div>
-
-    <div class="transaction-list">
-
-      <div class="transaction-list-head">
-        <span>Date</span>
-        <span>Category</span>
-        <span>Note</span>
-        <span>Amount</span>
-        <span></span>
-      </div>
-
-      <div
-        id="cashWithdrawalRows"
-        class="transaction-list-body"
-      ></div>
-
-    </div>
-
-  </div>
-
-</div>
     </main>
   </div>
 
-  <script type="module" src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>

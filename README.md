@@ -1,16 +1,29 @@
-# LapMob Budget Tracker V8
+# LapMob Budget Tracker — Real Local Version
 
-Responsive desktop and mobile design.
+This version is for testing the actual behavior before Firebase.
 
-Desktop/laptop uses a wide dashboard with four summary cards and side-by-side panels.
-Phone uses a compact mobile-first layout with larger touch targets, stacked sections, and a mobile-friendly profile dialog.
+- Starts with zero balances and no transactions.
+- Income increases only the selected account.
+- Expense decreases only the selected account.
+- Withdrawal decreases only the selected account.
+- Bank, Savings, Emergency Fund, and Other have separate pages.
+- Cash transactions stay on the dashboard.
+- Amount fields start empty.
+- Data is saved in browser localStorage and shared by these pages in the same browser.
+- Refreshing does not erase saved data.
 
-The layout switches automatically based on screen width.
+Example:
+Cash = NT$0
+Add Income → Cash → NT$1,000
 
-## V9 funds
-The dashboard now has three separate saved amounts:
-- Bank
-- Cash
-- Emergency Savings Acc.
+Cash becomes NT$1,000.
+Bank, Savings, Emergency Fund, and Other remain unchanged.
 
-Click a fund card to view/edit its amount. The values are stored under the signed-in user's Firestore data, separately from transactions.
+This is ready to connect to Firebase later.
+
+
+## Eye toggle
+Amounts on the dashboard and account pages can be hidden or shown with the eye button. The setting is saved in localStorage.
+
+
+Eye buttons now stop link/card clicks, so clicking the eye only hides/shows the amount and does not open Bank, Savings, Emergency, or Other.

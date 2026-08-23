@@ -17,19 +17,18 @@
     <!-- HEADER -->
     <div class="top">
 
-      <div>
-        <h1>💰 Savings</h1>
-        <p>Savings account transactions</p>
-      </div>
+      <div class="account-page-title savings-page-title">
+    <img 
+        src="picture/Savings Design/banner.png"
+        alt="Savings"
+        class="savings-title-image"
+    >
+</div>
 
       <div class="account-area">
 
-        <button
-          class="secondary"
-          id="backBtn"
-          type="button"
-        >
-          ← Dashboard
+        <button class="secondary" id="backBtn" type="button">
+          ← Back to Dashboard
         </button>
 
       </div>
@@ -38,7 +37,7 @@
 
 
     <!-- CURRENT BALANCE -->
-    <div class="account-summary-card">
+    <div class="account-summary-card savings-balance-card">
 
       <span class="label">
         Current Balance
@@ -50,16 +49,16 @@
           NT$0
         </strong>
 
-        <button
-          class="eye-toggle"
-          type="button"
-          data-target="pageBalance"
-          aria-label="Hide balance"
-          title="Hide balance"
-        >
+        <button class="eye-toggle" type="button" data-target="pageBalance" aria-label="Hide balance"
+          title="Hide balance">
           👁
         </button>
 
+      </div>
+
+      <!-- 3D SAVINGS IMAGE -->
+      <div class="savings-balance-image">
+        <img src="picture/Savings Design/s1.png" alt="Savings">
       </div>
 
     </div>
@@ -83,10 +82,7 @@
             Account
           </label>
 
-          <select
-            id="account"
-            disabled
-          >
+          <select id="account" disabled>
             <option value="savings">
               Savings
             </option>
@@ -145,38 +141,22 @@
             Amount (NT$)
           </label>
 
-          <input
-            id="amount"
-            type="number"
-            min="0"
-            step="1"
-            required
-            autocomplete="off"
-            inputmode="numeric"
-            placeholder="Enter amount"
-          >
+          <input id="amount" type="number" min="0" step="1" required autocomplete="off" inputmode="numeric"
+            placeholder="Enter amount">
 
 
           <label for="date">
             Date
           </label>
 
-          <input
-            id="date"
-            type="date"
-            required
-          >
+          <input id="date" type="date" required>
 
 
           <label for="note">
             Note
           </label>
 
-          <input
-            id="note"
-            maxlength="80"
-            placeholder="Optional"
-          >
+          <input id="note" maxlength="80" placeholder="Optional">
 
 
           <button type="submit">
@@ -184,6 +164,11 @@
           </button>
 
         </form>
+
+        <!-- SAVINGS TRANSACTION IMAGE -->
+        <div class="savings-transaction-character">
+          <img src="picture/Savings Design/s2.png" alt="Savings illustration">
+        </div>
 
       </div>
 
@@ -205,20 +190,12 @@
 
             <div class="amount-with-eye">
 
-              <b
-                id="pageIncome"
-                class="income"
-              >
+              <b id="pageIncome" class="income">
                 NT$0
               </b>
 
-              <button
-                class="eye-toggle"
-                type="button"
-                data-target="pageIncome"
-                aria-label="Hide income"
-                title="Hide income"
-              >
+              <button class="eye-toggle" type="button" data-target="pageIncome" aria-label="Hide income"
+                title="Hide income">
                 👁
               </button>
 
@@ -236,20 +213,12 @@
 
             <div class="amount-with-eye">
 
-              <b
-                id="pageExpense"
-                class="expense"
-              >
+              <b id="pageExpense" class="expense">
                 NT$0
               </b>
 
-              <button
-                class="eye-toggle"
-                type="button"
-                data-target="pageExpense"
-                aria-label="Hide expenses"
-                title="Hide expenses"
-              >
+              <button class="eye-toggle" type="button" data-target="pageExpense" aria-label="Hide expenses"
+                title="Hide expenses">
                 👁
               </button>
 
@@ -267,20 +236,12 @@
 
             <div class="amount-with-eye">
 
-              <b
-                id="pageWithdrawal"
-                class="withdrawal"
-              >
+              <b id="pageWithdrawal" class="withdrawal">
                 NT$0
               </b>
 
-              <button
-                class="eye-toggle"
-                type="button"
-                data-target="pageWithdrawal"
-                aria-label="Hide withdrawals"
-                title="Hide withdrawals"
-              >
+              <button class="eye-toggle" type="button" data-target="pageWithdrawal" aria-label="Hide withdrawals"
+                title="Hide withdrawals">
                 👁
               </button>
 
@@ -327,10 +288,7 @@
 
               </div>
 
-              <div
-                id="incomeRows"
-                class="transaction-list-body"
-              >
+              <div id="incomeRows" class="transaction-list-body">
               </div>
 
             </div>
@@ -366,10 +324,7 @@
 
               </div>
 
-              <div
-                id="expenseRows"
-                class="transaction-list-body"
-              >
+              <div id="expenseRows" class="transaction-list-body">
               </div>
 
             </div>
@@ -405,10 +360,7 @@
 
               </div>
 
-              <div
-                id="withdrawalRows"
-                class="transaction-list-body"
-              >
+              <div id="withdrawalRows" class="transaction-list-body">
               </div>
 
             </div>
@@ -424,7 +376,7 @@
   </div>
 
 
-  <script type="module" src="account-page.js"></script>
+  <script src="account-page.js"></script>
 
 </body>
 

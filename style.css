@@ -602,8 +602,23 @@ body { min-height: 100vh; }
 }
 
 .fund-card strong {
-  font-size: 24px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: inherit;
+  line-height: 1.4;
   margin-top: 2px;
+}
+.fund-amount-with-eye {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fund-amount-with-eye strong {
+  font-size: 25px;
+  font-weight: 800;
+  font-family: inherit;
+  line-height: 1.2;
 }
 
 .fund-action {
@@ -659,4 +674,8257 @@ body { min-height: 100vh; }
   .fund-total strong {
     font-size: 18px;
   }
+}
+
+/* V12 account detail view */
+.account-view.hidden { display: none !important; }
+.account-page-top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.account-page-top h2 { margin: 0; font-size: 24px; }
+.account-view-subtitle { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.account-summary-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 12px;
+}
+.account-summary-card strong { display: block; font-size: 32px; margin-top: 5px; }
+.account-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.withdrawal { color: #7c3aed; }
+.account-transactions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+@media (max-width: 600px) {
+  .account-page-top { grid-template-columns: 1fr; }
+  .account-page-top button { width: 100%; }
+  .account-page-top h2 { font-size: 21px; }
+  .account-summary-card strong { font-size: 26px; }
+  .account-stats { gap: 7px; }
+  .account-stats .mini { padding: 9px; }
+  .account-stats .mini b { font-size: 13px; }
+  .account-transactions-header { flex-direction: column; }
+  .account-transactions-header button { width: 100%; }
+}
+
+/* V13 grouped transaction format */
+.transaction-group {
+  margin-top: 20px;
+}
+
+.transaction-group:first-of-type {
+  margin-top: 10px;
+}
+
+.transaction-group-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.transaction-group-title h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.transaction-group-title span {
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.income-title h3,
+.income-title span {
+  color: var(--green);
+}
+
+.expense-title h3,
+.expense-title span {
+  color: var(--red);
+}
+
+.withdrawal-title h3,
+.withdrawal-title span {
+  color: #7c3aed;
+}
+
+.transaction-list {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.transaction-list-head,
+.transaction-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 1.5fr 130px 42px;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+}
+
+.transaction-list-head {
+  background: #f9fafb;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.transaction-list-body {
+  background: var(--card);
+}
+
+.transaction-row {
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.transaction-row .amount {
+  font-size: 14px;
+  margin: 0;
+}
+
+.transaction-row .row-delete {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 6px 7px;
+  border-radius: 7px;
+  font-size: 11px;
+}
+
+.transaction-empty {
+  padding: 16px 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 700px) {
+  .transaction-list {
+    overflow-x: auto;
+  }
+
+  .transaction-list-head,
+  .transaction-row {
+    min-width: 610px;
+    grid-template-columns: 105px 1fr 1.5fr 110px 42px;
+  }
+
+  .transaction-group-title h3 {
+    font-size: 15px;
+  }
+}
+
+.fund-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 15px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.edit-name-btn {
+  margin-top: 4px;
+  font-size: 11px;
+  padding: 7px 9px;
+}
+
+.other-fund-card {
+  cursor: pointer;
+}
+
+
+/* Balance visibility toggle */
+.amount-with-eye,
+.fund-amount-with-eye {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amount-with-eye {
+  margin-top: 7px;
+}
+
+.amount-with-eye span,
+.amount-with-eye b,
+.amount-with-eye strong,
+.fund-amount-with-eye strong {
+  margin-top: 0;
+}
+
+.eye-toggle {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  min-width: 30px;
+  min-height: 30px;
+  font-size: 17px;
+  line-height: 1;
+  border-radius: 8px;
+}
+
+.eye-toggle:hover {
+  background: #f3f4f6;
+  color: var(--text);
+}
+
+.eye-toggle:active {
+  transform: scale(0.95);
+}
+
+.fund-amount-with-eye {
+  margin-top: 2px;
+}
+
+@media (max-width: 600px) {
+  .eye-toggle {
+    min-width: 32px;
+    min-height: 32px;
+    font-size: 18px;
+  }
+}
+.amount-with-eye {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 7px;
+}
+
+.amount-with-eye span {
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.2;
+  font-family: inherit;
+}
+
+.amount-with-eye.income span {
+  color: var(--green);
+}
+
+.amount-with-eye.expense span {
+  color: var(--red);
+}
+
+/* =========================================
+   ACCOUNT PAGE - ADD TRANSACTION + TRANSACTIONS
+   ========================================= */
+
+.account-page-layout {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.account-add-panel h2,
+.account-transactions-panel h2 {
+  margin: 0 0 18px;
+}
+
+.account-add-panel form {
+  display: block;
+}
+
+.account-add-panel input,
+.account-add-panel select {
+  width: 100%;
+}
+
+.account-add-panel button[type="submit"] {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.account-transactions-panel {
+  min-width: 0;
+}
+
+.account-transactions-panel .transaction-group {
+  margin-top: 20px;
+}
+
+.account-transactions-panel .transaction-group:first-of-type {
+  margin-top: 8px;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+
+  .account-page-layout {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+}
+
+/* =========================
+   ACCOUNT SUMMARY CARDS
+   ========================= */
+
+.account-stats {
+  display: grid;
+  grid-template-columns: 220px 220px 220px;
+  gap: 10px;
+  width: max-content;
+  margin-top: 14px;
+}
+
+.account-stats .mini {
+  width: 220px;
+  min-width: 220px;
+  padding: 12px;
+}
+
+/* Keep the amount and eye on one line */
+.account-stats .amount-with-eye {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+
+  .account-stats {
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .account-stats .mini {
+    width: auto;
+    min-width: 0;
+  }
+
+}
+
+@media (max-width: 520px) {
+
+  .account-stats {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .account-stats .mini {
+    width: 100%;
+  }
+
+}
+
+/* =========================================================
+   BANK PAGE — 3D PASTEL DESIGN
+   ONLY AFFECTS bank.html
+   ========================================================= */
+
+body[data-account-page="bank"] {
+    background:
+        radial-gradient(
+            circle at 8% 15%,
+            rgba(116, 73, 230, .10),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 92% 30%,
+            rgba(100, 170, 255, .10),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #f8f9ff 0%,
+            #f1f4ff 55%,
+            #fbf9ff 100%
+        );
+
+    color: #172143;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+body[data-account-page="bank"] .container {
+    max-width: 1320px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+body[data-account-page="bank"] .top {
+    margin-bottom: 18px;
+}
+
+
+body[data-account-page="bank"] .top h1 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    font-size: 38px;
+    font-weight: 900;
+
+    color: #172143;
+}
+
+
+body[data-account-page="bank"] .top h1::first-letter {
+    color: #7044e8;
+}
+
+
+body[data-account-page="bank"] .top p {
+    margin-top: -8px;
+    margin-left: 56px;
+
+    color: #65708f;
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   BACK TO DASHBOARD
+   ========================================================= */
+
+body[data-account-page="bank"] #backBtn {
+    padding: 13px 22px;
+
+    border-radius: 14px;
+
+    border: 1px solid #dfd3ff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eee7ff
+        );
+
+    color: #542acb;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 0 #d9cdec,
+        0 10px 20px rgba(75, 50, 150, .10),
+        inset 0 1px 0 white;
+
+    transition: .2s ease;
+}
+
+
+body[data-account-page="bank"] #backBtn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 0 #d9cdec,
+        0 15px 25px rgba(75, 50, 150, .15),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   CURRENT BALANCE — LARGE PURPLE BANNER
+   ========================================================= */
+
+body[data-account-page="bank"] .account-summary-card {
+    position: relative;
+
+    min-height: 135px;
+
+    box-sizing: border-box;
+
+    padding: 27px 38px;
+
+    border-radius: 20px;
+
+    border: 1px solid #d9c8ff;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff 0%,
+            #f7f0ff 48%,
+            #eee2ff 100%
+        );
+
+    overflow: hidden;
+
+    box-shadow:
+        0 7px 0 #ddd1f0,
+        0 18px 35px rgba(76, 55, 150, .12),
+        inset 0 1px 0 white;
+}
+
+
+/* decorative glow */
+
+body[data-account-page="bank"] .account-summary-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 160px;
+
+    right: 100px;
+    bottom: -80px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(130, 87, 235, .16),
+            transparent 68%
+        );
+
+    pointer-events: none;
+}
+
+
+/* decorative sparkles */
+
+body[data-account-page="bank"] .account-summary-card::after {
+    content: "✦     ✧        ✦";
+
+    position: absolute;
+
+    right: 390px;
+    top: 28px;
+
+    color: #a688ef;
+
+    font-size: 22px;
+
+    letter-spacing: 13px;
+
+    opacity: .55;
+}
+
+
+/* balance label */
+
+body[data-account-page="bank"] .account-summary-card .label {
+    position: relative;
+
+    z-index: 2;
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #354364;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* balance */
+
+body[data-account-page="bank"] #pageBalance {
+    position: relative;
+
+    z-index: 2;
+
+    color: #5d31d2;
+
+    font-size: 43px;
+    font-weight: 900;
+
+    text-shadow:
+        0 2px 0 #d8c7fa;
+}
+
+
+/* =========================================================
+   THREE SUMMARY CARDS
+   ========================================================= */
+
+body[data-account-page="bank"] .account-stats {
+    width: 100% !important;
+
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 18px !important;
+
+    margin-top: 22px !important;
+}
+
+
+body[data-account-page="bank"] .account-stats .mini {
+    position: relative;
+
+    width: auto !important;
+    min-width: 0 !important;
+
+    min-height: 105px;
+
+    box-sizing: border-box;
+
+    padding: 20px 22px !important;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    transition: .22s ease;
+}
+
+
+body[data-account-page="bank"] .account-stats .mini:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   INCOME CARD
+   ========================================================= */
+
+body[data-account-page="bank"] .account-stats .mini:nth-child(1) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #e8faee
+        );
+
+    border: 1px solid #c3ead0;
+
+    box-shadow:
+        0 7px 0 #c9e5d1,
+        0 14px 27px rgba(25, 165, 80, .10),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="bank"] .account-stats .mini:nth-child(1) .label {
+    color: #286448;
+}
+
+
+body[data-account-page="bank"] #pageIncome {
+    color: #12a653;
+
+    font-size: 27px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   EXPENSE CARD
+   ========================================================= */
+
+body[data-account-page="bank"] .account-stats .mini:nth-child(2) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #ffedf1
+        );
+
+    border: 1px solid #ffd0d8;
+
+    box-shadow:
+        0 7px 0 #efd1d7,
+        0 14px 27px rgba(225, 50, 75, .09),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="bank"] .account-stats .mini:nth-child(2) .label {
+    color: #7b4752;
+}
+
+
+body[data-account-page="bank"] #pageExpense {
+    color: #ed354f;
+
+    font-size: 27px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   WITHDRAWAL CARD
+   ========================================================= */
+
+body[data-account-page="bank"] .account-stats .mini:nth-child(3) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eee8ff
+        );
+
+    border: 1px solid #d7c8ff;
+
+    box-shadow:
+        0 7px 0 #d9ceed,
+        0 14px 27px rgba(90, 60, 180, .10),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="bank"] .account-stats .mini:nth-child(3) .label {
+    color: #5b4b8e;
+}
+
+
+body[data-account-page="bank"] #pageWithdrawal {
+    color: #6638d9;
+
+    font-size: 27px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   BANK TRANSACTIONS MAIN PANEL
+   ========================================================= */
+
+body[data-account-page="bank"] .account-transactions-panel {
+
+    position: relative;
+
+    margin-top: 20px;
+
+    padding: 25px 20px 28px;
+
+    border-radius: 23px;
+
+    border: 1px solid #dce3f2;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f9fbff
+        );
+
+    box-shadow:
+        0 8px 0 #d8e1ee,
+        0 20px 42px rgba(50, 65, 110, .12),
+        inset 0 1px 0 white;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   BANK TRANSACTIONS TITLE
+   ========================================================= */
+
+body[data-account-page="bank"] .account-transactions-panel > h2 {
+
+    position: relative;
+
+    margin: 0 0 24px;
+
+    padding-left: 58px;
+
+    color: #172143;
+
+    font-size: 25px;
+
+    font-weight: 900;
+
+    line-height: 42px;
+}
+
+
+/* purple icon */
+
+body[data-account-page="bank"] .account-transactions-panel > h2::before {
+
+    content: "▣";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #8355f2,
+            #5426cc
+        );
+
+    color: white;
+
+    font-size: 22px;
+
+    box-shadow:
+        0 5px 0 #4520a8,
+        0 10px 18px rgba(80, 40, 190, .20),
+        inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+
+/* =========================================================
+   TRANSACTION GROUPS
+   ========================================================= */
+
+body[data-account-page="bank"]
+.account-transactions-panel
+.transaction-group {
+
+    position: relative;
+
+    margin-top: 22px;
+
+    padding: 12px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   INCOME GROUP
+   ========================================================= */
+
+body[data-account-page="bank"]
+.transaction-group:has(.income-title) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #f6fff9,
+            #eafff1
+        );
+
+    border: 1px solid #c9efd7;
+
+    box-shadow:
+        0 6px 0 #cde6d5,
+        0 12px 23px rgba(20, 160, 80, .08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   EXPENSE GROUP
+   ========================================================= */
+
+body[data-account-page="bank"]
+.transaction-group:has(.expense-title) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff9fa,
+            #ffedf1
+        );
+
+    border: 1px solid #ffd1d9;
+
+    box-shadow:
+        0 6px 0 #efd3d8,
+        0 12px 23px rgba(220, 50, 75, .08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   WITHDRAWAL GROUP
+   ========================================================= */
+
+body[data-account-page="bank"]
+.transaction-group:has(.withdrawal-title) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #fbf9ff,
+            #eee8ff
+        );
+
+    border: 1px solid #d9ccff;
+
+    box-shadow:
+        0 6px 0 #dcd2ee,
+        0 12px 23px rgba(90, 60, 180, .08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   SECTION HEADERS
+   ========================================================= */
+
+body[data-account-page="bank"] .transaction-group-title {
+
+    min-height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 8px 8px 8px;
+}
+
+
+/* Income title */
+
+body[data-account-page="bank"] .income-title h3 {
+
+    color: #16a653;
+
+    font-size: 18px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="bank"] .income-title h3::before {
+
+    content: "↓";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #42d780,
+            #12a552
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #128d46,
+        0 7px 12px rgba(20,160,80,.18);
+}
+
+
+/* Expense title */
+
+body[data-account-page="bank"] .expense-title h3 {
+
+    color: #ed3b53;
+
+    font-size: 18px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="bank"] .expense-title h3::before {
+
+    content: "↑";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff6980,
+            #ed304b
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #ca273e,
+        0 7px 12px rgba(220,45,70,.18);
+}
+
+
+/* Withdrawal title */
+
+body[data-account-page="bank"] .withdrawal-title h3 {
+
+    color: #6638d9;
+
+    font-size: 18px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="bank"] .withdrawal-title h3::before {
+
+    content: "↓";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #8960f4,
+            #5b31d3
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #4a27b1,
+        0 7px 12px rgba(90,50,190,.18);
+}
+
+
+/* =========================================================
+   TOTAL PILLS
+   ========================================================= */
+
+body[data-account-page="bank"] .income-title > span {
+
+    min-width: 78px;
+
+    padding: 8px 15px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e9fff0,
+            #d2f6df
+        );
+
+    color: #0fa34d;
+
+    font-size: 15px;
+    font-weight: 900;
+
+    box-shadow:
+        0 3px 0 #bee2c9,
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="bank"] .expense-title > span {
+
+    min-width: 78px;
+
+    padding: 8px 15px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff1f4,
+            #ffdce3
+        );
+
+    color: #ed354f;
+
+    font-size: 15px;
+    font-weight: 900;
+
+    box-shadow:
+        0 3px 0 #efc4cc,
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="bank"] .withdrawal-title > span {
+
+    min-width: 78px;
+
+    padding: 8px 15px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f0eaff,
+            #dfd2ff
+        );
+
+    color: #6335d5;
+
+    font-size: 15px;
+    font-weight: 900;
+
+    box-shadow:
+        0 3px 0 #d1c5eb,
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+body[data-account-page="bank"] .transaction-list {
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    border: 1px solid #e1e5ee;
+
+    background: rgba(255,255,255,.88);
+
+    box-shadow:
+        0 5px 13px rgba(50,60,100,.06),
+        inset 0 1px 0 white;
+}
+
+
+/* table header */
+
+body[data-account-page="bank"] .transaction-list-head {
+
+    min-height: 47px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1.35fr
+        1.7fr
+        1fr
+        55px;
+
+    align-items: center;
+
+    padding: 0 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8f9ff,
+            #edf2fb
+        );
+
+    color: #526684;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+
+/* transaction row */
+
+body[data-account-page="bank"] .transaction-row {
+
+    min-height: 76px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1.35fr
+        1.7fr
+        1fr
+        55px;
+
+    align-items: center;
+
+    padding: 0 18px;
+
+    background: rgba(255,255,255,.95);
+
+    border-top: 1px solid #edf0f5;
+
+    transition: .2s ease;
+}
+
+
+body[data-account-page="bank"] .transaction-row:hover {
+
+    transform: translateY(-2px);
+
+    background: white;
+
+    box-shadow:
+        0 7px 15px rgba(50,60,100,.07);
+}
+
+
+/* amounts */
+
+body[data-account-page="bank"] .transaction-row .amount {
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    text-align: right;
+}
+
+
+body[data-account-page="bank"] .transaction-row .amount.income {
+    color: #10a34d;
+}
+
+
+body[data-account-page="bank"] .transaction-row .amount.expense {
+    color: #ef3b52;
+}
+
+
+body[data-account-page="bank"] .transaction-row .amount.withdrawal {
+    color: #6335d5;
+}
+
+
+/* =========================================================
+   DELETE BUTTON
+   ========================================================= */
+
+body[data-account-page="bank"] .row-delete {
+
+    width: 40px;
+    height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border-radius: 11px;
+
+    border: 1px solid #ffc2cc;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff2f4,
+            #ffdce3
+        );
+
+    color: #ed3b52;
+
+    font-size: 0;
+
+    box-shadow:
+        0 4px 0 #efc5cd,
+        0 7px 13px rgba(220,50,75,.10),
+        inset 0 1px 0 white;
+
+    transition: .18s ease;
+}
+
+
+body[data-account-page="bank"] .row-delete::before {
+
+    content: "🗑";
+
+    font-size: 17px;
+}
+
+
+body[data-account-page="bank"] .row-delete:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 7px 0 #efc5cd,
+        0 12px 18px rgba(220,50,75,.15),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   EMPTY TRANSACTION AREA
+   ========================================================= */
+
+body[data-account-page="bank"] .transaction-empty {
+
+    min-height: 100px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    color: #697491;
+
+    font-size: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.95),
+            rgba(250,251,255,.95)
+        );
+}
+
+
+/* =========================================================
+   3D PANEL DEPTH
+   ========================================================= */
+
+body[data-account-page="bank"] .account-add-panel,
+body[data-account-page="bank"] .account-transactions-panel,
+body[data-account-page="bank"] .account-summary-card,
+body[data-account-page="bank"] .account-stats .mini {
+
+    transform-style: preserve-3d;
+}
+
+
+/* =========================================================
+   ADD TRANSACTION PANEL
+   ========================================================= */
+
+body[data-account-page="bank"] .account-add-panel {
+
+    position: relative;
+
+    padding: 25px 20px 25px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f6f0ff
+        );
+
+    border: 1px solid #dccbff;
+
+    box-shadow:
+        0 8px 0 #d9ccef,
+        0 18px 35px rgba(85,55,170,.12),
+        inset 0 1px 0 white;
+
+    overflow: hidden;
+}
+
+
+/* Add transaction title */
+
+body[data-account-page="bank"] .account-add-panel h2 {
+
+    position: relative;
+
+    padding-left: 58px;
+
+    min-height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    color: #172143;
+
+    font-size: 23px;
+
+    font-weight: 900;
+}
+
+
+body[data-account-page="bank"] .account-add-panel h2::before {
+
+    content: "+";
+
+    position: absolute;
+
+    left: 0;
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #8758f4,
+            #5527cf
+        );
+
+    color: white;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 5px 0 #4520aa,
+        0 10px 18px rgba(80,40,190,.22),
+        inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+
+/* =========================================================
+   FORM LABELS
+   ========================================================= */
+
+body[data-account-page="bank"] .account-add-panel label {
+
+    display: block;
+
+    margin-top: 11px;
+    margin-bottom: 6px;
+
+    color: #273457;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   FORM INPUTS
+   ========================================================= */
+
+body[data-account-page="bank"] .account-add-panel input,
+body[data-account-page="bank"] .account-add-panel select {
+
+    width: 100%;
+
+    min-height: 43px;
+
+    box-sizing: border-box;
+
+    padding: 0 13px;
+
+    border-radius: 12px;
+
+    border: 1px solid #dce1ee;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f7f8ff
+        );
+
+    color: #273252;
+
+    font-size: 13px;
+
+    box-shadow:
+        0 4px 9px rgba(50,60,100,.06),
+        inset 0 1px 0 white;
+
+    transition: .18s ease;
+}
+
+
+body[data-account-page="bank"] .account-add-panel input:focus,
+body[data-account-page="bank"] .account-add-panel select:focus {
+
+    outline: none;
+
+    border-color: #8a67e9;
+
+    box-shadow:
+        0 0 0 4px rgba(112,68,232,.09),
+        0 6px 13px rgba(70,50,150,.08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   COLORED FORM FIELDS
+   ========================================================= */
+
+body[data-account-page="bank"] #account {
+    border-left: 5px solid #7044e8;
+    background: linear-gradient(145deg,#fff,#f2ebff);
+}
+
+
+body[data-account-page="bank"] #type {
+    border-left: 5px solid #19aa59;
+    background: linear-gradient(145deg,#fff,#eafff1);
+}
+
+
+body[data-account-page="bank"] #category {
+    border-left: 5px solid #f59b16;
+    background: linear-gradient(145deg,#fff,#fff5df);
+}
+
+
+body[data-account-page="bank"] #amount {
+    border-left: 5px solid #1682e8;
+    background: linear-gradient(145deg,#fff,#edf7ff);
+}
+
+
+body[data-account-page="bank"] #date {
+    border-left: 5px solid #ff5b7a;
+    background: linear-gradient(145deg,#fff,#fff0f4);
+}
+
+
+body[data-account-page="bank"] #note {
+    border-left: 5px solid #8060e8;
+    background: linear-gradient(145deg,#fff,#f1edff);
+}
+
+
+/* =========================================================
+   ADD TRANSACTION BUTTON
+   ========================================================= */
+
+body[data-account-page="bank"]
+.account-add-panel
+button[type="submit"] {
+
+    width: 100%;
+
+    min-height: 48px;
+
+    margin-top: 16px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #8150f4,
+            #5728d2
+        );
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 0 #4520aa,
+        0 13px 23px rgba(85,40,195,.25),
+        inset 0 1px 0 rgba(255,255,255,.30);
+
+    transition: .18s ease;
+}
+
+
+body[data-account-page="bank"]
+.account-add-panel
+button[type="submit"]:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 9px 0 #4520aa,
+        0 18px 28px rgba(85,40,195,.30),
+        inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+
+/* =========================================================
+   RIGHT COLUMN
+   ========================================================= */
+
+body[data-account-page="bank"] .account-right-column {
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    body[data-account-page="bank"] .account-page-layout {
+
+        grid-template-columns:
+            320px
+            minmax(0, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    body[data-account-page="bank"] .account-page-layout {
+
+        grid-template-columns: 1fr;
+    }
+
+    body[data-account-page="bank"] .account-stats {
+
+        grid-template-columns:
+            repeat(3, 1fr) !important;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    body[data-account-page="bank"] .account-stats {
+
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-account-page="bank"] .account-summary-card {
+
+        padding: 22px;
+    }
+
+    body[data-account-page="bank"] #pageBalance {
+
+        font-size: 35px;
+    }
+
+    body[data-account-page="bank"] .transaction-list {
+
+        overflow-x: auto;
+    }
+
+    body[data-account-page="bank"]
+    .transaction-list-head,
+    body[data-account-page="bank"]
+    .transaction-row {
+
+        min-width: 650px;
+    }
+
+}
+
+/* =========================================================
+   SAVINGS ACCOUNT
+   3D PASTEL DESIGN
+   ONLY AFFECTS SAVINGS PAGE
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE BACKGROUND
+   ========================================================= */
+
+body[data-account-page="savings"] {
+    background:
+        radial-gradient(
+            circle at 8% 15%,
+            rgba(255, 190, 45, .10),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 92% 30%,
+            rgba(125, 80, 230, .08),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #fffdf7 0%,
+            #f8f7ff 55%,
+            #fffaf0 100%
+        );
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+body[data-account-page="savings"] .top h1 {
+    color: #172143;
+
+    font-size: 38px;
+
+    font-weight: 900;
+}
+
+
+body[data-account-page="savings"] .top p {
+    color: #68738f;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+body[data-account-page="savings"] #backBtn {
+    padding: 13px 22px;
+
+    border-radius: 14px;
+
+    border: 1px solid #e1d5ff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f0eaff
+        );
+
+    color: #5429c9;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 0 #dcd0ef,
+        0 10px 20px rgba(75,50,150,.10),
+        inset 0 1px 0 white;
+
+    transition: .2s ease;
+}
+
+
+body[data-account-page="savings"] #backBtn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 0 #dcd0ef,
+        0 15px 25px rgba(75,50,150,.15),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   CURRENT BALANCE
+   GOLD / SAVINGS BANNER
+   ========================================================= */
+
+body[data-account-page="savings"] .account-summary-card {
+
+    position: relative;
+
+    min-height: 140px;
+
+    box-sizing: border-box;
+
+    padding: 28px 36px;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    border: 1px solid #f2dca7;
+
+    background:
+        linear-gradient(
+            110deg,
+            #fffef9 0%,
+            #fff7df 48%,
+            #ffefc5 100%
+        );
+
+    box-shadow:
+        0 8px 0 #eadab4,
+        0 20px 38px rgba(200,150,35,.12),
+        inset 0 1px 0 white;
+}
+
+
+/* golden glow */
+
+body[data-account-page="savings"]
+.account-summary-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    right: 80px;
+    bottom: -90px;
+
+    width: 500px;
+    height: 170px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,190,45,.20),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* sparkles */
+
+body[data-account-page="savings"]
+.account-summary-card::after {
+
+    content: "✦     ✧       ✦";
+
+    position: absolute;
+
+    right: 330px;
+    top: 35px;
+
+    color: #e8a600;
+
+    font-size: 23px;
+
+    letter-spacing: 14px;
+
+    opacity: .65;
+}
+
+
+/* balance label */
+
+body[data-account-page="savings"]
+.account-summary-card .label {
+
+    position: relative;
+
+    z-index: 5;
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #785a18;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+/* balance amount */
+
+body[data-account-page="savings"] #pageBalance {
+
+    position: relative;
+
+    z-index: 5;
+
+    color: #d58b00;
+
+    font-size: 43px;
+
+    font-weight: 900;
+
+    text-shadow:
+        0 2px 0 #f1d58b;
+}
+
+
+/* =========================================================
+   BALANCE EYE
+   ========================================================= */
+
+body[data-account-page="savings"]
+.account-summary-card .eye-toggle {
+
+    position: relative;
+
+    z-index: 10;
+
+    border: none;
+
+    background: rgba(255,255,255,.55);
+
+    border-radius: 50%;
+
+    width: 32px;
+
+    height: 32px;
+
+    box-shadow:
+        0 3px 7px rgba(180,130,20,.10);
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+body[data-account-page="savings"] .account-page-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        350px
+        minmax(0, 1fr);
+
+    gap: 22px;
+
+    align-items: stretch;
+
+    margin-top: 20px;
+}
+
+
+/* =========================================================
+   LEFT ADD TRANSACTION
+   ========================================================= */
+
+body[data-account-page="savings"] .account-add-panel {
+
+    position: relative;
+
+    padding: 25px 20px 25px;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    border: 1px solid #dfd2ff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #faf6ff,
+            #eee5ff
+        );
+
+    box-shadow:
+        0 8px 0 #ded3ef,
+        0 19px 38px rgba(80,55,160,.13),
+        inset 0 1px 0 white;
+
+    transform-style: preserve-3d;
+
+    transition: .22s ease;
+}
+
+
+body[data-account-page="savings"]
+.account-add-panel:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 11px 0 #ded3ef,
+        0 26px 45px rgba(80,55,160,.17),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   ADD TRANSACTION TITLE
+   ========================================================= */
+
+body[data-account-page="savings"]
+.account-add-panel h2 {
+
+    position: relative;
+
+    padding-left: 58px;
+
+    min-height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    color: #172143;
+
+    font-size: 24px;
+
+    font-weight: 900;
+}
+
+
+body[data-account-page="savings"]
+.account-add-panel h2::before {
+
+    content: "+";
+
+    position: absolute;
+
+    left: 0;
+
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #8758f5,
+            #5426ce
+        );
+
+    color: white;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 5px 0 #4520aa,
+        0 10px 20px rgba(85,40,195,.22),
+        inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+
+/* sparkle */
+
+body[data-account-page="savings"]
+.account-add-panel::after {
+
+    content: "✦";
+
+    position: absolute;
+
+    top: 26px;
+
+    right: 26px;
+
+    color: #a17df0;
+
+    font-size: 24px;
+}
+
+
+/* =========================================================
+   FORM LABELS
+   ========================================================= */
+
+body[data-account-page="savings"]
+.account-add-panel label {
+
+    display: block;
+
+    margin-top: 10px;
+
+    margin-bottom: 6px;
+
+    color: #29365a;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   FORM INPUTS
+   ========================================================= */
+
+body[data-account-page="savings"]
+.account-add-panel input,
+
+body[data-account-page="savings"]
+.account-add-panel select {
+
+    width: 100%;
+
+    min-height: 43px;
+
+    box-sizing: border-box;
+
+    padding: 0 13px;
+
+    border-radius: 12px;
+
+    border: 1px solid #dce1ee;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f7f8ff
+        );
+
+    color: #273252;
+
+    font-size: 13px;
+
+    box-shadow:
+        0 4px 9px rgba(50,60,100,.06),
+        inset 0 1px 0 white;
+
+    transition: .18s ease;
+}
+
+
+body[data-account-page="savings"]
+.account-add-panel input:hover,
+
+body[data-account-page="savings"]
+.account-add-panel select:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 12px rgba(50,60,100,.09),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="savings"]
+.account-add-panel input:focus,
+
+body[data-account-page="savings"]
+.account-add-panel select:focus {
+
+    outline: none;
+
+    border-color: #8b64e8;
+
+    box-shadow:
+        0 0 0 4px rgba(112,68,232,.09),
+        0 7px 14px rgba(70,50,150,.08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   SAVINGS FORM COLORS
+   ========================================================= */
+
+body[data-account-page="savings"] #account {
+
+    border-left: 5px solid #f2a500;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff5d9
+        );
+}
+
+
+body[data-account-page="savings"] #type {
+
+    border-left: 5px solid #19aa59;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eafff1
+        );
+}
+
+
+body[data-account-page="savings"] #category {
+
+    border-left: 5px solid #f59b16;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff5df
+        );
+}
+
+
+body[data-account-page="savings"] #amount {
+
+    border-left: 5px solid #7b50e9;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f1ebff
+        );
+}
+
+
+body[data-account-page="savings"] #date {
+
+    border-left: 5px solid #ff5b7a;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff0f4
+        );
+}
+
+
+body[data-account-page="savings"] #note {
+
+    border-left: 5px solid #4d8fe8;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #edf5ff
+        );
+}
+
+
+/* =========================================================
+   ADD BUTTON
+   ========================================================= */
+
+body[data-account-page="savings"]
+.account-add-panel
+button[type="submit"] {
+
+    width: 100%;
+
+    min-height: 48px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #8150f4,
+            #5728d2
+        );
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 0 #4520aa,
+        0 13px 23px rgba(85,40,195,.25),
+        inset 0 1px 0 rgba(255,255,255,.3);
+
+    transition: .18s ease;
+}
+
+
+body[data-account-page="savings"]
+.account-add-panel
+button[type="submit"]:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 9px 0 #4520aa,
+        0 18px 30px rgba(85,40,195,.30),
+        inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+
+body[data-account-page="savings"]
+.account-add-panel
+button[type="submit"]:active {
+
+    transform: translateY(2px);
+
+    box-shadow:
+        0 3px 0 #4520aa,
+        0 7px 12px rgba(85,40,195,.20);
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+   ========================================================= */
+
+body[data-account-page="savings"] .account-right-column {
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+body[data-account-page="savings"] .account-stats {
+
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 16px !important;
+
+    width: 100% !important;
+
+    margin-top: 0 !important;
+}
+
+
+body[data-account-page="savings"]
+.account-stats .mini {
+
+    width: auto !important;
+
+    min-width: 0 !important;
+
+    min-height: 105px;
+
+    box-sizing: border-box;
+
+    padding: 18px !important;
+
+    border-radius: 19px;
+
+    transform-style: preserve-3d;
+
+    transition: .22s ease;
+}
+
+
+body[data-account-page="savings"]
+.account-stats .mini:hover {
+
+    transform: translateY(-5px);
+}
+
+
+/* INCOME */
+
+body[data-account-page="savings"]
+.account-stats .mini:nth-child(1) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #e7faee
+        );
+
+    border: 1px solid #c4ead1;
+
+    box-shadow:
+        0 7px 0 #c8e4d0,
+        0 13px 26px rgba(20,160,80,.10),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="savings"] #pageIncome {
+
+    color: #11a34f;
+
+    font-size: 27px;
+
+    font-weight: 900;
+}
+
+
+/* EXPENSE */
+
+body[data-account-page="savings"]
+.account-stats .mini:nth-child(2) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #ffedf1
+        );
+
+    border: 1px solid #ffd0d8;
+
+    box-shadow:
+        0 7px 0 #efd0d7,
+        0 13px 26px rgba(225,50,75,.09),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="savings"] #pageExpense {
+
+    color: #ef3852;
+
+    font-size: 27px;
+
+    font-weight: 900;
+}
+
+
+/* WITHDRAWAL */
+
+body[data-account-page="savings"]
+.account-stats .mini:nth-child(3) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eee8ff
+        );
+
+    border: 1px solid #d9ccff;
+
+    box-shadow:
+        0 7px 0 #d9cfee,
+        0 13px 26px rgba(90,60,180,.10),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="savings"] #pageWithdrawal {
+
+    color: #6638d9;
+
+    font-size: 27px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   AMOUNT + EYE
+   ========================================================= */
+
+body[data-account-page="savings"]
+.account-stats .amount-with-eye {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   SAVINGS TRANSACTIONS PANEL
+   ========================================================= */
+
+body[data-account-page="savings"]
+.account-transactions-panel {
+
+    position: relative;
+
+    margin-top: 20px;
+
+    padding: 24px 20px 28px;
+
+    border-radius: 23px;
+
+    border: 1px solid #e0e4ef;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fafbff
+        );
+
+    box-shadow:
+        0 8px 0 #dce2ed,
+        0 20px 42px rgba(50,60,105,.12),
+        inset 0 1px 0 white;
+
+    transform-style: preserve-3d;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TRANSACTION TITLE
+   ========================================================= */
+
+body[data-account-page="savings"]
+.account-transactions-panel > h2 {
+
+    position: relative;
+
+    margin: 0 0 20px;
+
+    padding-left: 56px;
+
+    min-height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    color: #172143;
+
+    font-size: 25px;
+
+    font-weight: 900;
+}
+
+
+body[data-account-page="savings"]
+.account-transactions-panel > h2::before {
+
+    content: "☷";
+
+    position: absolute;
+
+    left: 0;
+
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffc52d,
+            #e99a00
+        );
+
+    color: white;
+
+    font-size: 24px;
+
+    box-shadow:
+        0 5px 0 #c88700,
+        0 9px 18px rgba(220,150,10,.20),
+        inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+
+/* =========================================================
+   TRANSACTION GROUPS
+   ========================================================= */
+
+body[data-account-page="savings"]
+.account-transactions-panel
+.transaction-group {
+
+    margin-top: 20px;
+
+    padding: 11px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   INCOME
+   ========================================================= */
+
+body[data-account-page="savings"]
+.transaction-group:has(.income-title) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #f5fff8,
+            #e7faed
+        );
+
+    border: 1px solid #c8edd5;
+
+    box-shadow:
+        0 6px 0 #cfe6d6,
+        0 12px 24px rgba(20,160,80,.08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   EXPENSE
+   ========================================================= */
+
+body[data-account-page="savings"]
+.transaction-group:has(.expense-title) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff9fa,
+            #ffedf1
+        );
+
+    border: 1px solid #ffd0d8;
+
+    box-shadow:
+        0 6px 0 #efd1d7,
+        0 12px 24px rgba(220,50,75,.08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   WITHDRAWAL
+   ========================================================= */
+
+body[data-account-page="savings"]
+.transaction-group:has(.withdrawal-title) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #fbf9ff,
+            #eee8ff
+        );
+
+    border: 1px solid #d9ccff;
+
+    box-shadow:
+        0 6px 0 #ddd3ee,
+        0 12px 24px rgba(90,60,180,.08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   GROUP TITLES
+   ========================================================= */
+
+body[data-account-page="savings"]
+.transaction-group-title {
+
+    min-height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 8px 7px;
+}
+
+
+/* Income */
+
+body[data-account-page="savings"]
+.income-title h3 {
+
+    color: #13a451;
+
+    font-size: 18px;
+
+    font-weight: 900;
+}
+
+
+body[data-account-page="savings"]
+.income-title h3::before {
+
+    content: "↓";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #43d781,
+            #13a653
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #128d46,
+        0 7px 12px rgba(20,160,80,.18);
+}
+
+
+/* Expenses */
+
+body[data-account-page="savings"]
+.expense-title h3 {
+
+    color: #ed3b53;
+
+    font-size: 18px;
+
+    font-weight: 900;
+}
+
+
+body[data-account-page="savings"]
+.expense-title h3::before {
+
+    content: "↑";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff6b82,
+            #ed304b
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #ca273e,
+        0 7px 12px rgba(220,45,70,.18);
+}
+
+
+/* Withdrawals */
+
+body[data-account-page="savings"]
+.withdrawal-title h3 {
+
+    color: #6537d7;
+
+    font-size: 18px;
+
+    font-weight: 900;
+}
+
+
+body[data-account-page="savings"]
+.withdrawal-title h3::before {
+
+    content: "↓";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #8960f4,
+            #5b31d3
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #4a27b1,
+        0 7px 12px rgba(90,50,190,.18);
+}
+
+
+/* =========================================================
+   TOTAL PILLS
+   ========================================================= */
+
+body[data-account-page="savings"]
+.income-title > span {
+
+    min-width: 75px;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e9fff0,
+            #d1f5dd
+        );
+
+    color: #0fa34d;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 3px 0 #bee1c9,
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="savings"]
+.expense-title > span {
+
+    min-width: 75px;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff1f4,
+            #ffdce3
+        );
+
+    color: #ed354f;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 3px 0 #efc4cc,
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="savings"]
+.withdrawal-title > span {
+
+    min-width: 75px;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f0eaff,
+            #dfd2ff
+        );
+
+    color: #6335d5;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 3px 0 #d1c5eb,
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+body[data-account-page="savings"]
+.transaction-list {
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    border: 1px solid #e1e5ee;
+
+    background:
+        rgba(255,255,255,.92);
+
+    box-shadow:
+        0 5px 13px rgba(50,60,100,.06),
+        inset 0 1px 0 white;
+}
+
+
+/* Header */
+
+body[data-account-page="savings"]
+.transaction-list-head {
+
+    min-height: 48px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1.35fr
+        1.7fr
+        1fr
+        55px;
+
+    align-items: center;
+
+    padding: 0 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fafbff,
+            #edf2fb
+        );
+
+    color: #536684;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+
+/* Rows */
+
+body[data-account-page="savings"]
+.transaction-row {
+
+    min-height: 78px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1.35fr
+        1.7fr
+        1fr
+        55px;
+
+    align-items: center;
+
+    padding: 0 18px;
+
+    background:
+        rgba(255,255,255,.95);
+
+    border-top: 1px solid #edf0f5;
+
+    transition: .2s ease;
+}
+
+
+body[data-account-page="savings"]
+.transaction-row:hover {
+
+    transform: translateY(-2px);
+
+    background: white;
+
+    box-shadow:
+        0 7px 15px rgba(50,60,100,.07);
+}
+
+
+/* =========================================================
+   AMOUNT COLORS
+   ========================================================= */
+
+body[data-account-page="savings"]
+.transaction-row .amount {
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    text-align: right;
+}
+
+
+body[data-account-page="savings"]
+.transaction-row .amount.income {
+
+    color: #10a34d;
+}
+
+
+body[data-account-page="savings"]
+.transaction-row .amount.expense {
+
+    color: #ef3b52;
+}
+
+
+body[data-account-page="savings"]
+.transaction-row .amount.withdrawal {
+
+    color: #6638d9;
+}
+
+
+/* =========================================================
+   DELETE BUTTON
+   ========================================================= */
+
+body[data-account-page="savings"]
+.row-delete {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border-radius: 12px;
+
+    border: 1px solid #ffc2cc;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff2f4,
+            #ffdce3
+        );
+
+    color: #ed3b52;
+
+    font-size: 0;
+
+    box-shadow:
+        0 4px 0 #efc5cd,
+        0 7px 13px rgba(220,50,75,.10),
+        inset 0 1px 0 white;
+
+    transition: .18s ease;
+}
+
+
+body[data-account-page="savings"]
+.row-delete::before {
+
+    content: "🗑";
+
+    font-size: 17px;
+}
+
+
+body[data-account-page="savings"]
+.row-delete:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 7px 0 #efc5cd,
+        0 12px 18px rgba(220,50,75,.15),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   EMPTY TRANSACTIONS
+   ========================================================= */
+
+body[data-account-page="savings"]
+.transaction-empty {
+
+    min-height: 105px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    color: #687490;
+
+    font-size: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fafbff
+        );
+}
+
+
+/* =========================================================
+   3D HIGHLIGHT
+   ========================================================= */
+
+body[data-account-page="savings"]
+.account-add-panel::before,
+
+body[data-account-page="savings"]
+.account-transactions-panel::before,
+
+body[data-account-page="savings"]
+.account-summary-card::before {
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    body[data-account-page="savings"]
+    .account-page-layout {
+
+        grid-template-columns:
+            320px
+            minmax(0, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    body[data-account-page="savings"]
+    .account-page-layout {
+
+        grid-template-columns: 1fr;
+    }
+
+    body[data-account-page="savings"]
+    .account-stats {
+
+        grid-template-columns:
+            repeat(3, 1fr) !important;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    body[data-account-page="savings"]
+    .account-stats {
+
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-account-page="savings"]
+    .account-summary-card {
+
+        padding: 22px;
+    }
+
+    body[data-account-page="savings"]
+    #pageBalance {
+
+        font-size: 35px;
+    }
+
+    body[data-account-page="savings"]
+    .transaction-list {
+
+        overflow-x: auto;
+    }
+
+    body[data-account-page="savings"]
+    .transaction-list-head,
+
+    body[data-account-page="savings"]
+    .transaction-row {
+
+        min-width: 650px;
+    }
+
+}
+
+/* =========================================================
+   3D CHARACTER — MAIN DASHBOARD
+   UPPER RIGHT
+   ========================================================= */
+
+.top {
+    position: relative !important;
+}
+
+
+/* Character container */
+
+.dashboard-character {
+
+    position: absolute !important;
+
+    top: -28px !important;
+
+    right: -5px !important;
+
+    width: 190px !important;
+
+    height: 190px !important;
+
+    z-index: 20 !important;
+
+    pointer-events: none;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+}
+
+
+/* Character image */
+
+.dashboard-character img { 
+
+    width: 100% !important;
+
+    height: auto !important;
+
+    max-width: none !important;
+
+    object-fit: contain;
+
+    display: block;
+
+    filter:
+        drop-shadow(
+            0 14px 18px rgba(70, 45, 150, .18)
+        );
+
+    transform:
+        translateY(5px);
+
+    animation:
+        dashboardBoyFloat 4s ease-in-out infinite;
+
+}
+
+
+/* =========================================================
+   SOFT FLOATING ANIMATION
+   ========================================================= */
+
+@keyframes dashboardBoyFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(5px)
+            rotate(0deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-5px)
+            rotate(.5deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   KEEP BUTTONS ABOVE CHARACTER
+   ========================================================= */
+
+.account-area {
+
+    position: relative !important;
+
+    z-index: 30 !important;
+
+    margin-right: 175px !important;
+
+}
+
+
+/* =========================================================
+   MAKE HEADER ROOM FOR CHARACTER
+   ========================================================= */
+
+.top {
+
+    padding-right: 15px !important;
+
+    min-height: 120px !important;
+
+}
+
+
+/* =========================================================
+   DESKTOP SIZE
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+    .dashboard-character {
+
+        width: 210px !important;
+
+        height: 210px !important;
+
+        top: -38px !important;
+
+        right: -10px !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 701px) and (max-width: 1199px) {
+
+    .dashboard-character {
+
+        width: 150px !important;
+
+        height: 150px !important;
+
+        top: -20px !important;
+
+        right: 0 !important;
+
+    }
+
+    .account-area {
+
+        margin-right: 130px !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .dashboard-character {
+
+        width: 95px !important;
+
+        height: 95px !important;
+
+        top: -10px !important;
+
+        right: -5px !important;
+
+        opacity: .95;
+
+    }
+
+    .account-area {
+
+        margin-right: 75px !important;
+
+    }
+
+    .top {
+
+        min-height: 95px !important;
+
+    }
+
+}
+
+/* =========================================================
+   CASH DASHBOARD — SMALLER QUOTE BOX
+   ========================================================= */
+
+.cash-transactions-panel {
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    height: auto;
+}
+
+
+/* =========================================================
+   BUDGET QUOTE
+   ========================================================= */
+
+.budget-quote {
+    position: absolute;
+
+    left: 50%;
+    bottom: 70px;
+
+    transform: translateX(-50%);
+
+    width: 55%;
+
+    color: #4f3b91;
+
+    font-size: 22px;
+    font-weight: 800;
+
+    line-height: 1.35;
+
+    text-align: center;
+
+    z-index: 5;
+
+    text-shadow:
+        0 2px 5px rgba(80, 55, 150, .10);
+}
+
+
+/* =========================================================
+   CASH GIRL
+   ========================================================= */
+
+.cash-transactions-panel .cash-dashboard-character {
+
+    position: absolute;
+
+    right: 0;
+    bottom: -5px;
+
+    width: 175px;
+    height: 175px;
+
+    z-index: 10;
+
+    pointer-events: none;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+}
+
+
+.cash-transactions-panel
+.cash-dashboard-character img {
+
+    width: 100%;
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 10px 15px rgba(70, 45, 150, .16)
+        );
+
+    animation:
+        cashGirlFloat 4s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   FLOATING EFFECT
+   ========================================================= */
+
+@keyframes cashGirlFloat {
+
+    0%,
+    100% {
+        transform: translateY(4px);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .cash-transactions-panel {
+        min-height: 280px !important;
+        height: 280px !important;
+    }
+
+    .budget-quote {
+        width: 55%;
+        font-size: 20px;
+        bottom: 60px;
+    }
+
+    .cash-transactions-panel .cash-dashboard-character {
+        width: 155px;
+        height: 155px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .cash-transactions-panel {
+        min-height: 240px !important;
+        height: 240px !important;
+    }
+
+    .budget-quote {
+        width: 58%;
+        font-size: 16px;
+        line-height: 1.3;
+        bottom: 45px;
+    }
+
+    .cash-transactions-panel .cash-dashboard-character {
+        width: 115px;
+        height: 115px;
+        right: 0;
+        bottom: 0;
+    }
+
+}
+/* =========================================================
+   GIRL CHARACTER
+   SAME STYLE AS DASHBOARD BOY
+   LOWER-RIGHT OF CASH TRANSACTIONS
+   ========================================================= */
+
+.cash-transactions-panel {
+    position: relative !important;
+}
+
+
+/* Character container */
+
+.cash-transactions-panel .cash-dashboard-character {
+
+    position: absolute !important;
+
+    right: 5px !important;
+
+    bottom: -5px !important;
+
+    width: 190px !important;
+
+    height: 190px !important;
+
+    z-index: 20 !important;
+
+    pointer-events: none !important;
+
+    display: flex !important;
+
+    align-items: flex-end !important;
+
+    justify-content: center !important;
+}
+
+
+/* Character image */
+
+.cash-transactions-panel .cash-dashboard-character img {
+
+    width: 100% !important;
+
+    height: auto !important;
+
+    max-width: none !important;
+
+    display: block !important;
+
+    object-fit: contain !important;
+
+    filter:
+        drop-shadow(
+            0 14px 18px rgba(70, 45, 150, .18)
+        );
+
+    transform:
+        translateY(5px);
+
+    animation:
+        cashGirlFloat 4s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   SAME FLOATING ANIMATION AS BOY
+   ========================================================= */
+
+@keyframes cashGirlFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(5px)
+            rotate(0deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-5px)
+            rotate(.5deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+    .cash-transactions-panel
+    .cash-dashboard-character {
+
+        width: 210px !important;
+
+        height: 210px !important;
+
+        right: 5px !important;
+
+        bottom: 20px !important;
+    }
+
+}
+
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 701px)
+and (max-width: 1199px) {
+
+    .cash-transactions-panel
+    .cash-dashboard-character {
+
+        width: 160px !important;
+
+        height: 160px !important;
+
+        right: 3px !important;
+
+        bottom: 0 !important;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .cash-transactions-panel
+    .cash-dashboard-character {
+
+        width: 115px !important;
+
+        height: 115px !important;
+
+        right: 0 !important;
+
+        bottom: 0 !important;
+    }
+
+}
+
+/* =========================================================
+   BUDGET QUOTE — LOWER DASHBOARD BOX
+   ========================================================= */
+
+/* =========================================================
+   BUDGET QUOTE
+   CENTER OF THE EMPTY LOWER AREA
+   ========================================================= */
+
+.budget-quote {
+    position: absolute;
+
+    left: 50%;
+    bottom: 100px;
+
+    transform: translateX(-50%);
+
+    width: 520px;
+
+    color: #4f3b91;
+
+    font-size: 26px;
+    font-weight: 800;
+
+    line-height: 1.45;
+
+    text-align: center;
+
+    z-index: 5;
+
+    text-shadow:
+        0 2px 5px rgba(80, 55, 150, .10);
+}
+
+
+/* Make sure the box can contain the quote */
+.cash-transactions-panel {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+
+/* Keep the girl above the quote */
+.cash-transactions-panel .cash-dashboard-character {
+    z-index: 10 !important;
+}
+
+/* =========================================================
+   BANK PAGE — MATCH MAIN DASHBOARD SIZE
+   Keeps the Bank design, only fixes the overall sizing
+   ========================================================= */
+
+body[data-account-page="bank"] .container {
+    width: min(1200px, 100%);
+    max-width: 1200px;
+    margin: auto;
+    padding: 28px 24px 40px;
+}
+
+
+/* Same main content width as dashboard */
+body[data-account-page="bank"] .account-page-layout {
+    display: grid;
+    grid-template-columns: 360px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+
+/* Keep right side inside the dashboard width */
+body[data-account-page="bank"] .account-right-column {
+    min-width: 0;
+    width: 100%;
+}
+
+
+/* Summary cards use the available right-side width */
+body[data-account-page="bank"] .account-stats {
+    width: 100% !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+}
+
+
+/* Make the transaction panel fit perfectly */
+body[data-account-page="bank"] .account-transactions-panel {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* Make the add panel fit the dashboard's 360px column */
+body[data-account-page="bank"] .account-add-panel {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLE WIDTH
+   ========================================================= */
+
+body[data-account-page="bank"] .transaction-list {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body[data-account-page="bank"] .transaction-list-head,
+body[data-account-page="bank"] .transaction-row {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    body[data-account-page="bank"] .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    body[data-account-page="bank"] .account-page-layout {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    body[data-account-page="bank"] .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 12px;
+    }
+
+    body[data-account-page="bank"] .account-page-layout {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    body[data-account-page="bank"] .account-stats {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+}
+  
+/* =========================================================
+   BANK PAGE — MATCH THE COMPACT MAIN DASHBOARD SCALE
+   ========================================================= */
+
+body[data-account-page="bank"] .container {
+    width: min(1200px, calc(100% - 40px)) !important;
+    max-width: 1200px !important;
+
+    margin: 0 auto !important;
+
+    padding: 22px 20px 30px !important;
+}
+
+
+/* =========================================================
+   BANK HEADER
+   ========================================================= */
+
+body[data-account-page="bank"] .top {
+    margin-bottom: 14px !important;
+}
+
+body[data-account-page="bank"] .top h1 {
+    font-size: 32px !important;
+    gap: 12px !important;
+}
+
+body[data-account-page="bank"] .top p {
+    font-size: 14px !important;
+    margin-top: -5px !important;
+    margin-left: 48px !important;
+}
+
+
+/* Back button */
+body[data-account-page="bank"] #backBtn {
+    padding: 10px 18px !important;
+    font-size: 13px !important;
+}
+
+
+/* =========================================================
+   CURRENT BALANCE BANNER
+   ========================================================= */
+
+body[data-account-page="bank"] .account-summary-card {
+    min-height: 120px !important;
+
+    padding: 20px 28px !important;
+
+    margin-bottom: 16px !important;
+
+    border-radius: 18px !important;
+}
+
+
+/* Balance text */
+body[data-account-page="bank"] #pageBalance {
+    font-size: 42px !important;
+    line-height: 1 !important;
+}
+
+
+/* =========================================================
+   MAIN BANK LAYOUT
+   ========================================================= */
+
+body[data-account-page="bank"] .account-page-layout {
+
+    display: grid !important;
+
+    grid-template-columns:
+        300px
+        minmax(0, 1fr) !important;
+
+    gap: 18px !important;
+
+    align-items: start !important;
+
+    width: 100% !important;
+}
+
+
+/* =========================================================
+   LEFT — ADD TRANSACTION
+   ========================================================= */
+
+body[data-account-page="bank"] .account-add-panel {
+
+    width: 100% !important;
+
+    padding: 20px !important;
+
+    box-sizing: border-box !important;
+
+    border-radius: 18px !important;
+}
+
+
+body[data-account-page="bank"] .account-add-panel h2 {
+
+    font-size: 21px !important;
+
+    margin-bottom: 14px !important;
+}
+
+
+body[data-account-page="bank"] .account-add-panel label {
+
+    font-size: 12px !important;
+}
+
+
+body[data-account-page="bank"] .account-add-panel input,
+body[data-account-page="bank"] .account-add-panel select {
+
+    height: 38px !important;
+
+    padding: 8px 11px !important;
+
+    font-size: 13px !important;
+
+    box-sizing: border-box !important;
+}
+
+
+body[data-account-page="bank"] .account-add-panel button[type="submit"] {
+
+    height: 40px !important;
+
+    margin-top: 11px !important;
+
+    font-size: 13px !important;
+}
+
+
+/* =========================================================
+   RIGHT COLUMN
+   ========================================================= */
+
+body[data-account-page="bank"] .account-right-column {
+
+    width: 100% !important;
+
+    min-width: 0 !important;
+}
+
+
+/* =========================================================
+   THREE SUMMARY CARDS
+   ========================================================= */
+
+body[data-account-page="bank"] .account-stats {
+
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 12px !important;
+
+    width: 100% !important;
+
+    margin-top: 0 !important;
+}
+
+
+body[data-account-page="bank"] .account-stats .mini {
+
+    width: 100% !important;
+
+    min-width: 0 !important;
+
+    min-height: 92px !important;
+
+    padding: 14px !important;
+
+    box-sizing: border-box !important;
+
+    border-radius: 16px !important;
+}
+
+
+/* Card labels */
+body[data-account-page="bank"] .account-stats .label {
+
+    font-size: 12px !important;
+}
+
+
+/* Card amounts */
+body[data-account-page="bank"] #pageIncome,
+body[data-account-page="bank"] #pageExpense,
+body[data-account-page="bank"] #pageWithdrawal {
+
+    font-size: 24px !important;
+}
+
+
+/* =========================================================
+   BANK TRANSACTIONS
+   ========================================================= */
+
+body[data-account-page="bank"] .account-transactions-panel {
+
+    margin-top: 14px !important;
+
+    padding: 20px 16px 22px !important;
+
+    border-radius: 19px !important;
+}
+
+
+body[data-account-page="bank"]
+.account-transactions-panel > h2 {
+
+    margin-bottom: 16px !important;
+
+    font-size: 21px !important;
+
+    line-height: 36px !important;
+
+    padding-left: 48px !important;
+}
+
+
+/* Transaction groups */
+body[data-account-page="bank"] .transaction-group {
+
+    margin-top: 14px !important;
+}
+
+
+body[data-account-page="bank"]
+.transaction-group-title {
+
+    padding: 4px 3px !important;
+}
+
+
+/* Transaction list */
+body[data-account-page="bank"] .transaction-list {
+
+    border-radius: 13px !important;
+}
+
+
+/* Table header */
+body[data-account-page="bank"] .transaction-list-head {
+
+    min-height: 34px !important;
+
+    font-size: 10px !important;
+}
+
+
+/* Transaction rows */
+body[data-account-page="bank"] .transaction-row {
+
+    min-height: 48px !important;
+
+    font-size: 11px !important;
+}
+
+
+/* Delete button */
+body[data-account-page="bank"] .row-delete {
+
+    padding: 6px 9px !important;
+
+    font-size: 10px !important;
+}
+
+
+/* =========================================================
+   DESKTOP — KEEP EVERYTHING FITTING
+   ========================================================= */
+
+@media (min-width: 1101px) {
+
+    body[data-account-page="bank"] .container {
+        width: 1200px !important;
+        max-width: 1200px !important;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    body[data-account-page="bank"] .container {
+
+        width: calc(100% - 36px) !important;
+
+        max-width: 100% !important;
+    }
+
+    body[data-account-page="bank"] .account-page-layout {
+
+        grid-template-columns:
+            280px
+            minmax(0, 1fr) !important;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    body[data-account-page="bank"] .container {
+
+        width: calc(100% - 24px) !important;
+
+        max-width: 100% !important;
+
+        padding: 18px 12px 30px !important;
+    }
+
+    body[data-account-page="bank"] .account-page-layout {
+
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-account-page="bank"] .account-stats {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr)) !important;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    body[data-account-page="bank"] .account-stats {
+
+        grid-template-columns: 1fr !important;
+    }
+
+}
+
+/* =========================================================
+   FINAL BANK SIZE FIX
+   DO NOT REMOVE
+   ========================================================= */
+
+body[data-account-page="bank"] {
+    zoom: 1 !important;
+}
+
+body[data-account-page="bank"] .container {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 28px 24px 40px !important;
+}
+
+body[data-account-page="bank"] .account-page-layout {
+    display: grid !important;
+    grid-template-columns: 360px minmax(0, 1fr) !important;
+    gap: 20px !important;
+    width: 100% !important;
+    align-items: start !important;
+}
+
+body[data-account-page="bank"] .account-add-panel {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+body[data-account-page="bank"] .account-right-column {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+body[data-account-page="bank"] .account-stats {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+}
+
+body[data-account-page="bank"] .account-stats .mini {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 105px !important;
+    padding: 18px 20px !important;
+}
+
+body[data-account-page="bank"] .account-transactions-panel {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+body[data-account-page="bank"] .transaction-list {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+body[data-account-page="bank"] .transaction-list-head,
+body[data-account-page="bank"] .transaction-row {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+body[data-account-page="bank"] .transaction-list-head {
+    min-height: 47px !important;
+    font-size: 11px !important;
+}
+
+body[data-account-page="bank"] .transaction-row {
+    min-height: 68px !important;
+    font-size: 13px !important;
+}
+
+body[data-account-page="bank"] .row-delete {
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+}
+
+
+/* =========================================================
+   BANK — 1366px DESKTOP
+   ========================================================= */
+
+@media (min-width: 1101px) {
+    body[data-account-page="bank"] .container {
+        width: min(1200px, calc(100% - 48px)) !important;
+        max-width: 1200px !important;
+    }
+
+    body[data-account-page="bank"] .account-page-layout {
+        grid-template-columns: 360px minmax(0, 1fr) !important;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+    body[data-account-page="bank"] .container {
+        width: calc(100% - 32px) !important;
+        max-width: none !important;
+    }
+
+    body[data-account-page="bank"] .account-page-layout {
+        grid-template-columns: 320px minmax(0, 1fr) !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+    body[data-account-page="bank"] .container {
+        width: calc(100% - 24px) !important;
+        padding: 18px 12px 30px !important;
+    }
+
+    body[data-account-page="bank"] .account-page-layout {
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-account-page="bank"] .account-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    body[data-account-page="bank"] .account-stats {
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-account-page="bank"] .transaction-list {
+        overflow-x: auto !important;
+    }
+
+    body[data-account-page="bank"] .transaction-list-head,
+    body[data-account-page="bank"] .transaction-row {
+        min-width: 650px !important;
+    }
+}
+
+/* =========================================================
+   BANK BALANCE CARD — 3D BANK ON RIGHT
+   ========================================================= */
+
+body[data-account-page="bank"] .bank-balance-card {
+    position: relative;
+    min-height: 145px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    padding: 24px 34px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff 0%,
+            #faf5ff 45%,
+            #eee2ff 100%
+        );
+
+    border: 1px solid #d9c7ff;
+
+    box-shadow:
+        0 8px 0 #ddd0f0,
+        0 18px 35px rgba(90, 55, 170, 0.12);
+}
+
+
+/* LEFT SIDE — BALANCE */
+
+body[data-account-page="bank"] .bank-balance-info {
+    position: relative;
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    min-width: 260px;
+}
+
+
+body[data-account-page="bank"] .bank-balance-info .label {
+    margin-bottom: 7px;
+
+    color: #243253;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+body[data-account-page="bank"] .bank-balance-info .amount-with-eye {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+body[data-account-page="bank"] .bank-balance-info #pageBalance {
+    color: #5b2fd2;
+
+    font-size: 42px;
+    font-weight: 900;
+
+    line-height: 1.1;
+
+    text-shadow:
+        0 2px 0 #d8c6fa;
+}
+
+
+/* EYE BUTTON */
+
+body[data-account-page="bank"] .bank-balance-info .eye-toggle {
+    width: 32px;
+    height: 32px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background: transparent;
+
+    color: #68738d;
+
+    font-size: 17px;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   3D BANK IMAGE
+   ========================================================= */
+
+body[data-account-page="bank"] .bank-balance-image {
+    position: absolute;
+    right: 22px;
+    bottom: 2px;
+
+    width: 220px;
+    max-width: 32%;
+
+    height: 105px;
+    object-fit: contain;
+    object-position: right bottom;
+
+    z-index: 2;
+    pointer-events: none;
+
+    filter: drop-shadow(0 6px 8px rgba(74, 44, 145, 0.12));
+}
+
+
+/* Slightly lift the illustration */
+
+body[data-account-page="bank"] .bank-balance-card:hover
+.bank-balance-image {
+    transform: translateY(-4px);
+
+    filter:
+        drop-shadow(0 18px 20px rgba(74, 44, 145, 0.20));
+}
+
+
+/* =========================================================
+   LARGE SCREEN
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+    body[data-account-page="bank"] .bank-balance-card {
+        min-height: 155px;
+    }
+
+    body[data-account-page="bank"] .bank-balance-image {
+        width: 500px;
+        right: 10px;
+        bottom: -8px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    body[data-account-page="bank"] .bank-balance-card {
+        min-height: 135px;
+        padding: 22px 25px;
+    }
+
+    body[data-account-page="bank"] .bank-balance-info #pageBalance {
+        font-size: 36px;
+    }
+
+    body[data-account-page="bank"] .bank-balance-image {
+        width: 360px;
+        max-width: 45%;
+        right: 5px;
+        bottom: -3px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    body[data-account-page="bank"] .bank-balance-card {
+        min-height: 125px;
+        padding: 18px;
+    }
+
+    body[data-account-page="bank"] .bank-balance-info {
+        min-width: 0;
+    }
+
+    body[data-account-page="bank"] .bank-balance-info #pageBalance {
+        font-size: 30px;
+    }
+
+    body[data-account-page="bank"] .bank-balance-image {
+        width: 230px;
+        max-width: 48%;
+        right: -5px;
+        bottom: 0;
+    }
+}
+
+/* =========================================================
+   BANK PAGE
+   BOY + PIGGY BANK UNDER ADD TRANSACTION
+   ========================================================= */
+
+body[data-account-page="bank"] .account-add-panel {
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* Image area */
+
+body[data-account-page="bank"] .bank-transaction-character {
+    width: 100%;
+    height: 190px;
+
+    margin-top: 8px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/* Boy + piggy image */
+
+body[data-account-page="bank"] .bank-transaction-character img {
+    width: 310px;
+    max-width: 100%;
+    height: auto;
+
+    display: block;
+    object-fit: contain;
+
+    transform: translateY(12px);
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(
+            0 8px 10px rgba(70, 45, 150, 0.16)
+        );
+}
+
+/* =========================================================
+   BANK PAGE - 3D HEADER DESIGN
+   ========================================================= */
+
+body[data-account-page="bank"] .bank-page-title {
+    position: relative;
+
+    width: 100%;
+    min-height: 125px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* 3D Bank picture */
+
+body[data-account-page="bank"] .bank-page-title img {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 390px;
+    height: 125px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    filter: drop-shadow(
+        0 8px 10px rgba(72, 45, 150, 0.15)
+    );
+}
+
+
+/* Keep the title readable */
+
+body[data-account-page="bank"] .bank-page-title-text {
+    position: relative;
+
+    z-index: 2;
+
+    margin-left: 410px;
+}
+
+
+body[data-account-page="bank"] .bank-page-title-text h1 {
+    margin: 0;
+
+    font-size: 32px;
+    font-weight: 800;
+
+    color: #101a3a;
+}
+
+
+body[data-account-page="bank"] .bank-page-title-text p {
+    margin: 3px 0 0;
+
+    font-size: 15px;
+
+    color: #64708f;
+}
+
+/* =========================================================
+   BANK HEADER — PERFECT ALIGNMENT
+   ========================================================= */
+
+body[data-account-page="bank"] .top {
+    width: 100% !important;
+    min-height: 70px !important;
+
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+
+    align-items: center !important;
+
+    gap: 20px !important;
+
+    margin: 0 0 16px 0 !important;
+    padding: 0 !important;
+}
+
+
+/* LEFT: Bank title */
+body[data-account-page="bank"] .top > div:first-child {
+    min-width: 0;
+}
+
+
+/* Bank title */
+body[data-account-page="bank"] .top h1 {
+    margin: 0 !important;
+
+    font-size: 32px !important;
+    line-height: 1.1 !important;
+}
+
+
+/* Subtitle */
+body[data-account-page="bank"] .top p {
+    margin: 4px 0 0 0 !important;
+
+    font-size: 14px !important;
+}
+
+
+/* RIGHT: Back to Dashboard */
+body[data-account-page="bank"] .account-area {
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    width: auto !important;
+}
+
+
+/* Button */
+body[data-account-page="bank"] #backBtn {
+    margin: 0 !important;
+
+    padding: 11px 18px !important;
+
+    white-space: nowrap !important;
+
+    transform: none !important;
+}
+
+
+/* =========================================================
+   BALANCE BOX — SAME WIDTH AS HEADER
+   ========================================================= */
+
+body[data-account-page="bank"] .bank-balance-card {
+    width: 100% !important;
+
+    box-sizing: border-box !important;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.cloud-budget-banner {
+    width: 650px;
+    height: 135px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    display: block;
+
+    max-width: none;
+
+    transform: scale(1.08);
+    transform-origin: left center;
+}
+
+
+/* =========================================================
+   SAVINGS PAGE — 3D PIGGY BANK
+   ========================================================= */
+
+body[data-account-page="savings"] .savings-balance-card {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Piggy bank on the right side */
+
+body[data-account-page="savings"] .savings-balance-image {
+    position: absolute;
+
+    right: 20px;
+    bottom: 0;
+
+    width: 350px;
+    height: 145px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+
+body[data-account-page="savings"] .savings-balance-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: right bottom;
+
+    display: block;
+
+    filter: drop-shadow(
+        0 8px 10px rgba(220, 150, 20, 0.15)
+    );
+}
+
+
+/* Keep balance text above the image */
+
+body[data-account-page="savings"] .savings-balance-info {
+    position: relative;
+    z-index: 5;
+}
+
+/* =========================================================
+   SAVINGS PAGE
+   IMAGE BELOW ADD TRANSACTION
+   ========================================================= */
+
+body[data-account-page="savings"] .account-add-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SAVINGS ADD TRANSACTION IMAGE
+   FIT BELOW THE BUTTON — DO NOT OVERLAP THE FORM
+   ========================================================= */
+
+body[data-account-page="savings"] .account-add-panel {
+    position: relative !important;
+    overflow: hidden !important;
+
+    /* Let the panel size itself naturally */
+    height: auto !important;
+    min-height: 0 !important;
+
+    padding-bottom: 10px !important;
+}
+
+
+/* Image area stays AFTER the form */
+body[data-account-page="savings"] .savings-transaction-character {
+    position: relative !important;
+
+    width: 100% !important;
+    height: 145px !important;
+
+    margin-top: 8px !important;
+
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+
+    overflow: hidden !important;
+
+    z-index: 1 !important;
+}
+
+
+/* The Savings girl illustration */
+body[data-account-page="savings"] .savings-transaction-character img {
+    width: 270px !important;
+    height: 145px !important;
+
+    max-width: 95% !important;
+
+    object-fit: contain !important;
+    object-position: center bottom !important;
+
+    display: block !important;
+
+    pointer-events: none !important;
+
+    filter: drop-shadow(
+        0 8px 10px rgba(80, 55, 150, .16)
+    );
+}
+
+/* =========================================================
+   SAVINGS - REMOVE EXTRA SPACE BELOW IMAGE
+   ========================================================= */
+
+body[data-account-page="savings"] .account-add-panel {
+    height: fit-content !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    align-self: flex-start !important;
+
+    padding-bottom: 8px !important;
+
+    overflow: hidden !important;
+}
+
+
+/* Keep the image in normal flow */
+body[data-account-page="savings"] .savings-transaction-character {
+    position: relative !important;
+
+    width: 100% !important;
+    height: 125px !important;
+
+    margin: 5px 0 0 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+
+    overflow: hidden !important;
+}
+
+
+/* Image */
+body[data-account-page="savings"] .savings-transaction-character img {
+    width: 250px !important;
+    height: 125px !important;
+
+    max-width: 90% !important;
+
+    object-fit: contain !important;
+    object-position: center bottom !important;
+
+    display: block !important;
+}
+
+/* =========================================
+   SAVINGS HEADER 3D IMAGE
+   ========================================= */
+
+.savings-page-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.savings-title-image {
+    width: 420px;
+    height: 105px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    display: block;
+    margin: -5px 0 0 -10px;
+}
+
+/* Subtitle */
+.savings-page-title p {
+    margin-top: -5px;
+}
+
+/* =========================================
+   SAVINGS HEADER ALIGNMENT
+   ========================================= */
+
+body[data-account-page="savings"] .top {
+    position: relative !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+}
+
+
+/* Savings banner on the left */
+body[data-account-page="savings"] .savings-page-title {
+    flex: 1 !important;
+}
+
+
+/* Back to Dashboard on the right */
+body[data-account-page="savings"] .account-area {
+    margin-left: auto !important;
+
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: flex-start !important;
+}
+
+
+/* Keep button at the right edge */
+body[data-account-page="savings"] #backBtn {
+    margin-left: auto !important;
+}
+/* =========================================================
+   SAVINGS HEADER — FINAL RIGHT ALIGNMENT FIX
+   ========================================================= */
+
+body[data-account-page="savings"] .top {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-right: 0 !important;
+}
+
+body[data-account-page="savings"] .savings-page-title {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+body[data-account-page="savings"] .account-area {
+    position: relative !important;
+    z-index: 30 !important;
+
+    margin-left: auto !important;
+    margin-right: 0 !important;
+
+    padding: 0 !important;
+    width: auto !important;
+
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+}
+
+body[data-account-page="savings"] #backBtn {
+    margin: 0 !important;
+    white-space: nowrap !important;
+}
+
+/* =========================================================
+   EMERGENCY FUND PAGE
+   3D PASTEL DESIGN
+   ONLY AFFECTS EMERGENCY FUND
+   ========================================================= */
+
+body[data-account-page="emergency"] {
+    background:
+        radial-gradient(
+            circle at 8% 15%,
+            rgba(255, 105, 120, .10),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 92% 30%,
+            rgba(255, 170, 60, .10),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #fff8f8 0%,
+            #f8f7ff 55%,
+            #fffaf4 100%
+        );
+
+    color: #172143;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+body[data-account-page="emergency"] .container {
+    width: min(1200px, calc(100% - 48px));
+    max-width: 1200px;
+    margin: auto;
+    padding: 28px 24px 40px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+body[data-account-page="emergency"] .top {
+    width: 100%;
+    min-height: 70px;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    align-items: center;
+    gap: 20px;
+
+    margin: 0 0 16px 0;
+    padding: 0;
+}
+
+
+body[data-account-page="emergency"] .top h1 {
+    margin: 0;
+
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 900;
+
+    color: #172143;
+}
+
+
+body[data-account-page="emergency"] .top p {
+    margin: 5px 0 0;
+
+    color: #69738e;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BACK TO DASHBOARD
+   ========================================================= */
+
+body[data-account-page="emergency"] #backBtn {
+    margin: 0;
+
+    padding: 11px 18px;
+
+    border-radius: 14px;
+
+    border: 1px solid #ffd0d5;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff0f2
+        );
+
+    color: #c52e48;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 5px 0 #efd0d5,
+        0 10px 20px rgba(210, 50, 75, .10),
+        inset 0 1px 0 white;
+
+    transition: .2s ease;
+}
+
+
+body[data-account-page="emergency"] #backBtn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 0 #efd0d5,
+        0 15px 25px rgba(210, 50, 75, .15),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   CURRENT BALANCE
+   ========================================================= */
+
+body[data-account-page="emergency"] .account-summary-card {
+    position: relative;
+
+    min-height: 140px;
+
+    box-sizing: border-box;
+
+    padding: 25px 32px;
+
+    margin-bottom: 18px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    border: 1px solid #ffcbd2;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff 0%,
+            #fff3f5 48%,
+            #ffe5e9 100%
+        );
+
+    box-shadow:
+        0 8px 0 #efd4d9,
+        0 20px 38px rgba(210, 55, 80, .12),
+        inset 0 1px 0 white;
+}
+
+
+/* Decorative glow */
+
+body[data-account-page="emergency"]
+.account-summary-card::before {
+    content: "";
+
+    position: absolute;
+
+    right: 80px;
+    bottom: -90px;
+
+    width: 500px;
+    height: 170px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255, 90, 110, .18),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* Decorative stars */
+
+body[data-account-page="emergency"]
+.account-summary-card::after {
+    content: "✦     ✧       ✦";
+
+    position: absolute;
+
+    right: 310px;
+    top: 30px;
+
+    color: #ef8b9a;
+
+    font-size: 23px;
+
+    letter-spacing: 14px;
+
+    opacity: .60;
+}
+
+
+/* Balance label */
+
+body[data-account-page="emergency"]
+.account-summary-card .label {
+    position: relative;
+    z-index: 5;
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #70404a;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* Balance */
+
+body[data-account-page="emergency"] #pageBalance {
+    position: relative;
+    z-index: 5;
+
+    color: #d73550;
+
+    font-size: 42px;
+    font-weight: 900;
+
+    line-height: 1.1;
+
+    text-shadow:
+        0 2px 0 #f4c5cc;
+}
+
+
+/* Eye */
+
+body[data-account-page="emergency"]
+.account-summary-card .eye-toggle {
+    position: relative;
+    z-index: 10;
+
+    width: 32px;
+    height: 32px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.65);
+
+    color: #7d6870;
+
+    box-shadow:
+        0 3px 7px rgba(190, 70, 90, .10);
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+body[data-account-page="emergency"] .account-page-layout {
+    display: grid;
+
+    grid-template-columns:
+        360px
+        minmax(0, 1fr);
+
+    gap: 20px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   ADD TRANSACTION PANEL
+   ========================================================= */
+
+body[data-account-page="emergency"] .account-add-panel {
+    position: relative;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 22px 20px 20px;
+
+    border-radius: 21px;
+
+    overflow: hidden;
+
+    border: 1px solid #ffd0d6;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff8f9,
+            #fff0f3
+        );
+
+    box-shadow:
+        0 8px 0 #efd5da,
+        0 18px 35px rgba(210, 55, 80, .12),
+        inset 0 1px 0 white;
+}
+
+
+/* Add title */
+
+body[data-account-page="emergency"]
+.account-add-panel h2 {
+    position: relative;
+
+    min-height: 45px;
+
+    display: flex;
+    align-items: center;
+
+    margin: 0 0 16px;
+
+    padding-left: 57px;
+
+    color: #172143;
+
+    font-size: 22px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="emergency"]
+.account-add-panel h2::before {
+    content: "+";
+
+    position: absolute;
+
+    left: 0;
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff7185,
+            #dc304d
+        );
+
+    color: white;
+
+    font-size: 29px;
+
+    box-shadow:
+        0 5px 0 #b9243d,
+        0 10px 18px rgba(210, 45, 70, .22),
+        inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+
+/* Form labels */
+
+body[data-account-page="emergency"]
+.account-add-panel label {
+    display: block;
+
+    margin-top: 10px;
+    margin-bottom: 6px;
+
+    color: #29365a;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* Inputs */
+
+body[data-account-page="emergency"]
+.account-add-panel input,
+
+body[data-account-page="emergency"]
+.account-add-panel select {
+    width: 100%;
+    min-height: 40px;
+
+    box-sizing: border-box;
+
+    padding: 0 12px;
+
+    border-radius: 11px;
+
+    border: 1px solid #e0e3ec;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fafbff
+        );
+
+    color: #273252;
+
+    font-size: 13px;
+
+    box-shadow:
+        0 4px 9px rgba(50,60,100,.06),
+        inset 0 1px 0 white;
+
+    transition: .18s ease;
+}
+
+
+body[data-account-page="emergency"]
+.account-add-panel input:focus,
+
+body[data-account-page="emergency"]
+.account-add-panel select:focus {
+    outline: none;
+
+    border-color: #ed6a7e;
+
+    box-shadow:
+        0 0 0 4px rgba(237, 80, 105, .09),
+        0 7px 14px rgba(190, 50, 75, .08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   EMERGENCY FORM COLORS
+   ========================================================= */
+
+body[data-account-page="emergency"] #account {
+    border-left: 5px solid #e33b57;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff0f3
+        );
+}
+
+
+body[data-account-page="emergency"] #type {
+    border-left: 5px solid #19aa59;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eafff1
+        );
+}
+
+
+body[data-account-page="emergency"] #category {
+    border-left: 5px solid #f59b16;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff5df
+        );
+}
+
+
+body[data-account-page="emergency"] #amount {
+    border-left: 5px solid #7a55df;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f1ebff
+        );
+}
+
+
+body[data-account-page="emergency"] #date {
+    border-left: 5px solid #ef657f;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff0f4
+        );
+}
+
+
+body[data-account-page="emergency"] #note {
+    border-left: 5px solid #4d8fe8;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #edf5ff
+        );
+}
+
+
+/* =========================================================
+   ADD BUTTON
+   ========================================================= */
+
+body[data-account-page="emergency"]
+.account-add-panel button[type="submit"] {
+    width: 100%;
+
+    min-height: 47px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff6078,
+            #d92f4b
+        );
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 900;
+
+    box-shadow:
+        0 6px 0 #b9243d,
+        0 13px 23px rgba(210, 45, 70, .25),
+        inset 0 1px 0 rgba(255,255,255,.30);
+
+    transition: .18s ease;
+}
+
+
+body[data-account-page="emergency"]
+.account-add-panel button[type="submit"]:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 9px 0 #b9243d,
+        0 18px 28px rgba(210, 45, 70, .30),
+        inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+
+/* =========================================================
+   RIGHT COLUMN
+   ========================================================= */
+
+body[data-account-page="emergency"] .account-right-column {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+body[data-account-page="emergency"] .account-stats {
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 15px !important;
+
+    width: 100% !important;
+
+    margin-top: 0 !important;
+}
+
+
+body[data-account-page="emergency"]
+.account-stats .mini {
+    width: auto !important;
+    min-width: 0 !important;
+
+    min-height: 100px;
+
+    padding: 17px !important;
+
+    box-sizing: border-box;
+
+    border-radius: 18px;
+
+    transition: .2s ease;
+}
+
+
+body[data-account-page="emergency"]
+.account-stats .mini:hover {
+    transform: translateY(-4px);
+}
+
+
+/* Income */
+
+body[data-account-page="emergency"]
+.account-stats .mini:nth-child(1) {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #e7faee
+        );
+
+    border: 1px solid #c4ead1;
+
+    box-shadow:
+        0 7px 0 #c8e4d0,
+        0 13px 26px rgba(20,160,80,.10),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="emergency"] #pageIncome {
+    color: #11a34f;
+
+    font-size: 26px;
+    font-weight: 900;
+}
+
+
+/* Expenses */
+
+body[data-account-page="emergency"]
+.account-stats .mini:nth-child(2) {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #ffedf1
+        );
+
+    border: 1px solid #ffd0d8;
+
+    box-shadow:
+        0 7px 0 #efd0d7,
+        0 13px 26px rgba(225,50,75,.09),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="emergency"] #pageExpense {
+    color: #ef3852;
+
+    font-size: 26px;
+    font-weight: 900;
+}
+
+
+/* Withdrawals */
+
+body[data-account-page="emergency"]
+.account-stats .mini:nth-child(3) {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eee8ff
+        );
+
+    border: 1px solid #d9ccff;
+
+    box-shadow:
+        0 7px 0 #d9cfee,
+        0 13px 26px rgba(90,60,180,.10),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="emergency"] #pageWithdrawal {
+    color: #6638d9;
+
+    font-size: 26px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   TRANSACTIONS PANEL
+   ========================================================= */
+
+body[data-account-page="emergency"]
+.account-transactions-panel {
+    position: relative;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-top: 18px;
+
+    padding: 22px 18px 25px;
+
+    border-radius: 22px;
+
+    border: 1px solid #e0e4ef;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fafbff
+        );
+
+    box-shadow:
+        0 8px 0 #dce2ed,
+        0 20px 42px rgba(50,60,105,.12),
+        inset 0 1px 0 white;
+
+    overflow: hidden;
+}
+
+
+/* Transaction title */
+
+body[data-account-page="emergency"]
+.account-transactions-panel > h2 {
+    position: relative;
+
+    min-height: 43px;
+
+    display: flex;
+    align-items: center;
+
+    margin: 0 0 20px;
+
+    padding-left: 55px;
+
+    color: #172143;
+
+    font-size: 23px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="emergency"]
+.account-transactions-panel > h2::before {
+    content: "🛡";
+
+    position: absolute;
+
+    left: 0;
+
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff6d83,
+            #d92f4b
+        );
+
+    font-size: 21px;
+
+    box-shadow:
+        0 5px 0 #b9243d,
+        0 9px 18px rgba(210,45,70,.20);
+}
+
+
+/* =========================================================
+   TRANSACTION GROUPS
+   ========================================================= */
+
+body[data-account-page="emergency"]
+.account-transactions-panel .transaction-group {
+    margin-top: 18px;
+
+    padding: 11px;
+
+    border-radius: 19px;
+
+    overflow: hidden;
+}
+
+
+/* Income */
+
+body[data-account-page="emergency"]
+.transaction-group:has(.income-title) {
+    background:
+        linear-gradient(
+            145deg,
+            #f5fff8,
+            #e7faed
+        );
+
+    border: 1px solid #c8edd5;
+
+    box-shadow:
+        0 6px 0 #cfe6d6,
+        0 12px 24px rgba(20,160,80,.08),
+        inset 0 1px 0 white;
+}
+
+
+/* Expense */
+
+body[data-account-page="emergency"]
+.transaction-group:has(.expense-title) {
+    background:
+        linear-gradient(
+            145deg,
+            #fff9fa,
+            #ffedf1
+        );
+
+    border: 1px solid #ffd0d8;
+
+    box-shadow:
+        0 6px 0 #efd1d7,
+        0 12px 24px rgba(220,50,75,.08),
+        inset 0 1px 0 white;
+}
+
+
+/* Withdrawal */
+
+body[data-account-page="emergency"]
+.transaction-group:has(.withdrawal-title) {
+    background:
+        linear-gradient(
+            145deg,
+            #fbf9ff,
+            #eee8ff
+        );
+
+    border: 1px solid #d9ccff;
+
+    box-shadow:
+        0 6px 0 #ddd3ee,
+        0 12px 24px rgba(90,60,180,.08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   GROUP TITLES
+   ========================================================= */
+
+body[data-account-page="emergency"]
+.transaction-group-title {
+    min-height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7px 7px;
+}
+
+
+/* Income */
+
+body[data-account-page="emergency"]
+.income-title h3 {
+    color: #13a451;
+
+    font-size: 17px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="emergency"]
+.income-title h3::before {
+    content: "↓";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #43d781,
+            #13a653
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #128d46,
+        0 7px 12px rgba(20,160,80,.18);
+}
+
+
+/* Expense */
+
+body[data-account-page="emergency"]
+.expense-title h3 {
+    color: #ed3b53;
+
+    font-size: 17px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="emergency"]
+.expense-title h3::before {
+    content: "↑";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff6b82,
+            #ed304b
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #ca273e,
+        0 7px 12px rgba(220,45,70,.18);
+}
+
+
+/* Withdrawal */
+
+body[data-account-page="emergency"]
+.withdrawal-title h3 {
+    color: #6537d7;
+
+    font-size: 17px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="emergency"]
+.withdrawal-title h3::before {
+    content: "↓";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #8960f4,
+            #5b31d3
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #4a27b1,
+        0 7px 12px rgba(90,50,190,.18);
+}
+
+
+/* =========================================================
+   TOTAL PILLS
+   ========================================================= */
+
+body[data-account-page="emergency"]
+.income-title > span,
+body[data-account-page="emergency"]
+.expense-title > span,
+body[data-account-page="emergency"]
+.withdrawal-title > span {
+    min-width: 75px;
+
+    padding: 8px 13px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="emergency"]
+.income-title > span {
+    background: #dff8e7;
+    color: #0fa34d;
+
+    box-shadow:
+        0 3px 0 #bee1c9,
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="emergency"]
+.expense-title > span {
+    background: #ffdfe5;
+    color: #ed354f;
+
+    box-shadow:
+        0 3px 0 #efc4cc,
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="emergency"]
+.withdrawal-title > span {
+    background: #dfd2ff;
+    color: #6335d5;
+
+    box-shadow:
+        0 3px 0 #d1c5eb,
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   TRANSACTION TABLE
+   ========================================================= */
+
+body[data-account-page="emergency"]
+.transaction-list {
+    width: 100%;
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    border: 1px solid #e1e5ee;
+
+    background: rgba(255,255,255,.92);
+
+    box-shadow:
+        0 5px 13px rgba(50,60,100,.06),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="emergency"]
+.transaction-list-head {
+    min-height: 46px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1.35fr
+        1.7fr
+        1fr
+        55px;
+
+    align-items: center;
+
+    padding: 0 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fafbff,
+            #edf2fb
+        );
+
+    color: #536684;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+
+body[data-account-page="emergency"]
+.transaction-row {
+    min-height: 68px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1.35fr
+        1.7fr
+        1fr
+        55px;
+
+    align-items: center;
+
+    padding: 0 17px;
+
+    background: rgba(255,255,255,.95);
+
+    border-top: 1px solid #edf0f5;
+
+    font-size: 13px;
+
+    transition: .2s ease;
+}
+
+
+body[data-account-page="emergency"]
+.transaction-row:hover {
+    transform: translateY(-2px);
+
+    background: white;
+
+    box-shadow:
+        0 7px 15px rgba(50,60,100,.07);
+}
+
+
+/* Amount */
+
+body[data-account-page="emergency"]
+.transaction-row .amount {
+    font-size: 15px;
+
+    font-weight: 900;
+
+    text-align: right;
+}
+
+
+body[data-account-page="emergency"]
+.transaction-row .amount.income {
+    color: #10a34d;
+}
+
+
+body[data-account-page="emergency"]
+.transaction-row .amount.expense {
+    color: #ef3b52;
+}
+
+
+body[data-account-page="emergency"]
+.transaction-row .amount.withdrawal {
+    color: #6335d5;
+}
+
+
+/* Delete */
+
+body[data-account-page="emergency"]
+.row-delete {
+    width: 40px;
+    height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border-radius: 11px;
+
+    border: 1px solid #ffc2cc;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff2f4,
+            #ffdce3
+        );
+
+    color: #ed3b52;
+
+    font-size: 0;
+
+    box-shadow:
+        0 4px 0 #efc5cd,
+        0 7px 13px rgba(220,50,75,.10),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="emergency"]
+.row-delete::before {
+    content: "🗑";
+    font-size: 17px;
+}
+
+
+/* Empty */
+
+body[data-account-page="emergency"]
+.transaction-empty {
+    min-height: 95px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    color: #687490;
+
+    font-size: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fafbff
+        );
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    body[data-account-page="emergency"]
+    .account-page-layout {
+        grid-template-columns:
+            320px
+            minmax(0, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    body[data-account-page="emergency"]
+    .account-page-layout {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-account-page="emergency"]
+    .account-stats {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr)) !important;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    body[data-account-page="emergency"] .container {
+        width: calc(100% - 24px);
+        padding: 18px 12px 30px;
+    }
+
+    body[data-account-page="emergency"] .top {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+    }
+
+    body[data-account-page="emergency"] .account-area {
+        justify-content: flex-start;
+    }
+
+    body[data-account-page="emergency"]
+    .account-stats {
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-account-page="emergency"]
+    .account-summary-card {
+        padding: 22px;
+    }
+
+    body[data-account-page="emergency"]
+    #pageBalance {
+        font-size: 35px;
+    }
+
+    body[data-account-page="emergency"]
+    .transaction-list {
+        overflow-x: auto;
+    }
+
+    body[data-account-page="emergency"]
+    .transaction-list-head,
+    body[data-account-page="emergency"]
+    .transaction-row {
+        min-width: 650px;
+    }
+
+}
+
+/* =========================================================
+   OTHER PAGE
+   3D PASTEL DESIGN
+   ONLY AFFECTS OTHER ACCOUNT
+   ========================================================= */
+
+body[data-account-page="other"] {
+    background:
+        radial-gradient(
+            circle at 8% 15%,
+            rgba(255, 105, 120, .10),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 92% 30%,
+            rgba(255, 170, 60, .10),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #f5faff 0%,
+            #f7f9ff 55%,
+            #f5fbff 100%
+        );
+
+    color: #17315c;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+body[data-account-page="other"] .container {
+    width: min(1200px, calc(100% - 48px));
+    max-width: 1200px;
+    margin: auto;
+    padding: 28px 24px 40px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+body[data-account-page="other"] .top {
+    width: 100%;
+    min-height: 70px;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    align-items: center;
+    gap: 20px;
+
+    margin: 0 0 16px 0;
+    padding: 0;
+}
+
+
+body[data-account-page="other"] .top h1 {
+    margin: 0;
+
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 900;
+
+    color: #17315c;
+}
+
+
+body[data-account-page="other"] .top p {
+    margin: 5px 0 0;
+
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BACK TO DASHBOARD
+   ========================================================= */
+
+body[data-account-page="other"] #backBtn {
+    margin: 0;
+
+    padding: 11px 18px;
+
+    border-radius: 14px;
+
+    border: 1px solid #c9e5ff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #edf7ff
+        );
+
+    color: #2878c8;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 5px 0 #c5ddf3,
+        0 10px 20px rgba(37, 125, 210, .10),
+        inset 0 1px 0 white;
+
+    transition: .2s ease;
+}
+
+
+body[data-account-page="other"] #backBtn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 0 #c5ddf3,
+        0 15px 25px rgba(37, 125, 210, .15),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   CURRENT BALANCE
+   ========================================================= */
+
+body[data-account-page="other"] .account-summary-card {
+    position: relative;
+
+    min-height: 140px;
+
+    box-sizing: border-box;
+
+    padding: 25px 32px;
+
+    margin-bottom: 18px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    border: 1px solid #c7e4ff;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff 0%,
+            #eef8ff 48%,
+            #dff2ff 100%
+        );
+
+    box-shadow:
+        0 8px 0 #c9dff2,
+        0 20px 38px rgba(45, 130, 210, .12),
+        inset 0 1px 0 white;
+}
+
+
+/* Decorative glow */
+
+body[data-account-page="other"]
+.account-summary-card::before {
+    content: "";
+
+    position: absolute;
+
+    right: 80px;
+    bottom: -90px;
+
+    width: 500px;
+    height: 170px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(80, 170, 235, .18),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* Decorative stars */
+
+body[data-account-page="other"]
+.account-summary-card::after {
+    content: "✦     ✧       ✦";
+
+    position: absolute;
+
+    right: 310px;
+    top: 30px;
+
+    color: #6fb8ee;
+
+    font-size: 23px;
+
+    letter-spacing: 14px;
+
+    opacity: .60;
+}
+
+
+/* Balance label */
+
+body[data-account-page="other"]
+.account-summary-card .label {
+    position: relative;
+    z-index: 5;
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #315477;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* Balance */
+
+body[data-account-page="other"] #pageBalance {
+    position: relative;
+    z-index: 5;
+
+    color: #2476c5;
+
+    font-size: 42px;
+    font-weight: 900;
+
+    line-height: 1.1;
+
+    text-shadow:
+        0 2px 0 #bcdcf4;
+}
+
+
+/* Eye */
+
+body[data-account-page="other"]
+.account-summary-card .eye-toggle {
+    position: relative;
+    z-index: 10;
+
+    width: 32px;
+    height: 32px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.65);
+
+    color: #5f7185;
+
+    box-shadow:
+        0 3px 7px rgba(50, 125, 190, .10);
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+body[data-account-page="other"] .account-page-layout {
+    display: grid;
+
+    grid-template-columns:
+        360px
+        minmax(0, 1fr);
+
+    gap: 20px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   ADD TRANSACTION PANEL
+   ========================================================= */
+
+body[data-account-page="other"] .account-add-panel {
+    position: relative;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 22px 20px 20px;
+
+    border-radius: 21px;
+
+    overflow: hidden;
+
+    border: 1px solid #c8e4fb;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f4faff,
+            #eaf6ff
+        );
+
+    box-shadow:
+        0 8px 0 #c9dfef,
+        0 18px 35px rgba(45, 130, 210, .12),
+        inset 0 1px 0 white;
+}
+
+
+/* Add title */
+
+body[data-account-page="other"]
+.account-add-panel h2 {
+    position: relative;
+
+    min-height: 45px;
+
+    display: flex;
+    align-items: center;
+
+    margin: 0 0 16px;
+
+    padding-left: 57px;
+
+    color: #17315c;
+
+    font-size: 22px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="other"]
+.account-add-panel h2::before {
+    content: "+";
+
+    position: absolute;
+
+    left: 0;
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #56a9ed,
+            #2377c9
+        );
+
+    color: white;
+
+    font-size: 29px;
+
+    box-shadow:
+        0 5px 0 #1d62a6,
+        0 10px 18px rgba(35, 119, 201, .22),
+        inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+
+/* Form labels */
+
+body[data-account-page="other"]
+.account-add-panel label {
+    display: block;
+
+    margin-top: 10px;
+    margin-bottom: 6px;
+
+    color: #294b70;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* Inputs */
+
+body[data-account-page="other"]
+.account-add-panel input,
+
+body[data-account-page="other"]
+.account-add-panel select {
+    width: 100%;
+    min-height: 40px;
+
+    box-sizing: border-box;
+
+    padding: 0 12px;
+
+    border-radius: 11px;
+
+    border: 1px solid #e0e3ec;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f8fbff
+        );
+
+    color: #273252;
+
+    font-size: 13px;
+
+    box-shadow:
+        0 4px 9px rgba(50,60,100,.06),
+        inset 0 1px 0 white;
+
+    transition: .18s ease;
+}
+
+
+body[data-account-page="other"]
+.account-add-panel input:focus,
+
+body[data-account-page="other"]
+.account-add-panel select:focus {
+    outline: none;
+
+    border-color: #4d9fe3;
+
+    box-shadow:
+        0 0 0 4px rgba(77, 159, 227, .09),
+        0 7px 14px rgba(45, 130, 210, .08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   OTHER FORM COLORS
+   ========================================================= */
+
+body[data-account-page="other"] #account {
+    border-left: 5px solid #3b91d9;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eaf6ff
+        );
+}
+
+
+body[data-account-page="other"] #type {
+    border-left: 5px solid #19aa59;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eafff1
+        );
+}
+
+
+body[data-account-page="other"] #category {
+    border-left: 5px solid #f0a62b;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff7e5
+        );
+}
+
+
+body[data-account-page="other"] #amount {
+    border-left: 5px solid #7357d8;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f1efff
+        );
+}
+
+
+body[data-account-page="other"] #date {
+    border-left: 5px solid #5ca8e8;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #edf7ff
+        );
+}
+
+
+body[data-account-page="other"] #note {
+    border-left: 5px solid #3e91d9;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #e9f6ff
+        );
+}
+
+
+/* =========================================================
+   ADD BUTTON
+   ========================================================= */
+
+body[data-account-page="other"]
+.account-add-panel button[type="submit"] {
+    width: 100%;
+
+    min-height: 47px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #4da5eb,
+            #267bc8
+        );
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 900;
+
+    box-shadow:
+        0 6px 0 #1d62a6,
+        0 13px 23px rgba(38, 123, 200, .22),
+        inset 0 1px 0 rgba(255,255,255,.30);
+
+    transition: .18s ease;
+}
+
+
+body[data-account-page="other"]
+.account-add-panel button[type="submit"]:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 9px 0 #1d62a6,
+        0 18px 28px rgba(38, 123, 200, .28),
+        inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+
+/* =========================================================
+   RIGHT COLUMN
+   ========================================================= */
+
+body[data-account-page="other"] .account-right-column {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+body[data-account-page="other"] .account-stats {
+    display: grid !important;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 15px !important;
+
+    width: 100% !important;
+
+    margin-top: 0 !important;
+}
+
+
+body[data-account-page="other"]
+.account-stats .mini {
+    width: auto !important;
+    min-width: 0 !important;
+
+    min-height: 100px;
+
+    padding: 17px !important;
+
+    box-sizing: border-box;
+
+    border-radius: 18px;
+
+    transition: .2s ease;
+}
+
+
+body[data-account-page="other"]
+.account-stats .mini:hover {
+    transform: translateY(-4px);
+}
+
+
+/* Income */
+
+body[data-account-page="other"]
+.account-stats .mini:nth-child(1) {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #e8f7ff
+        );
+
+    border: 1px solid #c4e6f5;
+
+    box-shadow:
+        0 7px 0 #c8e1ed,
+        0 13px 26px rgba(30, 140, 190, .10),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="other"] #pageIncome {
+    color: #168bc2;
+
+    font-size: 26px;
+    font-weight: 900;
+}
+
+
+/* Expenses */
+
+body[data-account-page="other"]
+.account-stats .mini:nth-child(2) {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eaf5ff
+        );
+
+    border: 1px solid #c9e5f7;
+
+    box-shadow:
+        0 7px 0 #c9dfe9,
+        0 13px 26px rgba(35, 125, 185, .09),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="other"] #pageExpense {
+    color: #2f82c9;
+
+    font-size: 26px;
+    font-weight: 900;
+}
+
+
+/* Withdrawals */
+
+body[data-account-page="other"]
+.account-stats .mini:nth-child(3) {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #edf0ff
+        );
+
+    border: 1px solid #ccdfff;
+
+    box-shadow:
+        0 7px 0 #cadbed,
+        0 13px 26px rgba(70, 100, 190, .10),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="other"] #pageWithdrawal {
+    color: #6254c9;
+
+    font-size: 26px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   TRANSACTIONS PANEL
+   ========================================================= */
+
+body[data-account-page="other"]
+.account-transactions-panel {
+    position: relative;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-top: 18px;
+
+    padding: 22px 18px 25px;
+
+    border-radius: 22px;
+
+    border: 1px solid #d7e4ef;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f8fbff
+        );
+
+    box-shadow:
+        0 8px 0 #cfdeea,
+        0 20px 42px rgba(45, 90, 130, .10),
+        inset 0 1px 0 white;
+
+    overflow: hidden;
+}
+
+
+/* Transaction title */
+
+body[data-account-page="other"]
+.account-transactions-panel > h2 {
+    position: relative;
+
+    min-height: 43px;
+
+    display: flex;
+    align-items: center;
+
+    margin: 0 0 20px;
+
+    padding-left: 55px;
+
+    color: #17315c;
+
+    font-size: 23px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="other"]
+.account-transactions-panel > h2::before {
+    content: "📦";
+
+    position: absolute;
+
+    left: 0;
+
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff6d83,
+            #267bc8
+        );
+
+    font-size: 21px;
+
+    box-shadow:
+        0 5px 0 #1d62a6,
+        0 9px 18px rgba(210,45,70,.20);
+}
+
+
+/* =========================================================
+   TRANSACTION GROUPS
+   ========================================================= */
+
+body[data-account-page="other"]
+.account-transactions-panel .transaction-group {
+    margin-top: 18px;
+
+    padding: 11px;
+
+    border-radius: 19px;
+
+    overflow: hidden;
+}
+
+
+/* Income */
+
+body[data-account-page="other"]
+.transaction-group:has(.income-title) {
+    background:
+        linear-gradient(
+            145deg,
+            #f2fbff,
+            #e7faed
+        );
+
+    border: 1px solid #c5e6f0;
+
+    box-shadow:
+        0 6px 0 #c9e0e9,
+        0 12px 24px rgba(30, 135, 180, .08),
+        inset 0 1px 0 white;
+}
+
+
+/* Expense */
+
+body[data-account-page="other"]
+.transaction-group:has(.expense-title) {
+    background:
+        linear-gradient(
+            145deg,
+            #f5faff,
+            #eaf5ff
+        );
+
+    border: 1px solid #c9e5f7;
+
+    box-shadow:
+        0 6px 0 #cadfe9,
+        0 12px 24px rgba(40, 120, 180, .08),
+        inset 0 1px 0 white;
+}
+
+
+/* Withdrawal */
+
+body[data-account-page="other"]
+.transaction-group:has(.withdrawal-title) {
+    background:
+        linear-gradient(
+            145deg,
+            #f7f9ff,
+            #edf0ff
+        );
+
+    border: 1px solid #ccdfff;
+
+    box-shadow:
+        0 6px 0 #d1dceb,
+        0 12px 24px rgba(65, 100, 180, .08),
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   GROUP TITLES
+   ========================================================= */
+
+body[data-account-page="other"]
+.transaction-group-title {
+    min-height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7px 7px;
+}
+
+
+/* Income */
+
+body[data-account-page="other"]
+.income-title h3 {
+    color: #1694c4;
+
+    font-size: 17px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="other"]
+.income-title h3::before {
+    content: "↓";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #65c4ea,
+            #2397c7
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #207ca6,
+        0 7px 12px rgba(35, 145, 195, .18);
+}
+
+
+/* Expense */
+
+body[data-account-page="other"]
+.expense-title h3 {
+    color: #347fc8;
+
+    font-size: 17px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="other"]
+.expense-title h3::before {
+    content: "↑";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #67b9ee,
+            #2e82c7
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #276ba7,
+        0 7px 12px rgba(45, 125, 190, .18);
+}
+
+
+/* Withdrawal */
+
+body[data-account-page="other"]
+.withdrawal-title h3 {
+    color: #6358c9;
+
+    font-size: 17px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="other"]
+.withdrawal-title h3::before {
+    content: "↓";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #668fe8,
+            #526fc5
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #3f5da9,
+        0 7px 12px rgba(70, 90, 180, .16);
+}
+
+
+/* =========================================================
+   TOTAL PILLS
+   ========================================================= */
+
+body[data-account-page="other"]
+.income-title > span,
+body[data-account-page="other"]
+.expense-title > span,
+body[data-account-page="other"]
+.withdrawal-title > span {
+    min-width: 75px;
+
+    padding: 8px 13px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+    font-weight: 900;
+}
+
+
+body[data-account-page="other"]
+.income-title > span {
+    background: #e3f5fb;
+    color: #168bc0;
+
+    box-shadow:
+        0 3px 0 #c4dfe8,
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="other"]
+.expense-title > span {
+    background: #e3f1fb;
+    color: #2d7fc2;
+
+    box-shadow:
+        0 3px 0 #c8dce8,
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="other"]
+.withdrawal-title > span {
+    background: #e3e9ff;
+    color: #5c55c5;
+
+    box-shadow:
+        0 3px 0 #ccd6e8,
+        inset 0 1px 0 white;
+}
+
+
+/* =========================================================
+   TRANSACTION TABLE
+   ========================================================= */
+
+body[data-account-page="other"]
+.transaction-list {
+    width: 100%;
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    border: 1px solid #dbe7ef;
+
+    background: rgba(255,255,255,.92);
+
+    box-shadow:
+        0 5px 13px rgba(50,60,100,.06),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="other"]
+.transaction-list-head {
+    min-height: 46px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1.35fr
+        1.7fr
+        1fr
+        55px;
+
+    align-items: center;
+
+    padding: 0 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8fbff,
+            #eef7fc
+        );
+
+    color: #58718b;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+
+body[data-account-page="other"]
+.transaction-row {
+    min-height: 68px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1.35fr
+        1.7fr
+        1fr
+        55px;
+
+    align-items: center;
+
+    padding: 0 17px;
+
+    background: rgba(255,255,255,.95);
+
+    border-top: 1px solid #e5eef4;
+
+    font-size: 13px;
+
+    transition: .2s ease;
+}
+
+
+body[data-account-page="other"]
+.transaction-row:hover {
+    transform: translateY(-2px);
+
+    background: white;
+
+    box-shadow:
+        0 7px 15px rgba(50,60,100,.07);
+}
+
+
+/* Amount */
+
+body[data-account-page="other"]
+.transaction-row .amount {
+    font-size: 15px;
+
+    font-weight: 900;
+
+    text-align: right;
+}
+
+
+body[data-account-page="other"]
+.transaction-row .amount.income {
+    color: #10a34d;
+}
+
+
+body[data-account-page="other"]
+.transaction-row .amount.expense {
+    color: #ef3b52;
+}
+
+
+body[data-account-page="other"]
+.transaction-row .amount.withdrawal {
+    color: #5c55c5;
+}
+
+
+/* Delete */
+
+body[data-account-page="other"]
+.row-delete {
+    width: 40px;
+    height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border-radius: 11px;
+
+    border: 1px solid #b9ddf5;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eef8ff,
+            #d9efff
+        );
+
+    color: #ed3b52;
+
+    font-size: 0;
+
+    box-shadow:
+        0 4px 0 #c2dce9,
+        0 7px 13px rgba(40, 120, 180, .10),
+        inset 0 1px 0 white;
+}
+
+
+body[data-account-page="other"]
+.row-delete::before {
+    content: "🗑";
+    font-size: 17px;
+}
+
+
+/* Empty */
+
+body[data-account-page="other"]
+.transaction-empty {
+    min-height: 95px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    color: #687c8d;
+
+    font-size: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f8fbff
+        );
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    body[data-account-page="other"]
+    .account-page-layout {
+        grid-template-columns:
+            320px
+            minmax(0, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    body[data-account-page="other"]
+    .account-page-layout {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-account-page="other"]
+    .account-stats {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr)) !important;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    body[data-account-page="other"] .container {
+        width: calc(100% - 24px);
+        padding: 18px 12px 30px;
+    }
+
+    body[data-account-page="other"] .top {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+    }
+
+    body[data-account-page="other"] .account-area {
+        justify-content: flex-start;
+    }
+
+    body[data-account-page="other"]
+    .account-stats {
+        grid-template-columns: 1fr !important;
+    }
+
+    body[data-account-page="other"]
+    .account-summary-card {
+        padding: 22px;
+    }
+
+    body[data-account-page="other"]
+    #pageBalance {
+        font-size: 35px;
+    }
+
+    body[data-account-page="other"]
+    .transaction-list {
+        overflow-x: auto;
+    }
+
+    body[data-account-page="other"]
+    .transaction-list-head,
+    body[data-account-page="other"]
+    .transaction-row {
+        min-width: 650px;
+    }
+
+}
+
+/* =========================================================
+   EMERGENCY FUND BALANCE IMAGE
+   ========================================================= */
+
+body[data-account-page="emergency"] .balance-content {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    height: 100%;
+}
+
+
+/* Balance text stays on the left */
+
+body[data-account-page="emergency"] .balance-info {
+    position: relative;
+    z-index: 2;
+
+    flex: 0 0 auto;
+}
+
+
+/* Emergency image on the RIGHT */
+
+body[data-account-page="emergency"]
+.emergency-balance-image {
+
+    display: block;
+
+    width: 230px;
+    height: 120px;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    flex: 0 0 auto;
+
+    margin-right: 10px;
+
+    pointer-events: none;
+}
+
+
+/* Smaller screens */
+
+@media (max-width: 700px) {
+
+    body[data-account-page="emergency"]
+    .emergency-balance-image {
+
+        width: 170px;
+        height: 95px;
+    }
+
+}
+
+
+/* Very small screens */
+
+@media (max-width: 500px) {
+
+    body[data-account-page="emergency"] .balance-content {
+        gap: 8px;
+    }
+
+    body[data-account-page="emergency"]
+    .emergency-balance-image {
+
+        width: 125px;
+        height: 80px;
+    }
+
+}
+
+/* =========================================================
+   EMERGENCY FUND — IMAGE BELOW ADD TRANSACTION
+   ========================================================= */
+
+body[data-account-page="emergency"]
+.emergency-transaction-image {
+
+    display: block;
+
+    width: 100%;
+    max-width: 300px;
+
+    height: 130px;
+
+    object-fit: contain;
+
+    object-position: center bottom;
+
+    margin: 8px auto 0;
+
+    flex-shrink: 0;
+
+    pointer-events: none;
+}
+
+
+/* Keep the image inside the Add Transaction box */
+
+body[data-account-page="emergency"]
+.account-add-panel {
+
+    overflow: hidden;
+}
+
+
+/* Smaller screens */
+
+@media (max-width: 700px) {
+
+    body[data-account-page="emergency"]
+    .emergency-transaction-image {
+
+        max-width: 260px;
+        height: 115px;
+    }
+
+}
+
+/* =========================================================
+   EMERGENCY FUND — NEW BANNER
+   ========================================================= */
+
+body[data-account-page="emergency"] .emergency-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+body[data-account-page="emergency"] .emergency-banner {
+  display: block;
+  width: min(100%, 1050px);
+  height: 180px;
+  object-fit: contain;
+  object-position: left center;
+  pointer-events: none;
+}
+
+/* Keep Back to Dashboard visible */
+body[data-account-page="emergency"] .emergency-header .account-area {
+  flex-shrink: 0;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  body[data-account-page="emergency"] .emergency-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body[data-account-page="emergency"] .emergency-banner {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    object-fit: contain;
+  }
+
+  body[data-account-page="emergency"] .emergency-header .account-area {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  body[data-account-page="emergency"] .emergency-banner {
+    max-height: 110px;
+  }
+}
+
+/* =========================================================
+   EMERGENCY FUND
+   BACK BUTTON ALIGNED WITH BANNER
+   ========================================================= */
+
+body[data-account-page="emergency"] .emergency-header {
+    position: relative !important;
+}
+
+
+/* Move ONLY the Back to Dashboard button */
+
+body[data-account-page="emergency"]
+.emergency-header .account-area {
+    position: absolute !important;
+
+    top: 50% !important;
+    right: 0 !important;
+
+    transform: translateY(-50%) !important;
+
+    width: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+}
+
+
+/* Keep button size/design unchanged */
+
+body[data-account-page="emergency"] #backBtn {
+    margin: 0 !important;
+}
+
+/* =========================================================
+   OTHER PAGE — IMAGE BESIDE CURRENT BALANCE
+   ========================================================= */
+
+body[data-account-page="other"] .balance-content {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* Balance stays on the LEFT */
+
+body[data-account-page="other"] .balance-info {
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Image stays on the RIGHT */
+
+body[data-account-page="other"] .other-balance-image {
+    display: block;
+
+    width: 250px;
+    height: 130px;
+
+    object-fit: contain;
+    object-position: center;
+
+    flex: 0 0 auto;
+
+    margin-right: 5px;
+
+    pointer-events: none;
+}
+
+
+/* Tablet */
+
+@media (max-width: 800px) {
+
+    body[data-account-page="other"] .other-balance-image {
+        width: 190px;
+        height: 110px;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 550px) {
+
+    body[data-account-page="other"] .balance-content {
+        gap: 8px;
+    }
+
+    body[data-account-page="other"] .other-balance-image {
+        width: 140px;
+        height: 90px;
+    }
+
+}
+
+/* =========================================================
+   OTHER PAGE — IMAGE BELOW ADD TRANSACTION
+   ========================================================= */
+
+body[data-account-page="other"]
+.other-transaction-image {
+
+    display: block;
+
+    width: 100%;
+    max-width: 300px;
+
+    height: 135px;
+
+    object-fit: contain;
+
+    object-position: center bottom;
+
+    margin: 8px auto 0;
+
+    flex-shrink: 0;
+
+    pointer-events: none;
+}
+
+
+/* Keep image inside the Add Transaction box */
+
+body[data-account-page="other"]
+.account-add-panel {
+    overflow: hidden;
+}
+
+
+/* Tablet */
+
+@media (max-width: 700px) {
+
+    body[data-account-page="other"]
+    .other-transaction-image {
+
+        max-width: 270px;
+        height: 120px;
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    body[data-account-page="other"]
+    .other-transaction-image {
+
+        max-width: 240px;
+        height: 105px;
+    }
+}
+
+/* =========================================================
+   OTHER PAGE — BANNER
+   ========================================================= */
+
+body[data-account-page="other"] .other-header {
+    position: relative;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+
+/* Banner */
+
+body[data-account-page="other"] .other-banner {
+    display: block;
+
+    width: 100%;
+    max-width: 1050px;
+
+    height: 150px;
+
+    object-fit: contain;
+    object-position: left center;
+
+    margin: 0;
+
+    pointer-events: none;
+}
+
+
+/* Back to Dashboard + Edit Name */
+
+body[data-account-page="other"]
+.other-header .account-area {
+
+    position: absolute;
+
+    top: 50%;
+    right: 0;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Keep button design */
+
+body[data-account-page="other"] #backBtn,
+body[data-account-page="other"] #editOtherNameBtn {
+    margin: 0;
+}
+
+
+/* Tablet */
+
+@media (max-width: 800px) {
+
+    body[data-account-page="other"] .other-banner {
+        height: 120px;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 550px) {
+
+    body[data-account-page="other"] .other-banner {
+        height: 95px;
+    }
+
+}
+
+/* =========================================================
+   OTHER PAGE — ALIGN BACK TO DASHBOARD
+   ========================================================= */
+
+body[data-account-page="other"] .other-header {
+    position: relative !important;
+}
+
+
+/* Move ONLY the button area */
+
+body[data-account-page="other"]
+.other-header .account-area {
+    position: absolute !important;
+
+    top: 50% !important;
+    right: 0 !important;
+
+    transform: translateY(-50%) !important;
+
+    width: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    gap: 10px !important;
+}
+
+
+/* Keep the buttons themselves unchanged */
+
+body[data-account-page="other"] #backBtn {
+    margin: 0 !important;
 }

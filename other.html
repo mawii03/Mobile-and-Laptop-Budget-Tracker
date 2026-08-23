@@ -15,62 +15,67 @@
   <div class="container">
 
     <!-- HEADER -->
-    <div class="top">
+<div class="top other-header">
 
-      <div>
-        <h1>📦 Other</h1>
-        <p>Custom account transactions</p>
-      </div>
+  <!-- Other Banner -->
+  <img
+    src="picture/Other Design/banner.png"
+    alt="Other"
+    class="other-banner"
+  >
 
-      <div class="account-area">
+  <div class="account-area">
 
-        <button
-          class="secondary"
-          id="backBtn"
-          type="button"
-        >
-          ← Dashboard
-        </button>
+    <button
+      class="secondary"
+      id="backBtn"
+      type="button"
+    >
+      ← Back to Dashboard
+    </button>
 
-        <button
-          id="editOtherNameBtn"
-          class="secondary edit-name-btn"
-          type="button"
-        >
-          ✏️ Edit name
-        </button>
+    <button
+      id="editOtherNameBtn"
+      class="secondary edit-name-btn"
+      type="button"
+    >
+      ✏️ Edit name
+    </button>
 
-      </div>
+  </div>
 
-    </div>
-
+</div>
 
     <!-- CURRENT BALANCE -->
     <div class="account-summary-card">
 
-      <span class="label">
-        Current Balance
-      </span>
+    <div class="balance-content">
 
-      <div class="amount-with-eye">
+        <div class="balance-info">
+            <span class="label">Current Balance</span>
 
-        <strong id="pageBalance">
-          NT$0
-        </strong>
+            <div class="amount-with-eye">
+                <span id="pageBalance">NT$0</span>
 
-        <button
-          class="eye-toggle"
-          type="button"
-          data-target="pageBalance"
-          aria-label="Hide balance"
-          title="Hide balance"
+                <button
+                    class="eye-toggle"
+                    type="button"
+                    data-target="pageBalance">
+                    👁
+                </button>
+            </div>
+        </div>
+
+        <!-- Other account image -->
+        <img
+            src="picture/Other Design/o1.png"
+            alt="Other Account"
+            class="other-balance-image"
         >
-          👁
-        </button>
-
-      </div>
 
     </div>
+
+</div>
 
 
     <!-- MAIN AREA -->
@@ -190,6 +195,12 @@
           <button type="submit">
             ＋ Add Transaction
           </button>
+
+          <img
+    src="picture/Other Design/o2.png"
+    alt="Other Account"
+    class="other-transaction-image"
+>
 
         </form>
 
@@ -432,7 +443,7 @@
   </div>
 
 
-  <script type="module" src="account-page.js"></script>
+  <script src="account-page.js"></script>
 
 </body>
 

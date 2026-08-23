@@ -19,10 +19,12 @@
          ========================= -->
     <div class="top">
 
-      <div>
-        <h1>🏦 Bank</h1>
-        <p>Bank account transactions</p>
-      </div>
+      <div class="bank-page-title">
+    <img
+        src="picture/Bank Design/banner.png"
+        alt="Bank">
+
+</div>
 
       <div class="account-area">
 
@@ -31,7 +33,7 @@
           id="backBtn"
           type="button"
         >
-          ← Dashboard
+          ← Back to Dashboard
         </button>
 
       </div>
@@ -42,31 +44,30 @@
     <!-- =========================
          CURRENT BALANCE
          ========================= -->
-    <div class="account-summary-card">
+    <div class="account-summary-card bank-balance-card">
 
-      <span class="label">
-        Current Balance
-      </span>
+    <div class="bank-balance-info">
+        <span class="label">Current Balance</span>
 
-      <div class="amount-with-eye">
+        <div class="amount-with-eye">
+            <strong id="pageBalance">NT$0</strong>
 
-        <strong id="pageBalance">
-          NT$0
-        </strong>
-
-        <button
-          class="eye-toggle"
-          type="button"
-          data-target="pageBalance"
-          aria-label="Hide balance"
-          title="Hide balance"
-        >
-          👁
-        </button>
-
-      </div>
-
+            <button
+                type="button"
+                class="eye-toggle"
+                id="balanceEye"
+                aria-label="Show or hide balance">
+                👁
+            </button>
+        </div>
     </div>
+
+    <img
+        src="picture/Bank Design/b1.png"
+        alt="Bank illustration"
+        class="bank-balance-image">
+
+</div>
 
 
     <!-- =========================
@@ -249,14 +250,19 @@
           >
 
 
-          <!-- SUBMIT -->
           <button type="submit">
-            ＋ Add Transaction
-          </button>
+  ＋ Add Transaction
+</button>
 
-        </form>
+</form>
 
-      </div>
+<!-- BOY + PIGGY BANK -->
+<div class="bank-transaction-character">
+  <img src="picture/Bank Design/b2.png"
+       alt="Budget assistant">
+</div>
+
+</div>
 
 
       <!-- =========================
@@ -541,7 +547,7 @@
 
 
   <!-- ACCOUNT JAVASCRIPT -->
-  <script type="module" src="account-page.js"></script>
+  <script src="account-page.js"></script>
 
 </body>
 
