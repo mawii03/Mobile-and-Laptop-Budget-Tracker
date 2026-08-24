@@ -129,85 +129,12 @@ async function start() {
   $("googleSignInBtn")?.addEventListener("click", async () => {
     try { await signInWithPopup(auth, googleProvider); } catch (e) { console.error(e); alert(e.message); }
   });
+  
   $("logoutBtn")?.addEventListener("click", () => signOut(auth));
 
-onAuthStateChanged(auth, u => {
-  user = u;
+  onAuthStateChanged(auth, u => {
+    // code above
+  })
 
-  if (unsubscribe) {
-    unsubscribe();
-    unsubscribe = null;
-  }
-
-  const signInBtn = $("googleSignInBtn");
-  const logoutBtn = $("logoutBtn");
-  const userEmail = $("userEmail");
-  const status = $("status");
-
-  if (!u) {
-    if (status) {
-      status.textContent = "Signed out";
-      status.classList.remove("ok");
-    }
-
-    if (userEmail) {
-      userEmail.textContent = "";
-    }
-
-    if (signInBtn) {
-      signInBtn.hidden = false;
-    }
-
-    if (logoutBtn) {
-      logoutBtn.hidden = true;
-    }
-
-    data = [];
-    renderFunds();
-    render();
-
-    return;
-  }
-
-  // GOOGLE LOGIN SUCCESSFUL
-  if (status) {
-    status.textContent = "Connected";
-    status.classList.add("ok");
-  }
-
-  if (userEmail) {
-    userEmail.textContent = u.email || u.displayName || "";
-  }
-
-  if (signInBtn) {
-    signInBtn.hidden = true;
-  }
-
-  if (logoutBtn) {
-    logoutBtn.hidden = false;
-  }
-
-  const q = query(
-    collection(db, "users", u.uid, "transactions"),
-    orderBy("date", "desc")
-  );
-
-  unsubscribe = onSnapshot(
-    q,
-    snap => {
-      data = snap.docs.map(d => ({
-        id: d.id,
-        ...d.data()
-      }));
-
-      renderFunds();
-      render();
-    },
-    err => {
-      console.error("Firestore error:", err);
-      alert("Firestore error: " + err.message);
-    }
-  );
-});
 }
 start();
