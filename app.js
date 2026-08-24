@@ -127,14 +127,114 @@ async function start() {
     if (n?.trim()) { localStorage.setItem("lapmobOtherName", n.trim()); renderFunds(); }
   });
   $("googleSignInBtn")?.addEventListener("click", async () => {
-    try { await signInWithPopup(auth, googleProvider); } catch (e) { console.error(e); alert(e.message); }
-  });
+  const btn = $("googleSignInBtn");
+
+  try {
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Signing in...";
+    }
+
+    await signInWithPopup(auth, googleProvider);
+
+  } catch (e) {
+    console.error("Google sign-in error:", e);
+
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "Sign in with Google";
+    }
+
+    alert("Google sign-in failed: " + (e?.message || e));
+  }
+});
   
   $("logoutBtn")?.addEventListener("click", () => signOut(auth));
 
   onAuthStateChanged(auth, u => {
-    // code above
-  })
+  user = u;
+
+  if (unsubscribe) {
+    unsubscribe();
+    unsubscribe = null;
+  }
+
+  const signInBtn = $("googleSignInBtn");
+  const logoutBtn = $("logoutBtn");
+  const status = $("status");
+  const userEmail = $("userEmail");
+
+  if (!u) {
+    if (status) {
+      status.textContent = "Signed out";
+      status.classList.remove("ok");
+    }
+
+    if (userEmail) {
+      userEmail.textContent = "";
+    }
+
+    if (signInBtn) {
+      signInBtn.hidden = false;
+      signInBtn.disabled = false;
+      signInBtn.textContent = "Sign in with Google";
+    }
+
+    if (logoutBtn) {
+      logoutBtn.hidden = true;
+    }
+
+    data = [];
+    renderFunds();
+    render();
+    return;
+  }
+
+  // USER IS REALLY SIGNED IN
+  if (status) {
+    status.textContent = "Connected";
+    status.classList.add("ok");
+  }
+
+  if (userEmail) {
+    userEmail.textContent = u.email || "";
+  }
+
+  if (signInBtn) {
+    signInBtn.hidden = true;
+    signInBtn.disabled = false;
+  }
+
+  if (logoutBtn) {
+    logoutBtn.hidden = false;
+  }
+
+  const q = query(
+    collection(db, "users", u.uid, "transactions"),
+    orderBy("date", "desc")
+  );
+
+  unsubscribe = onSnapshot(
+    q,
+    snap => {
+      data = snap.docs.map(d => ({
+        id: d.id,
+        ...d.data()
+      }));
+
+      renderFunds();
+      render();
+    },
+    err => {
+      console.error("Firestore error:", err);
+
+      alert(
+        "Firestore error: " +
+        (err?.message || "Unable to load your transactions.")
+      );
+    }
+  );
+});
 
 }
 start();
