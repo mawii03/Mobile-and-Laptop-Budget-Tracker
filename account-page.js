@@ -302,39 +302,17 @@ if (form) {
   form.addEventListener("submit", addTransaction);
 }
 
-// ============================================================
-// ONE-TIME CLEANUP: REMOVE ONLY OLD LOCALSTORAGE-MIGRATED DATA
-// ============================================================
-async function cleanupOldMigratedTransactions(user) {
-  const ref = collection(db, "users", user.uid, "transactions");
+onAuthStateChanged(auth, async user => {
+  currentUser = user;
 
-  const snapshot = await getDocs(ref);
-
-  let deleted = 0;
-
-  for (const transactionDoc of snapshot.docs) {
-    const transaction = transactionDoc.data();
-
-    // DELETE ONLY transactions imported from old localStorage
-    if (transaction.migratedFromLocalStorage === true) {
-      await deleteDoc(
-        doc(
-          db,
-          "users",
-          user.uid,
-          "transactions",
-          transactionDoc.id
-        )
-      );
-
-      deleted++;
-    }
+  if (!user) {
+    transactions = [];
+    render();
+    return;
   }
 
-  console.log(
-    `Cleanup finished. Deleted ${deleted} old migrated transaction(s).`
-  );
-}
+  loadTransactions(user);
+});
 
 onAuthStateChanged(auth, async user => {
   currentUser = user;
