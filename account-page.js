@@ -311,12 +311,6 @@ onAuthStateChanged(auth, async user => {
     return;
   }
 
-  try {
-    await migrateLocalData(user);
-  } catch (error) {
-    console.warn("Local migration skipped:", error);
-  }
-
   loadTransactions(user);
 });
 
