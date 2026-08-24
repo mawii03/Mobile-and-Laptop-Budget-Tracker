@@ -322,9 +322,7 @@ onAuthStateChanged(auth, async user => {
     render();
     return;
   }
-
-  await cleanupOldMigratedTransactions(user);
-
+  
   loadTransactions(user);
 });
 
