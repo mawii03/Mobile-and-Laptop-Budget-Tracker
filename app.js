@@ -131,7 +131,7 @@ async function start() {
   });
   $("logoutBtn")?.addEventListener("click",()=>signOut(auth));
   onAuthStateChanged(auth, u => {
-    user=u;
+    status → "Connected"
     if (unsubscribe) unsubscribe();
     if (!u) {
       if ($("status")) $("status").textContent="Signed out";
