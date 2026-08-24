@@ -314,16 +314,4 @@ onAuthStateChanged(auth, async user => {
   loadTransactions(user);
 });
 
-onAuthStateChanged(auth, async user => {
-  currentUser = user;
-
-  if (!user) {
-    transactions = [];
-    render();
-    return;
-  }
-  
-  loadTransactions(user);
-});
-
 setPersistence(auth, browserLocalPersistence).catch(console.warn);
