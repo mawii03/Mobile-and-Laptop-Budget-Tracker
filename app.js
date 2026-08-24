@@ -130,7 +130,8 @@ async function start() {
     try { await signInWithPopup(auth, googleProvider); } catch (e) { console.error(e); alert(e.message); }
   });
   $("logoutBtn")?.addEventListener("click", () => signOut(auth));
-  onAuthStateChanged(auth, u => {
+
+onAuthStateChanged(auth, u => {
   user = u;
 
   if (unsubscribe) {
@@ -168,7 +169,7 @@ async function start() {
     return;
   }
 
-  // Google account successfully signed in
+  // GOOGLE LOGIN SUCCESSFUL
   if (status) {
     status.textContent = "Connected";
     status.classList.add("ok");
